@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gnn-pruning"
+version = "0.0.0"
+description = "Topology-aware activation-based pruning for Graph Neural Networks (CS260C, S26)."
+requires-python = ">=3.10"
+authors = [{ name = "Michael Mansour" }]
+readme = "README.md"
+dependencies = []
+
+[project.optional-dependencies]
+dev = []
+
+[tool.setuptools.packages.find]
+where = ["src"]

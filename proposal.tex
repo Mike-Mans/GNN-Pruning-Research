@@ -1,0 +1,77 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.65in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage[skip=3pt plus1pt]{parskip}
+\usepackage[small]{titlesec}
+
+\titlespacing*{\section}{0pt}{6pt}{2pt}
+\setlength{\abovedisplayskip}{4pt}
+\setlength{\belowdisplayskip}{4pt}
+
+\author{Michael Mansour --- CS260C Project Proposal (S26) --- Compression by Pruning in GNNs}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Key Terms}
+\begin{itemize}[leftmargin=*,itemsep=1pt,parsep=0pt]
+\item \textbf{Sparsity:} The percentage of weights that are zero. A matrix with 100 weights at 50\% sparsity has 50 zeros and 50 non-zeros. At 90\% sparsity, 90 zeros and 10 non-zeros.
+\item \textbf{Topology:} The structure of a graph---which nodes connect to which, how many neighbors each node has (degree), and the overall wiring pattern.
+\item \textbf{Homophily:} When connected nodes tend to share the same label (e.g., friends in a social network liking similar things). Cora has homophily 0.83.
+\item \textbf{Heterophily:} The opposite---connected nodes tend to have different labels. Squirrel has homophily ${\sim}0.22$.
+\item \textbf{Activation-aware:} A pruning criterion that considers not just the weight value itself, but also the magnitude of the input signal (activation) that the weight multiplies.
+\item \textbf{One-shot pruning:} Pruning all weights in a single step after training, as opposed to iterative methods that cycle through train$\to$prune$\to$retrain multiple times.
+\item \textbf{Unstructured pruning:} Zeroing out individual weight entries anywhere in the matrix. Produces irregular sparsity patterns but offers the finest-grained control over which weights to keep.
+\item \textbf{Structured pruning:} Removing entire rows, columns, or channels of a weight matrix at once (e.g., Zhou et al.~\cite{zhou2021}). Yields direct speedups on standard hardware but is coarser---entire feature dimensions are lost.
+\end{itemize}
+
+\section{Problem Statement}
+
+Because GNNs are useful in many situations (such as AML detection, social networks/recommendations, drug discovery, etc.)\ but still remain notoriously computationally expensive, I thought it would be interesting and meaningful to combine Professor Hsieh's recommendation of model compression via pruning (in which he suggested reviewing the work of Wanda~\cite{sun2024}, which discusses pruning in LLMs specifically) and GNNs to explore ways to make training and inference computationally cheaper for these models. Although he also introduced other means of compression (quantization, low-rank), I thought it would be best to narrow the scope of this project to just pruning and try to obtain meaningful results in this setting independently.
+
+\textbf{Core question:} How do topological features, specifically node degree and homophily, influence the efficacy of activation-aware pruning in GNNs? In LLMs, Wanda scores weights by $S_{pq} = |W_{pq}| \cdot \lVert \mathbf{X}_q \rVert_2$ (weight magnitude $\times$ input activation norm), exploiting the fact that certain hidden dimensions are consistently large across tokens. In GNNs, activations depend on graph structure through message passing (a hub aggregating 50 neighbors produces far larger activations than a leaf with 2). I aim to study pruning with respect to this topology-dependent activation information.
+
+\section{Mathematical Framework}
+
+A GNN updates node representations over $L$ layers via the message-passing framework:
+\begin{align}
+    \mathbf{m}_i^{(\ell)} &= \bigoplus\nolimits_{j \in \mathcal{N}(i)} \psi^{(\ell)}\!\bigl(\mathbf{h}_j^{(\ell)},\, \mathbf{e}_{ji}\bigr), \qquad
+    \mathbf{h}_i^{(\ell+1)} = \phi^{(\ell)}\!\bigl(\mathbf{h}_i^{(\ell)},\, \mathbf{m}_i^{(\ell)}\bigr) \tag{1}
+\end{align}
+where $\psi$ is a message function, $\bigoplus$ is a permutation-invariant aggregation, and $\phi$ contains a weight matrix $\mathbf{W}^{(\ell)} \in \mathbb{R}^{d_{\text{in}} \times d_{\text{out}}}$. GCN, GAT, and GraphSAGE are special cases with different $\psi$/$\bigoplus$. Across all architectures, each node's layer computation reduces to $\mathbf{z}_i^{(\ell)} = \mathbf{W}^{(\ell)\top}\! \mathbf{x}_i^{(\ell)}$, where $\mathbf{x}_i^{(\ell)}$ is the post-aggregation activation whose magnitude depends on node $i$'s degree and neighborhood---this is the topology dependence we exploit.
+
+\section{Methods}
+
+Five conditions, all evaluated as one-shot post-training pruning (no retraining), following Wanda's protocol. For each, we collect the activation matrix $\mathbf{X}^{(\ell)} \in \mathbb{R}^{n \times d_{\text{in}}}$ via a single forward pass over the training graph. Note that existing GNN pruning operates at a different granularity: Zhou et al.~\cite{zhou2021} prune entire feature dimensions (channel pruning) via LASSO regression, achieving 3.27$\times$ speedup with negligible accuracy loss. Our work prunes individual weights (rather than entire channels) and additionally incorporates activation information into the pruning criterion.
+
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=1pt,parsep=0pt]
+    \item \textbf{No pruning} (control): Dense model, providing the accuracy ceiling that all pruning methods degrade from.
+    \item \textbf{Magnitude pruning} (baseline): $S_{pq} = |W_{pq}|$. Standard criterion used by all prior GNN pruning work. Liu et al.~\cite{liu2024cgp} show GNN weights tolerate up to 99.9\% sparsity with this criterion on several datasets; Khedri et al.~\cite{khedri2025} find 50\% sparsity tolerable with fine-tuning but observe degradation at higher levels---precisely where smarter criteria should help.
+    \item \textbf{Wanda-Uniform}: $S_{pq} = |W_{pq}| \cdot \lVert \bar{\mathbf{X}}_q \rVert_2$, activation norm averaged uniformly across all nodes. Sun et al.~\cite{sun2024} develop this metric for LLMs, proving it approximates the diagonal OBS criterion. We extend it to GNNs, where topology-dependent activations create a challenge absent in the LLM setting.
+    \item \textbf{Wanda-Degree-Weighted}: $S_{pq} = |W_{pq}| \cdot \lVert \tilde{\mathbf{X}}_q \rVert_2$, node contributions weighted by degree, encoding that hub nodes' activations are more representative.
+    \item \textbf{Wanda-Per-Class}: Class-specific activation norms averaged across classes, preventing majority-class domination---relevant for heterophilic graphs, where Liu et al.~\cite{liu2024cgp} show pruning can improve accuracy by up to 120\% over baseline GCN.
+\end{enumerate}
+
+I will evaluate on GCN, GAT, and GraphSAGE (2-layer, hidden dim 256) at sparsity levels 10\%--90\%, measuring whatever task-appropriate metric is best vs.\ sparsity curves (accuracy vs.\ sparsity for class-balanced benchmarks; F1 and recall vs.\ sparsity for the imbalanced Ethereum dataset, where accuracy is uninformative at 0.008\% positive rate).
+
+\section{Datasets}
+
+I plan to explore the ones present in the papers, which include Flickr, Arxiv, Yelp, and Reddit from Zhou et al., and Cora, BBBP, and Proteins from Khedri et al. I also include heterophilic benchmarks Squirrel and Wisconsin, motivated by Liu et al.'s finding that heterophilic graphs respond very differently to pruning, with up to 120\% accuracy improvement from graph sparsification~\cite{liu2024cgp}. Additionally, I have another dataset (a labeled graph of the Ethereum network) which I constructed myself for a previous, separate project on applying IBM's Multi-GNN for AML, and I think testing with this dataset may be interesting and insightful, as it features extreme class imbalance and heavy-tailed degree distributions.
+
+\begingroup\footnotesize
+\begin{thebibliography}{4}
+\bibitem{sun2024} M.~Sun, Z.~Liu, A.~Bair, and J.~Z.~Kolter, ``A Simple and Effective Pruning Approach for Large Language Models,'' \emph{ICLR}, 2024.
+
+\bibitem{liu2024cgp} C.~Liu \emph{et al.}, ``Comprehensive Graph Gradual Pruning for Sparse Training in Graph Neural Networks,'' \emph{IEEE TNNLS}, vol.~35, no.~10, pp.~14903--14917, 2024.
+
+\bibitem{khedri2025} K.~Khedri, R.~Rawassizadeh, Q.~Wen, and M.~Hosseinzadeh, ``Pruning and Quantization Impact on Graph Neural Networks,'' arXiv:2510.22058, 2025.
+
+\bibitem{zhou2021} H.~Zhou, A.~Srivastava, H.~Zeng, R.~Kannan, and V.~Prasanna, ``Accelerating Large Scale Real-Time GNN Inference using Channel Pruning,'' \emph{PVLDB}, vol.~14, no.~9, 2021.
+\end{thebibliography}
+\endgroup
+
+\end{document}
