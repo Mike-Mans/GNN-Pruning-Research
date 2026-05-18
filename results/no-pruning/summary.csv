@@ -1,0 +1,4 @@
+dataset,architecture,sparsity,metric_name,metric_value,checkpoint_path
+cora,gat,0.0,accuracy,0.7929999828338623,results/no-pruning/cora/gat/checkpoint.pt
+cora,gcn,0.0,accuracy,0.8019999861717224,results/no-pruning/cora/gcn/checkpoint.pt
+wisconsin,gcn,0.0,macro_f1,0.2703225806451613,results/no-pruning/wisconsin/gcn/checkpoint.pt

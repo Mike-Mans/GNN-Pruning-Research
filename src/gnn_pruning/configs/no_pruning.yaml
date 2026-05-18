@@ -1,0 +1,109 @@
+# Issue #1: No-Pruning Control (dense baseline) — 30-cell grid.
+# Sparsity is fixed at 0% for this method; the grid is just `[0.0]` so the
+# orchestrator schema parity with #2–#5 holds.
+
+method: no-pruning
+sparsity_grid: [0.0]
+
+# Per-arch dataset list (sum: 14 + 8 + 8 = 30 cells).
+cells:
+  gcn:
+    - cora
+    - citeseer
+    - pubmed
+    - cs
+    - physics
+    - photo
+    - computers
+    - reddit
+    - cornell
+    - texas
+    - wisconsin
+    - actor
+    - bbbp
+    - proteins
+  gat:
+    - cora
+    - citeseer
+    - pubmed
+    - computers
+    - photo
+    - reddit
+    - cornell
+    - actor
+  graphsage:
+    - flickr
+    - ogbn-arxiv
+    - reddit
+    - yelp
+    - ogbn-products
+    - yelpchi
+    - bbbp
+    - proteins
+
+default_metric: accuracy
+metric_overrides:
+  # Heterophilic single-label NC → macro-F1 (issue #1).
+  cornell: macro_f1
+  texas: macro_f1
+  wisconsin: macro_f1
+  actor: macro_f1
+  # Multi-label NC → micro-F1 (issue #1; matches BCE training loss).
+  yelp: micro_f1
+  ogbn-proteins: micro_f1
+
+default_hyperparams:
+  hidden_dim: 256
+  lr: 0.01
+  weight_decay: 5.0e-4
+  epochs: 200
+  patience: 50
+  seed: 0
+
+hyperparam_overrides:
+  # Graph-classification: smaller LR, fewer epochs, mini-batches.
+  bbbp:
+    lr: 1.0e-3
+    weight_decay: 0.0
+    epochs: 100
+    patience: 20
+    batch_size: 32
+  proteins:
+    lr: 1.0e-3
+    weight_decay: 0.0
+    epochs: 100
+    patience: 20
+    batch_size: 32
+  # Heterophilic small graphs — shorter run is fine.
+  cornell:
+    epochs: 200
+    patience: 50
+  texas:
+    epochs: 200
+    patience: 50
+  wisconsin:
+    epochs: 200
+    patience: 50
+  actor:
+    epochs: 200
+    patience: 50
+  # Large datasets: SAGE on Reddit / ogbn-arxiv / ogbn-products / Yelp / Flickr
+  # — full-batch on MPS works for ogbn-arxiv per preflight (5.3 GB driver),
+  # but Reddit / ogbn-products may need NeighborLoader sampling. The current
+  # implementation is full-batch; if the human hits OOM on those, switch to
+  # the NeighborLoader code path (see RUN_REPORT.md "what's left").
+  ogbn-arxiv:
+    epochs: 200
+    patience: 30
+  reddit:
+    epochs: 100
+    patience: 20
+  yelp:
+    epochs: 100
+    patience: 20
+  ogbn-products:
+    epochs: 100
+    patience: 20
+  flickr:
+    epochs: 100
+    patience: 20
