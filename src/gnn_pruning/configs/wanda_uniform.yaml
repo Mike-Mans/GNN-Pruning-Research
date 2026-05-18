@@ -1,0 +1,50 @@
+# Issue #3: Wanda-Uniform — 30 cells × 9 sparsities.
+method: wanda-uniform
+sparsity_grid: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+
+cells:
+  gcn:
+    - cora
+    - citeseer
+    - pubmed
+    - cs
+    - physics
+    - photo
+    - computers
+    - reddit
+    - cornell
+    - texas
+    - wisconsin
+    - actor
+    - bbbp
+    - proteins
+  gat:
+    - cora
+    - citeseer
+    - pubmed
+    - computers
+    - photo
+    - reddit
+    - cornell
+    - actor
+  graphsage:
+    - flickr
+    - ogbn-arxiv
+    - reddit
+    - yelp
+    - ogbn-products
+    - yelpchi
+    - bbbp
+    - proteins
+
+default_metric: accuracy
+metric_overrides:
+  cornell: macro_f1
+  texas: macro_f1
+  wisconsin: macro_f1
+  actor: macro_f1
+  yelp: micro_f1
+  ogbn-proteins: micro_f1
+
+default_hyperparams:
+  seed: 0

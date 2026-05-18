@@ -103,39 +103,50 @@ def prunable_layers(model: nn.Module) -> list[tuple[str, nn.Module]]:
             if isinstance(mod, (GCNConv, GATConv, SAGEConv))]
 
 
-def conv_weight_tensors(conv: nn.Module) -> list[tuple[str, torch.Tensor]]:
-    """Return (name, weight) for the prunable weight matrices inside one conv.
+def conv_prunable_linears(conv: nn.Module) -> list[tuple[str, nn.Linear]]:
+    """Return `(suffix, linear)` for every prunable Linear inside one conv.
 
-    GCN: a single `lin.weight` (shape: [out, in]).
-    GAT: a single `lin.weight` or `lin_src.weight` (shape: [out*heads, in]).
-    SAGE: `lin_l.weight` and `lin_r.weight` — both are pruned independently.
+    Wanda-family scoring needs the *actual input* to each Linear, not the
+    input to its parent conv. For SAGE in particular, `lin_l` sees the
+    aggregated neighbor features while `lin_r` sees the original self-features
+    — so each Linear must be hooked separately to capture the right `X`.
+
+    - GCN: a single `lin`.
+    - GAT: a single `lin` in PyG 2.7 (when src/dst share weights, the standard
+      non-bipartite case); falls back to `lin_src`/`lin_dst` for bipartite.
+    - SAGE: `lin_l` (aggregated neighbors) and `lin_r` (self) — both are
+      pruned independently and **see different inputs**.
     """
-    weights: list[tuple[str, torch.Tensor]] = []
+    linears: list[tuple[str, nn.Linear]] = []
     if isinstance(conv, GCNConv):
-        weights.append(("lin.weight", conv.lin.weight))
+        linears.append(("lin", conv.lin))
     elif isinstance(conv, GATConv):
-        # In PyG 2.7, GATConv uses a single `lin` (Linear(in, out*heads)) when
-        # src and dst share weights (the standard non-bipartite case used here).
-        # `lin_src` / `lin_dst` are only populated for bipartite inputs.
         if getattr(conv, "lin", None) is not None:
-            weights.append(("lin.weight", conv.lin.weight))
+            linears.append(("lin", conv.lin))
         else:
             if getattr(conv, "lin_src", None) is not None:
-                weights.append(("lin_src.weight", conv.lin_src.weight))
+                linears.append(("lin_src", conv.lin_src))
             if getattr(conv, "lin_dst", None) is not None and \
                     conv.lin_dst is not getattr(conv, "lin_src", None):
-                weights.append(("lin_dst.weight", conv.lin_dst.weight))
+                linears.append(("lin_dst", conv.lin_dst))
     elif isinstance(conv, SAGEConv):
-        weights.append(("lin_l.weight", conv.lin_l.weight))
+        linears.append(("lin_l", conv.lin_l))
         if hasattr(conv, "lin_r") and conv.lin_r is not None:
-            weights.append(("lin_r.weight", conv.lin_r.weight))
-    return weights
+            linears.append(("lin_r", conv.lin_r))
+    return linears
+
+
+def named_prunable_linears(model: nn.Module
+                           ) -> list[tuple[str, nn.Linear]]:
+    """Flatten prunable Linears as `(conv_path.suffix, linear)`."""
+    out: list[tuple[str, nn.Linear]] = []
+    for conv_name, conv in prunable_layers(model):
+        for suffix, lin in conv_prunable_linears(conv):
+            out.append((f"{conv_name}.{suffix}", lin))
+    return out
 
 
 def named_prunable_weights(model: nn.Module) -> list[tuple[str, torch.Tensor]]:
-    """Flatten prunable weights across the whole model as `(full.name, W)`."""
-    out: list[tuple[str, torch.Tensor]] = []
-    for conv_name, conv in prunable_layers(model):
-        for w_name, w in conv_weight_tensors(conv):
-            out.append((f"{conv_name}.{w_name}", w))
-    return out
+    """Flatten prunable weights as `(conv_path.suffix.weight, W)`."""
+    return [(f"{name}.weight", lin.weight)
+            for name, lin in named_prunable_linears(model)]
