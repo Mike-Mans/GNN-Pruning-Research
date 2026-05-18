@@ -61,8 +61,14 @@ def load_flickr(root: Union[str, Path] = DEFAULT_ROOT) -> Data:
 
 
 def load_arxiv(root: Union[str, Path] = DEFAULT_ROOT) -> Data:
+    import torch
     from ogb.nodeproppred import PygNodePropPredDataset
+    from torch_geometric.data.data import DataEdgeAttr, DataTensorAttr
+    from torch_geometric.data.storage import GlobalStorage
 
+    # OGB calls torch.load directly without weights_only=False; with torch>=2.6
+    # the default flipped to True and trips on PyG's storage classes. Allowlist them.
+    torch.serialization.add_safe_globals([DataEdgeAttr, DataTensorAttr, GlobalStorage])
     dataset = PygNodePropPredDataset(name="ogbn-arxiv", root=_subdir(root, "OGB"))
     data = dataset[0]
     data.split_idx = dataset.get_idx_split()
