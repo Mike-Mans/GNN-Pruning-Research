@@ -1,0 +1,8 @@
+
+=== sweep start: method=wanda-degree cells=3 datasets_filter=['cora', 'wisconsin'] archs_filter=None ===
+[1/3] cora/gcn: launching
+  done in 2.3s
+[2/3] wisconsin/gcn: launching
+  done in 1.9s
+[3/3] cora/gat: launching
+  done in 2.1s
