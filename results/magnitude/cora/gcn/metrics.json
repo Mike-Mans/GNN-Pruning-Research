@@ -1,0 +1,45 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "accuracy",
+  "metric_values": [
+    0.8009999990463257,
+    0.8059999942779541,
+    0.8059999942779541,
+    0.8009999990463257,
+    0.800000011920929,
+    0.7929999828338623,
+    0.7990000247955322,
+    0.7509999871253967,
+    0.718999981880188
+  ],
+  "per_layer_sparsity": [
+    {
+      "name": "conv1.lin.weight",
+      "shape": [
+        256,
+        1433
+      ],
+      "numel": 366848
+    },
+    {
+      "name": "conv2.lin.weight",
+      "shape": [
+        7,
+        256
+      ],
+      "numel": 1792
+    }
+  ],
+  "checkpoint": "results/no-pruning/cora/gcn/checkpoint.pt",
+  "seed": 0
+}
