@@ -17,7 +17,11 @@ from gnn_pruning.models import build_model, named_prunable_weights
 from gnn_pruning.plotting import plot_accuracy_vs_sparsity
 from gnn_pruning.pruning import masked_weights
 from gnn_pruning.pruning.no_pruning import _infer_dims  # noqa: PLC2701
-from gnn_pruning.training import evaluate_test, evaluate_test_graphs
+from gnn_pruning.training import (
+    evaluate_test,
+    evaluate_test_graphs,
+    use_sparse_adj,
+)
 
 
 RESULTS_ROOT = Path("results/magnitude")
@@ -25,6 +29,8 @@ DENSE_ROOT = Path("results/no-pruning")
 
 
 def _device() -> torch.device:
+    if torch.cuda.is_available():
+        return torch.device("cuda")
     if torch.backends.mps.is_available():
         return torch.device("mps")
     return torch.device("cpu")
@@ -90,13 +96,15 @@ def run_cell(
     else:
         ds = load_dataset(dataset)
 
+    sparse = use_sparse_adj(dataset, architecture)
     metric_values: list[float] = []
     for s in sparsity_grid:
         with masked_weights(pairs, sparsity=s):
             if task == "graph-classification":
                 v = evaluate_test_graphs(model, device)
             else:
-                v = evaluate_test(model, ds, device, metric_name, split=split)
+                v = evaluate_test(model, ds, device, metric_name,
+                                  split=split, use_sparse=sparse)
         metric_values.append(float(v))
 
     cell_dir = RESULTS_ROOT / dataset / architecture / f"seed-{seed}" / f"split-{split}"

@@ -30,9 +30,11 @@ from gnn_pruning.plotting import plot_accuracy_vs_sparsity
 from gnn_pruning.pruning import masked_weights
 from gnn_pruning.training import (
     _split_graphs,  # noqa: PLC2701
+    build_sparse_adj,
     evaluate_test,
     evaluate_test_graphs,
     get_node_masks,
+    use_sparse_adj,
 )
 from gnn_pruning.training.activation_hooks import collect_activations
 
@@ -42,6 +44,8 @@ DENSE_ROOT = Path("results/no-pruning")
 
 
 def _device() -> torch.device:
+    if torch.cuda.is_available():
+        return torch.device("cuda")
     if torch.backends.mps.is_available():
         return torch.device("mps")
     return torch.device("cpu")
@@ -85,10 +89,12 @@ def _degree_summary(deg: torch.Tensor) -> dict:
 
 def _collect_node_classification(
     model: torch.nn.Module, data, device: torch.device, split: int = 0,
+    use_sparse: bool = False,
 ) -> tuple[dict[str, torch.Tensor], torch.Tensor, int]:
     data = data.to(device)
     model = model.to(device).eval()
-    acts = collect_activations(model, data.x, data.edge_index)
+    adj = build_sparse_adj(data) if use_sparse else data.edge_index
+    acts = collect_activations(model, data.x, adj)
     train_mask, _, _ = get_node_masks(data, split=split)
     train_mask = train_mask.to(device)
     n_used = int(train_mask.sum().item())
@@ -163,6 +169,7 @@ def run_cell(
 
     meta = DATASET_META.get(dataset.lower())
     task = meta.task if meta else "node-classification"
+    sparse = use_sparse_adj(dataset, architecture)
 
     if task == "graph-classification":
         ds = load_dataset(dataset)
@@ -174,7 +181,7 @@ def run_cell(
     else:
         ds = load_dataset(dataset)
         activations, deg, n_used = _collect_node_classification(
-            model, ds, device, split=split
+            model, ds, device, split=split, use_sparse=sparse
         )
 
     deg_summary = _degree_summary(deg)
@@ -186,7 +193,8 @@ def run_cell(
             if task == "graph-classification":
                 v = evaluate_test_graphs(model, device)
             else:
-                v = evaluate_test(model, ds, device, metric_name, split=split)
+                v = evaluate_test(model, ds, device, metric_name,
+                                  split=split, use_sparse=sparse)
         metric_values.append(float(v))
 
     cell_dir = RESULTS_ROOT / dataset / architecture / f"seed-{seed}" / f"split-{split}"

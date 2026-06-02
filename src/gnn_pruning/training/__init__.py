@@ -19,6 +19,44 @@ from torch_geometric.loader import DataLoader
 from gnn_pruning.eval import evaluate_node_classification, loss_fn
 
 
+# Large undirected NC graphs that OOM full-batch dense on a single GPU (issue
+# #6). For these we feed the convs a sparse CSR adjacency so aggregation runs
+# as SpMM (memory O(N·F) instead of O(E·F)). Restricted to GCN/SAGE on these
+# three because: (a) only they OOM, (b) all three are undirected so the sparse
+# path is numerically identical to the dense edge_index path (verified on
+# cora/reddit-like graphs; directed graphs like ogbn-arxiv would differ under
+# gcn_norm and are deliberately kept dense — they fit anyway), and (c) GATConv
+# does not support the native torch.sparse layout (and is infeasible full-batch
+# on Reddit-scale regardless).
+SPARSE_NC_DATASETS = {"reddit", "ogbn-products", "yelp"}
+SPARSE_ARCHS = {"gcn", "graphsage", "sage"}
+
+
+def use_sparse_adj(dataset: str, architecture: str) -> bool:
+    return (dataset.lower() in SPARSE_NC_DATASETS
+            and architecture.lower() in SPARSE_ARCHS)
+
+
+def build_sparse_adj(data: Data):
+    """Transposed CSR adjacency (`adj_t`) for memory-efficient SpMM.
+
+    `to_torch_csr_tensor(edge_index.flip(0))` puts targets on rows and sources
+    on cols, matching PyG's `adj_t` convention so `conv(x, adj_t)` aggregates
+    each node's in-neighbours exactly as `conv(x, edge_index)` does.
+    """
+    from torch_geometric.utils import to_torch_csr_tensor
+
+    ei = data.edge_index
+    n = data.num_nodes
+    return to_torch_csr_tensor(ei.flip(0), size=(n, n))
+
+
+def _forward_adj(data: Data, use_sparse: bool):
+    """The adjacency to feed the model: sparse CSR if requested, else COO
+    edge_index. `data` must already be on the target device."""
+    return build_sparse_adj(data) if use_sparse else data.edge_index
+
+
 def _resolve_mask(data: Data, attr: str, split: int = 0) -> Optional[torch.Tensor]:
     mask = getattr(data, attr, None)
     if mask is None:
@@ -90,10 +128,12 @@ def train_node_classification(
     metric_name: str = "accuracy",
     seed: int = 0,
     split: int = 0,
+    use_sparse: bool = False,
 ) -> tuple[dict, float, int]:
     torch.manual_seed(seed)
     model = model.to(device)
     data = data.to(device)
+    fwd_adj = _forward_adj(data, use_sparse)
 
     train_mask, val_mask, test_mask = get_node_masks(data, split=split)
     train_mask = train_mask.to(device)
@@ -113,7 +153,7 @@ def train_node_classification(
     for epoch in range(1, epochs + 1):
         model.train()
         opt.zero_grad()
-        out = model(data.x, data.edge_index)
+        out = model(data.x, fwd_adj)
         if metric_name == "micro_f1":
             target = y[train_mask].float()
         else:
@@ -124,7 +164,7 @@ def train_node_classification(
 
         model.eval()
         with torch.no_grad():
-            out = model(data.x, data.edge_index)
+            out = model(data.x, fwd_adj)
             val_target = val_mask if val_mask is not None else test_mask
             current = evaluate_node_classification(
                 out, y, val_target, metric_name
@@ -144,15 +184,16 @@ def train_node_classification(
 
 def evaluate_test(
     model: nn.Module, data: Data, device: torch.device, metric_name: str,
-    split: int = 0,
+    split: int = 0, use_sparse: bool = False,
 ) -> float:
     model = model.to(device).eval()
     data = data.to(device)
+    fwd_adj = _forward_adj(data, use_sparse)
     _, _, test_mask = get_node_masks(data, split=split)
     test_mask = test_mask.to(device)
     y = _flatten_y(data.y)
     with torch.no_grad():
-        out = model(data.x, data.edge_index)
+        out = model(data.x, fwd_adj)
     return evaluate_node_classification(out, y, test_mask, metric_name)
 
 

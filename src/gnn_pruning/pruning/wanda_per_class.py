@@ -33,9 +33,11 @@ from gnn_pruning.plotting import plot_accuracy_vs_sparsity
 from gnn_pruning.pruning import masked_weights
 from gnn_pruning.training import (
     _split_graphs,  # noqa: PLC2701
+    build_sparse_adj,
     evaluate_test,
     evaluate_test_graphs,
     get_node_masks,
+    use_sparse_adj,
 )
 from gnn_pruning.training.activation_hooks import collect_activations
 
@@ -45,6 +47,8 @@ DENSE_ROOT = Path("results/no-pruning")
 
 
 def _device() -> torch.device:
+    if torch.cuda.is_available():
+        return torch.device("cuda")
     if torch.backends.mps.is_available():
         return torch.device("mps")
     return torch.device("cpu")
@@ -123,10 +127,12 @@ def _per_class_norm_multi_label(
 
 def _collect_node_classification(
     model: torch.nn.Module, data, device: torch.device, split: int = 0,
+    use_sparse: bool = False,
 ) -> tuple[dict[str, torch.Tensor], torch.Tensor, int, bool]:
     data = data.to(device)
     model = model.to(device).eval()
-    acts = collect_activations(model, data.x, data.edge_index)
+    adj = build_sparse_adj(data) if use_sparse else data.edge_index
+    acts = collect_activations(model, data.x, adj)
     train_mask, _, _ = get_node_masks(data, split=split)
     train_mask = train_mask.to(device)
     n_used = int(train_mask.sum().item())
@@ -246,6 +252,7 @@ def run_cell(
     task = meta.task if meta else "node-classification"
     is_multi_label = (meta is not None and meta.multi_label) \
         or metric_name == "micro_f1"
+    sparse = use_sparse_adj(dataset, architecture)
 
     if task == "graph-classification":
         ds = load_dataset(dataset)
@@ -259,7 +266,8 @@ def run_cell(
     else:
         ds = load_dataset(dataset)
         activations, labels, n_used, multi_label = \
-            _collect_node_classification(model, ds, device, split=split)
+            _collect_node_classification(model, ds, device, split=split,
+                                         use_sparse=sparse)
         n_classes_hint = int(ck["out_dim"])
         if is_multi_label:
             multi_label = True
@@ -275,7 +283,8 @@ def run_cell(
             if task == "graph-classification":
                 v = evaluate_test_graphs(model, device)
             else:
-                v = evaluate_test(model, ds, device, metric_name, split=split)
+                v = evaluate_test(model, ds, device, metric_name,
+                                  split=split, use_sparse=sparse)
         metric_values.append(float(v))
 
     cell_dir = RESULTS_ROOT / dataset / architecture / f"seed-{seed}" / f"split-{split}"

@@ -22,6 +22,7 @@ from gnn_pruning.training import (
     evaluate_test_graphs,
     train_graph_classification,
     train_node_classification,
+    use_sparse_adj,
 )
 
 
@@ -29,6 +30,8 @@ RESULTS_ROOT = Path("results/no-pruning")
 
 
 def _device() -> torch.device:
+    if torch.cuda.is_available():
+        return torch.device("cuda")
     if torch.backends.mps.is_available():
         return torch.device("mps")
     return torch.device("cpu")
@@ -99,13 +102,15 @@ def run_cell(
         model.load_state_dict(best_state)
         test_metric = evaluate_test_graphs(model, device, batch_size=batch_size)
     else:
+        sparse = use_sparse_adj(dataset, architecture)
         best_state, best_val, best_epoch = train_node_classification(
             model, ds, device=device, lr=lr, weight_decay=weight_decay,
             epochs=epochs, patience=patience, metric_name=metric_name,
-            seed=seed, split=split,
+            seed=seed, split=split, use_sparse=sparse,
         )
         model.load_state_dict(best_state)
-        test_metric = evaluate_test(model, ds, device, metric_name, split=split)
+        test_metric = evaluate_test(model, ds, device, metric_name,
+                                    split=split, use_sparse=sparse)
 
     # Persist artifacts. One subdir per (seed, split) so the multi-seed /
     # multi-split sweep keeps every run isolated and idempotent.
