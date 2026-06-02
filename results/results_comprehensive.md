@@ -32,39 +32,39 @@ Heterophilic datasets (Cornell/Texas/Wisconsin/Actor) report **macro-F1**, the m
 
 ## Dense baselines (0% sparsity), all cells
 
-| Dataset | Architecture | Metric | Dense value | Runs |
-|---|---|---|---|---|
-| cornell | GPRGNN | macro-F1 | 0.486 | 10 |
-| texas | GPRGNN | macro-F1 | 0.557 | 10 |
-| wisconsin | GPRGNN | macro-F1 | 0.590 | 10 |
-| actor | GPRGNN | macro-F1 | 0.312 | 10 |
-| cornell | GCN | macro-F1 | 0.242 | 10 |
-| cornell | GAT | macro-F1 | 0.303 | 10 |
-| texas | GCN | macro-F1 | 0.249 | 10 |
-| wisconsin | GCN | macro-F1 | 0.309 | 10 |
-| actor | GCN | macro-F1 | 0.242 | 10 |
-| actor | GAT | macro-F1 | 0.227 | 10 |
-| cora | GCN | accuracy | 0.805 | 1 |
-| cora | GAT | accuracy | 0.800 | 1 |
-| citeseer | GCN | accuracy | 0.703 | 1 |
-| citeseer | GAT | accuracy | 0.678 | 1 |
-| pubmed | GCN | accuracy | 0.782 | 1 |
-| pubmed | GAT | accuracy | 0.765 | 1 |
-| cs | GCN | accuracy | 0.938 | 1 |
-| physics | GCN | accuracy | 0.966 | 1 |
-| photo | GCN | accuracy | 0.939 | 1 |
-| photo | GAT | accuracy | 0.902 | 1 |
-| computers | GCN | accuracy | 0.905 | 1 |
-| computers | GAT | accuracy | 0.900 | 1 |
-| ogbn-arxiv | GRAPHSAGE | accuracy | 0.548 | 1 |
-| flickr | GRAPHSAGE | accuracy | 0.448 | 1 |
-| reddit | GCN | accuracy | 0.565 | 1 |
-| reddit | GRAPHSAGE | accuracy | 0.479 | 1 |
-| yelp | GRAPHSAGE | micro-F1 | 0.296 | 1 |
-| bbbp | GCN | accuracy | 0.800 | 1 |
-| bbbp | GRAPHSAGE | accuracy | 0.780 | 1 |
-| proteins | GCN | accuracy | 0.652 | 1 |
-| proteins | GRAPHSAGE | accuracy | 0.643 | 1 |
+| Dataset | Homophily | Architecture | Metric | Dense value | Runs |
+|---|---|---|---|---|---|
+| actor | Heterophilic | GAT | macro-F1 | 0.227 | 10 |
+| actor | Heterophilic | GCN | macro-F1 | 0.242 | 10 |
+| actor | Heterophilic | GPRGNN | macro-F1 | 0.312 | 10 |
+| bbbp | Homophilic | GCN | accuracy | 0.800 | 1 |
+| bbbp | Homophilic | GRAPHSAGE | accuracy | 0.780 | 1 |
+| citeseer | Homophilic | GAT | accuracy | 0.678 | 1 |
+| citeseer | Homophilic | GCN | accuracy | 0.703 | 1 |
+| computers | Homophilic | GAT | accuracy | 0.900 | 1 |
+| computers | Homophilic | GCN | accuracy | 0.905 | 1 |
+| cora | Homophilic | GAT | accuracy | 0.800 | 1 |
+| cora | Homophilic | GCN | accuracy | 0.805 | 1 |
+| cornell | Heterophilic | GAT | macro-F1 | 0.303 | 10 |
+| cornell | Heterophilic | GCN | macro-F1 | 0.242 | 10 |
+| cornell | Heterophilic | GPRGNN | macro-F1 | 0.486 | 10 |
+| cs | Homophilic | GCN | accuracy | 0.938 | 1 |
+| flickr | Homophilic | GRAPHSAGE | accuracy | 0.448 | 1 |
+| ogbn-arxiv | Homophilic | GRAPHSAGE | accuracy | 0.548 | 1 |
+| photo | Homophilic | GAT | accuracy | 0.902 | 1 |
+| photo | Homophilic | GCN | accuracy | 0.939 | 1 |
+| physics | Homophilic | GCN | accuracy | 0.966 | 1 |
+| proteins | Homophilic | GCN | accuracy | 0.652 | 1 |
+| proteins | Homophilic | GRAPHSAGE | accuracy | 0.643 | 1 |
+| pubmed | Homophilic | GAT | accuracy | 0.765 | 1 |
+| pubmed | Homophilic | GCN | accuracy | 0.782 | 1 |
+| reddit | Homophilic | GCN | accuracy | 0.565 | 1 |
+| reddit | Homophilic | GRAPHSAGE | accuracy | 0.479 | 1 |
+| texas | Heterophilic | GCN | macro-F1 | 0.249 | 10 |
+| texas | Heterophilic | GPRGNN | macro-F1 | 0.557 | 10 |
+| wisconsin | Heterophilic | GCN | macro-F1 | 0.309 | 10 |
+| wisconsin | Heterophilic | GPRGNN | macro-F1 | 0.590 | 10 |
+| yelp | Homophilic | GRAPHSAGE | micro-F1 | 0.296 | 1 |
 
 ---
 
