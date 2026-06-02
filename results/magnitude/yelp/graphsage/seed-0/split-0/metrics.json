@@ -1,0 +1,62 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "micro_f1",
+  "metric_values": [
+    0.2957195332287304,
+    0.2970600103356246,
+    0.2952301102530269,
+    0.29084895464406474,
+    0.3006445934876974,
+    0.29174482913941935,
+    0.22698829864840078,
+    0.22571203218617036,
+    0.21105914546715226
+  ],
+  "per_layer_sparsity": [
+    {
+      "name": "conv1.lin_l.weight",
+      "shape": [
+        256,
+        300
+      ],
+      "numel": 76800
+    },
+    {
+      "name": "conv1.lin_r.weight",
+      "shape": [
+        256,
+        300
+      ],
+      "numel": 76800
+    },
+    {
+      "name": "conv2.lin_l.weight",
+      "shape": [
+        100,
+        256
+      ],
+      "numel": 25600
+    },
+    {
+      "name": "conv2.lin_r.weight",
+      "shape": [
+        100,
+        256
+      ],
+      "numel": 25600
+    }
+  ],
+  "checkpoint": "results/no-pruning/yelp/graphsage/seed-0/split-0/checkpoint.pt",
+  "seed": 0,
+  "split": 0
+}

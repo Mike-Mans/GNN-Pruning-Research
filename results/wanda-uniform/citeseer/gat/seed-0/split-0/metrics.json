@@ -1,0 +1,30 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "accuracy",
+  "metric_values": [
+    0.6940000057220459,
+    0.6950000524520874,
+    0.6920000314712524,
+    0.6920000314712524,
+    0.6980000138282776,
+    0.6990000605583191,
+    0.6990000605583191,
+    0.706000030040741,
+    0.6830000281333923
+  ],
+  "activation_collection_seed": 0,
+  "n_nodes_used": 120,
+  "checkpoint": "results/no-pruning/citeseer/gat/seed-0/split-0/checkpoint.pt",
+  "seed": 0,
+  "split": 0
+}

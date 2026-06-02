@@ -1,0 +1,30 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "micro_f1",
+  "metric_values": [
+    0.2962002436799482,
+    0.2960038758488982,
+    0.2963673073200644,
+    0.29694486740846593,
+    0.29749355987591164,
+    0.2994663268753291,
+    0.3009544427549118,
+    0.29858132034518053,
+    0.29639017168100534
+  ],
+  "activation_collection_seed": 0,
+  "n_nodes_used": 537635,
+  "checkpoint": "results/no-pruning/yelp/graphsage/seed-0/split-0/checkpoint.pt",
+  "seed": 0,
+  "split": 0
+}

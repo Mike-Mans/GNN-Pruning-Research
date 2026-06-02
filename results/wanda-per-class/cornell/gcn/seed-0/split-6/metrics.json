@@ -1,0 +1,36 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "macro_f1",
+  "metric_values": [
+    0.19304029304029302,
+    0.19304029304029302,
+    0.19304029304029302,
+    0.19304029304029302,
+    0.19304029304029302,
+    0.19304029304029302,
+    0.19304029304029302,
+    0.16422764227642275,
+    0.1597069597069597
+  ],
+  "class_summary": {
+    "n_classes": 5,
+    "min_count": 9,
+    "max_count": 44,
+    "imbalance_ratio": 4.888888888888889
+  },
+  "multi_label_strategy": null,
+  "n_nodes_used": 87,
+  "checkpoint": "results/no-pruning/cornell/gcn/seed-0/split-6/checkpoint.pt",
+  "seed": 0,
+  "split": 6
+}

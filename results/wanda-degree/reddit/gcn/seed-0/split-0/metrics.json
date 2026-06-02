@@ -1,0 +1,36 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "accuracy",
+  "metric_values": [
+    0.5645714998245239,
+    0.5645714998245239,
+    0.5645714998245239,
+    0.5645895600318909,
+    0.5646076202392578,
+    0.5645895600318909,
+    0.5644268989562988,
+    0.5587342381477356,
+    0.43978384137153625
+  ],
+  "degree_summary": {
+    "mean": 99.58914184570312,
+    "median": 67.0,
+    "max": 3649.0,
+    "p99": 617.6875
+  },
+  "self_loops_included": false,
+  "n_nodes_used": 153932,
+  "checkpoint": "results/no-pruning/reddit/gcn/seed-0/split-0/checkpoint.pt",
+  "seed": 0,
+  "split": 0
+}

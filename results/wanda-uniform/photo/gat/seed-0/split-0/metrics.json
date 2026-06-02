@@ -1,0 +1,30 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "accuracy",
+  "metric_values": [
+    0.9019607901573181,
+    0.9032679796218872,
+    0.9071895480155945,
+    0.9078431725502014,
+    0.900653600692749,
+    0.8810457587242126,
+    0.7882353067398071,
+    0.5313725471496582,
+    0.34379085898399353
+  ],
+  "activation_collection_seed": 0,
+  "n_nodes_used": 4590,
+  "checkpoint": "results/no-pruning/photo/gat/seed-0/split-0/checkpoint.pt",
+  "seed": 0,
+  "split": 0
+}

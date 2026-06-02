@@ -1,0 +1,36 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "accuracy",
+  "metric_values": [
+    0.9662318229675293,
+    0.9660869240760803,
+    0.9657970666885376,
+    0.9660869240760803,
+    0.9649274945259094,
+    0.960869550704956,
+    0.9559419751167297,
+    0.9382608532905579,
+    0.9060869216918945
+  ],
+  "class_summary": {
+    "n_classes": 5,
+    "min_count": 1657,
+    "max_count": 10393,
+    "imbalance_ratio": 6.272178636089318
+  },
+  "multi_label_strategy": null,
+  "n_nodes_used": 20695,
+  "checkpoint": "results/no-pruning/physics/gcn/seed-0/split-0/checkpoint.pt",
+  "seed": 0,
+  "split": 0
+}

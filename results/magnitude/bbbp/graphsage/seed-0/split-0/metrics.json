@@ -1,0 +1,62 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "accuracy",
+  "metric_values": [
+    0.7658536585365854,
+    0.7853658536585366,
+    0.7804878048780488,
+    0.7707317073170732,
+    0.7853658536585366,
+    0.7853658536585366,
+    0.7853658536585366,
+    0.7853658536585366,
+    0.7853658536585366
+  ],
+  "per_layer_sparsity": [
+    {
+      "name": "conv1.lin_l.weight",
+      "shape": [
+        256,
+        9
+      ],
+      "numel": 2304
+    },
+    {
+      "name": "conv1.lin_r.weight",
+      "shape": [
+        256,
+        9
+      ],
+      "numel": 2304
+    },
+    {
+      "name": "conv2.lin_l.weight",
+      "shape": [
+        2,
+        256
+      ],
+      "numel": 512
+    },
+    {
+      "name": "conv2.lin_r.weight",
+      "shape": [
+        2,
+        256
+      ],
+      "numel": 512
+    }
+  ],
+  "checkpoint": "results/no-pruning/bbbp/graphsage/seed-0/split-0/checkpoint.pt",
+  "seed": 0,
+  "split": 0
+}

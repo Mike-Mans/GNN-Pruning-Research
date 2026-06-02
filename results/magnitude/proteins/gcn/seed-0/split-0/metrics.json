@@ -1,0 +1,46 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "accuracy",
+  "metric_values": [
+    0.6517857142857143,
+    0.6517857142857143,
+    0.6517857142857143,
+    0.6517857142857143,
+    0.6428571428571429,
+    0.625,
+    0.6071428571428571,
+    0.42857142857142855,
+    0.5714285714285714
+  ],
+  "per_layer_sparsity": [
+    {
+      "name": "conv1.lin.weight",
+      "shape": [
+        256,
+        3
+      ],
+      "numel": 768
+    },
+    {
+      "name": "conv2.lin.weight",
+      "shape": [
+        2,
+        256
+      ],
+      "numel": 512
+    }
+  ],
+  "checkpoint": "results/no-pruning/proteins/gcn/seed-0/split-0/checkpoint.pt",
+  "seed": 0,
+  "split": 0
+}

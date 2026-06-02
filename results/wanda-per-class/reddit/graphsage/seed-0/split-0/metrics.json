@@ -1,0 +1,36 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "accuracy",
+  "metric_values": [
+    0.4794520437717438,
+    0.4794520437717438,
+    0.4794520437717438,
+    0.4794520437717438,
+    0.4794520437717438,
+    0.4794520437717438,
+    0.4794520437717438,
+    0.4794520437717438,
+    0.4794520437717438
+  ],
+  "class_summary": {
+    "n_classes": 41,
+    "min_count": 236,
+    "max_count": 16563,
+    "imbalance_ratio": 70.1822033898305
+  },
+  "multi_label_strategy": null,
+  "n_nodes_used": 153932,
+  "checkpoint": "results/no-pruning/reddit/graphsage/seed-0/split-0/checkpoint.pt",
+  "seed": 0,
+  "split": 0
+}

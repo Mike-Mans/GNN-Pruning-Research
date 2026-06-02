@@ -1,0 +1,46 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "macro_f1",
+  "metric_values": [
+    0.2557015961901421,
+    0.2539135264720068,
+    0.25278127668774014,
+    0.2500727402653141,
+    0.24540190792590932,
+    0.24521431034266578,
+    0.239470430136435,
+    0.1986724398157474,
+    0.1862380435470938
+  ],
+  "per_layer_sparsity": [
+    {
+      "name": "conv1.lin.weight",
+      "shape": [
+        256,
+        932
+      ],
+      "numel": 238592
+    },
+    {
+      "name": "conv2.lin.weight",
+      "shape": [
+        5,
+        256
+      ],
+      "numel": 1280
+    }
+  ],
+  "checkpoint": "results/no-pruning/actor/gcn/seed-0/split-8/checkpoint.pt",
+  "seed": 0,
+  "split": 8
+}

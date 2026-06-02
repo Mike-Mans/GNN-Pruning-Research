@@ -1,0 +1,46 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "macro_f1",
+  "metric_values": [
+    0.39666666666666667,
+    0.39904761904761904,
+    0.40151515151515155,
+    0.40073794549266245,
+    0.4033504273504274,
+    0.38733786848072566,
+    0.39565811965811964,
+    0.368974358974359,
+    0.31805194805194803
+  ],
+  "per_layer_sparsity": [
+    {
+      "name": "conv1.lin.weight",
+      "shape": [
+        256,
+        1703
+      ],
+      "numel": 435968
+    },
+    {
+      "name": "conv2.lin.weight",
+      "shape": [
+        5,
+        256
+      ],
+      "numel": 1280
+    }
+  ],
+  "checkpoint": "results/no-pruning/wisconsin/gcn/seed-0/split-7/checkpoint.pt",
+  "seed": 0,
+  "split": 7
+}

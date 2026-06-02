@@ -1,0 +1,36 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "macro_f1",
+  "metric_values": [
+    0.2661442600166245,
+    0.26056950961999753,
+    0.26397713810914125,
+    0.2608593728697258,
+    0.2525614953478369,
+    0.25297313263051585,
+    0.24218446633102494,
+    0.19421679869634043,
+    0.15312029707950864
+  ],
+  "class_summary": {
+    "n_classes": 5,
+    "min_count": 415,
+    "max_count": 908,
+    "imbalance_ratio": 2.1879518072289157
+  },
+  "multi_label_strategy": null,
+  "n_nodes_used": 3648,
+  "checkpoint": "results/no-pruning/actor/gcn/seed-0/split-9/checkpoint.pt",
+  "seed": 0,
+  "split": 9
+}

@@ -1,0 +1,46 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "macro_f1",
+  "metric_values": [
+    0.20445736434108527,
+    0.20125223613595708,
+    0.20445736434108527,
+    0.21936758893280633,
+    0.23085106382978726,
+    0.29728260869565215,
+    0.29033816425120773,
+    0.23289473684210527,
+    0.11166666666666668
+  ],
+  "per_layer_sparsity": [
+    {
+      "name": "conv1.lin.weight",
+      "shape": [
+        256,
+        1703
+      ],
+      "numel": 435968
+    },
+    {
+      "name": "conv2.lin.weight",
+      "shape": [
+        5,
+        256
+      ],
+      "numel": 1280
+    }
+  ],
+  "checkpoint": "results/no-pruning/texas/gcn/seed-0/split-3/checkpoint.pt",
+  "seed": 0,
+  "split": 3
+}

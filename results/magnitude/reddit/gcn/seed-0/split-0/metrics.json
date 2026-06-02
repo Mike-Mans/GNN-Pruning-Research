@@ -1,0 +1,46 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "accuracy",
+  "metric_values": [
+    0.564553439617157,
+    0.5645714998245239,
+    0.5657823085784912,
+    0.5588787794113159,
+    0.5380958914756775,
+    0.5095962285995483,
+    0.4706690013408661,
+    0.4543318748474121,
+    0.3443271517753601
+  ],
+  "per_layer_sparsity": [
+    {
+      "name": "conv1.lin.weight",
+      "shape": [
+        256,
+        602
+      ],
+      "numel": 154112
+    },
+    {
+      "name": "conv2.lin.weight",
+      "shape": [
+        41,
+        256
+      ],
+      "numel": 10496
+    }
+  ],
+  "checkpoint": "results/no-pruning/reddit/gcn/seed-0/split-0/checkpoint.pt",
+  "seed": 0,
+  "split": 0
+}

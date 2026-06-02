@@ -1,0 +1,36 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "micro_f1",
+  "metric_values": [
+    0.29621852297166856,
+    0.29602021059985956,
+    0.2962803488690555,
+    0.29695348972549757,
+    0.2972961452664782,
+    0.29921632518009417,
+    0.301621842216413,
+    0.29860018539157657,
+    0.29831604176145066
+  ],
+  "class_summary": {
+    "n_classes": 200,
+    "min_count": 7458,
+    "max_count": 530177,
+    "imbalance_ratio": 71.08836149101636
+  },
+  "multi_label_strategy": "binary-per-label",
+  "n_nodes_used": 537635,
+  "checkpoint": "results/no-pruning/yelp/graphsage/seed-0/split-0/checkpoint.pt",
+  "seed": 0,
+  "split": 0
+}

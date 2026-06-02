@@ -1,0 +1,36 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "micro_f1",
+  "metric_values": [
+    0.2962207601668559,
+    0.2960400907875439,
+    0.2960546162455983,
+    0.2971016448588041,
+    0.2975550625203306,
+    0.2990634488133263,
+    0.30046266831100477,
+    0.29796751445228,
+    0.2963775180516185
+  ],
+  "degree_summary": {
+    "mean": 18.425006866455078,
+    "median": 5.0,
+    "max": 4885.0,
+    "p99": 211.0
+  },
+  "self_loops_included": false,
+  "n_nodes_used": 537635,
+  "checkpoint": "results/no-pruning/yelp/graphsage/seed-0/split-0/checkpoint.pt",
+  "seed": 0,
+  "split": 0
+}

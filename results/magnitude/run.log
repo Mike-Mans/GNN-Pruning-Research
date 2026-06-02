@@ -1,8 +1,339 @@
 
-=== sweep start: method=magnitude cells=3 datasets_filter=['cora', 'wisconsin'] archs_filter=None ===
-[1/3] cora/gcn: launching
-  done in 2.6s
-[2/3] wisconsin/gcn: launching
-  done in 1.8s
-[3/3] cora/gat: launching
-  done in 2.5s
+=== sweep start: method=magnitude runs=83 datasets_filter=None archs_filter=None ===
+[1/83] cora/gcn/seed-0/split-0: launching
+  done in 10.1s
+[2/83] citeseer/gcn/seed-0/split-0: launching
+  done in 9.9s
+[3/83] pubmed/gcn/seed-0/split-0: launching
+  done in 9.8s
+[4/83] cs/gcn/seed-0/split-0: launching
+  done in 10.6s
+[5/83] physics/gcn/seed-0/split-0: launching
+  done in 11.3s
+[6/83] photo/gcn/seed-0/split-0: launching
+  done in 9.8s
+[7/83] computers/gcn/seed-0/split-0: launching
+  done in 9.9s
+[8/83] cornell/gcn/seed-0/split-0: launching
+  done in 9.8s
+[9/83] cornell/gcn/seed-0/split-1: launching
+  done in 9.8s
+[10/83] cornell/gcn/seed-0/split-2: launching
+  done in 9.8s
+[11/83] cornell/gcn/seed-0/split-3: launching
+  done in 9.9s
+[12/83] cornell/gcn/seed-0/split-4: launching
+  done in 9.8s
+[13/83] cornell/gcn/seed-0/split-5: launching
+  done in 9.8s
+[14/83] cornell/gcn/seed-0/split-6: launching
+  done in 9.8s
+[15/83] cornell/gcn/seed-0/split-7: launching
+  done in 9.9s
+[16/83] cornell/gcn/seed-0/split-8: launching
+  done in 9.9s
+[17/83] cornell/gcn/seed-0/split-9: launching
+  done in 9.8s
+[18/83] texas/gcn/seed-0/split-0: launching
+  done in 9.8s
+[19/83] texas/gcn/seed-0/split-1: launching
+  done in 9.8s
+[20/83] texas/gcn/seed-0/split-2: launching
+  done in 9.8s
+[21/83] texas/gcn/seed-0/split-3: launching
+  done in 9.8s
+[22/83] texas/gcn/seed-0/split-4: launching
+  done in 9.8s
+[23/83] texas/gcn/seed-0/split-5: launching
+  done in 9.8s
+[24/83] texas/gcn/seed-0/split-6: launching
+  done in 9.8s
+[25/83] texas/gcn/seed-0/split-7: launching
+  done in 9.8s
+[26/83] texas/gcn/seed-0/split-8: launching
+  done in 9.8s
+[27/83] texas/gcn/seed-0/split-9: launching
+  done in 9.8s
+[28/83] wisconsin/gcn/seed-0/split-0: launching
+  done in 9.8s
+[29/83] wisconsin/gcn/seed-0/split-1: launching
+  done in 9.8s
+[30/83] wisconsin/gcn/seed-0/split-2: launching
+  done in 9.8s
+[31/83] wisconsin/gcn/seed-0/split-3: launching
+  done in 9.8s
+[32/83] wisconsin/gcn/seed-0/split-4: launching
+  done in 9.8s
+[33/83] wisconsin/gcn/seed-0/split-5: launching
+  done in 9.9s
+[34/83] wisconsin/gcn/seed-0/split-6: launching
+  done in 9.8s
+[35/83] wisconsin/gcn/seed-0/split-7: launching
+  done in 9.8s
+[36/83] wisconsin/gcn/seed-0/split-8: launching
+  done in 9.8s
+[37/83] wisconsin/gcn/seed-0/split-9: launching
+  done in 9.8s
+[38/83] actor/gcn/seed-0/split-0: launching
+  done in 9.8s
+[39/83] actor/gcn/seed-0/split-1: launching
+  done in 9.8s
+[40/83] actor/gcn/seed-0/split-2: launching
+  done in 9.9s
+[41/83] actor/gcn/seed-0/split-3: launching
+  done in 9.8s
+[42/83] actor/gcn/seed-0/split-4: launching
+  done in 9.9s
+[43/83] actor/gcn/seed-0/split-5: launching
+  done in 9.8s
+[44/83] actor/gcn/seed-0/split-6: launching
+  done in 9.8s
+[45/83] actor/gcn/seed-0/split-7: launching
+  done in 9.9s
+[46/83] actor/gcn/seed-0/split-8: launching
+  done in 9.8s
+[47/83] actor/gcn/seed-0/split-9: launching
+  done in 9.8s
+[48/83] bbbp/gcn/seed-0/split-0: launching
+  done in 10.1s
+[49/83] proteins/gcn/seed-0/split-0: launching
+  done in 9.9s
+[50/83] cora/gat/seed-0/split-0: launching
+  done in 10.0s
+[51/83] citeseer/gat/seed-0/split-0: launching
+  done in 10.7s
+[52/83] pubmed/gat/seed-0/split-0: launching
+  done in 10.0s
+[53/83] computers/gat/seed-0/split-0: launching
+  done in 10.1s
+[54/83] photo/gat/seed-0/split-0: launching
+  done in 10.0s
+[55/83] cornell/gat/seed-0/split-0: launching
+  done in 10.0s
+[56/83] cornell/gat/seed-0/split-1: launching
+  done in 10.1s
+[57/83] cornell/gat/seed-0/split-2: launching
+  done in 10.1s
+[58/83] cornell/gat/seed-0/split-3: launching
+  done in 10.0s
+[59/83] cornell/gat/seed-0/split-4: launching
+  done in 10.0s
+[60/83] cornell/gat/seed-0/split-5: launching
+  done in 10.1s
+[61/83] cornell/gat/seed-0/split-6: launching
+  done in 10.1s
+[62/83] cornell/gat/seed-0/split-7: launching
+  done in 10.0s
+[63/83] cornell/gat/seed-0/split-8: launching
+  done in 10.1s
+[64/83] cornell/gat/seed-0/split-9: launching
+  done in 10.0s
+[65/83] actor/gat/seed-0/split-0: launching
+  done in 9.9s
+[66/83] actor/gat/seed-0/split-1: launching
+  done in 10.0s
+[67/83] actor/gat/seed-0/split-2: launching
+  done in 9.9s
+[68/83] actor/gat/seed-0/split-3: launching
+  done in 9.9s
+[69/83] actor/gat/seed-0/split-4: launching
+  done in 10.0s
+[70/83] actor/gat/seed-0/split-5: launching
+  done in 10.0s
+[71/83] actor/gat/seed-0/split-6: launching
+  done in 10.0s
+[72/83] actor/gat/seed-0/split-7: launching
+  done in 9.9s
+[73/83] actor/gat/seed-0/split-8: launching
+  done in 10.0s
+[74/83] actor/gat/seed-0/split-9: launching
+  done in 9.9s
+[75/83] bbbp/graphsage/seed-0/split-0: launching
+  done in 9.9s
+[76/83] proteins/graphsage/seed-0/split-0: launching
+  done in 9.8s
+[77/83] reddit/gcn/seed-0/split-0: launching
+  done in 11.4s
+[78/83] reddit/gat/seed-0/split-0: launching
+  FAILED in 8.8s (rc=1)
+  stdout-tail:
+
+  stderr-tail:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/cli.py", line 331, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/cli.py", line 316, in main
+    run_cell(args.method, args.dataset, args.architecture, args.config,
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/cli.py", line 128, in run_cell
+    rows = _run(dataset=dataset, architecture=architecture,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/pruning/magnitude.py", line 81, in run_cell
+    ck, prov = _load_dense(dataset, architecture, checkpoint_dir, seed, split)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/pruning/magnitude.py", line 45, in _load_dense
+    raise FileNotFoundError(
+FileNotFoundError: Dense checkpoint missing at results/no-pruning/reddit/gat/seed-0/split-0/checkpoint.pt. Run issue-#1 first.
+
+[79/83] flickr/graphsage/seed-0/split-0: launching
+  done in 10.0s
+[80/83] ogbn-arxiv/graphsage/seed-0/split-0: launching
+  done in 10.2s
+[81/83] reddit/graphsage/seed-0/split-0: launching
+  done in 11.6s
+[82/83] yelp/graphsage/seed-0/split-0: launching
+  done in 15.1s
+[83/83] ogbn-products/graphsage/seed-0/split-0: launching
+  FAILED in 8.8s (rc=1)
+  stdout-tail:
+
+  stderr-tail:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/cli.py", line 331, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/cli.py", line 316, in main
+    run_cell(args.method, args.dataset, args.architecture, args.config,
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/cli.py", line 128, in run_cell
+    rows = _run(dataset=dataset, architecture=architecture,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/pruning/magnitude.py", line 81, in run_cell
+    ck, prov = _load_dense(dataset, architecture, checkpoint_dir, seed, split)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/pruning/magnitude.py", line 45, in _load_dense
+    raise FileNotFoundError(
+FileNotFoundError: Dense checkpoint missing at results/no-pruning/ogbn-products/graphsage/seed-0/split-0/checkpoint.pt. Run issue-#1 first.
+
+
+=== sweep start: method=magnitude runs=83 datasets_filter=None archs_filter=None ===
+[1/83] cora/gcn/seed-0/split-0: SKIP (outputs already present)
+[2/83] citeseer/gcn/seed-0/split-0: SKIP (outputs already present)
+[3/83] pubmed/gcn/seed-0/split-0: SKIP (outputs already present)
+[4/83] cs/gcn/seed-0/split-0: SKIP (outputs already present)
+[5/83] physics/gcn/seed-0/split-0: SKIP (outputs already present)
+[6/83] photo/gcn/seed-0/split-0: SKIP (outputs already present)
+[7/83] computers/gcn/seed-0/split-0: SKIP (outputs already present)
+[8/83] cornell/gcn/seed-0/split-0: SKIP (outputs already present)
+[9/83] cornell/gcn/seed-0/split-1: SKIP (outputs already present)
+[10/83] cornell/gcn/seed-0/split-2: SKIP (outputs already present)
+[11/83] cornell/gcn/seed-0/split-3: SKIP (outputs already present)
+[12/83] cornell/gcn/seed-0/split-4: SKIP (outputs already present)
+[13/83] cornell/gcn/seed-0/split-5: SKIP (outputs already present)
+[14/83] cornell/gcn/seed-0/split-6: SKIP (outputs already present)
+[15/83] cornell/gcn/seed-0/split-7: SKIP (outputs already present)
+[16/83] cornell/gcn/seed-0/split-8: SKIP (outputs already present)
+[17/83] cornell/gcn/seed-0/split-9: SKIP (outputs already present)
+[18/83] texas/gcn/seed-0/split-0: SKIP (outputs already present)
+[19/83] texas/gcn/seed-0/split-1: SKIP (outputs already present)
+[20/83] texas/gcn/seed-0/split-2: SKIP (outputs already present)
+[21/83] texas/gcn/seed-0/split-3: SKIP (outputs already present)
+[22/83] texas/gcn/seed-0/split-4: SKIP (outputs already present)
+[23/83] texas/gcn/seed-0/split-5: SKIP (outputs already present)
+[24/83] texas/gcn/seed-0/split-6: SKIP (outputs already present)
+[25/83] texas/gcn/seed-0/split-7: SKIP (outputs already present)
+[26/83] texas/gcn/seed-0/split-8: SKIP (outputs already present)
+[27/83] texas/gcn/seed-0/split-9: SKIP (outputs already present)
+[28/83] wisconsin/gcn/seed-0/split-0: SKIP (outputs already present)
+[29/83] wisconsin/gcn/seed-0/split-1: SKIP (outputs already present)
+[30/83] wisconsin/gcn/seed-0/split-2: SKIP (outputs already present)
+[31/83] wisconsin/gcn/seed-0/split-3: SKIP (outputs already present)
+[32/83] wisconsin/gcn/seed-0/split-4: SKIP (outputs already present)
+[33/83] wisconsin/gcn/seed-0/split-5: SKIP (outputs already present)
+[34/83] wisconsin/gcn/seed-0/split-6: SKIP (outputs already present)
+[35/83] wisconsin/gcn/seed-0/split-7: SKIP (outputs already present)
+[36/83] wisconsin/gcn/seed-0/split-8: SKIP (outputs already present)
+[37/83] wisconsin/gcn/seed-0/split-9: SKIP (outputs already present)
+[38/83] actor/gcn/seed-0/split-0: SKIP (outputs already present)
+[39/83] actor/gcn/seed-0/split-1: SKIP (outputs already present)
+[40/83] actor/gcn/seed-0/split-2: SKIP (outputs already present)
+[41/83] actor/gcn/seed-0/split-3: SKIP (outputs already present)
+[42/83] actor/gcn/seed-0/split-4: SKIP (outputs already present)
+[43/83] actor/gcn/seed-0/split-5: SKIP (outputs already present)
+[44/83] actor/gcn/seed-0/split-6: SKIP (outputs already present)
+[45/83] actor/gcn/seed-0/split-7: SKIP (outputs already present)
+[46/83] actor/gcn/seed-0/split-8: SKIP (outputs already present)
+[47/83] actor/gcn/seed-0/split-9: SKIP (outputs already present)
+[48/83] bbbp/gcn/seed-0/split-0: SKIP (outputs already present)
+[49/83] proteins/gcn/seed-0/split-0: SKIP (outputs already present)
+[50/83] cora/gat/seed-0/split-0: SKIP (outputs already present)
+[51/83] citeseer/gat/seed-0/split-0: SKIP (outputs already present)
+[52/83] pubmed/gat/seed-0/split-0: SKIP (outputs already present)
+[53/83] computers/gat/seed-0/split-0: SKIP (outputs already present)
+[54/83] photo/gat/seed-0/split-0: SKIP (outputs already present)
+[55/83] cornell/gat/seed-0/split-0: SKIP (outputs already present)
+[56/83] cornell/gat/seed-0/split-1: SKIP (outputs already present)
+[57/83] cornell/gat/seed-0/split-2: SKIP (outputs already present)
+[58/83] cornell/gat/seed-0/split-3: SKIP (outputs already present)
+[59/83] cornell/gat/seed-0/split-4: SKIP (outputs already present)
+[60/83] cornell/gat/seed-0/split-5: SKIP (outputs already present)
+[61/83] cornell/gat/seed-0/split-6: SKIP (outputs already present)
+[62/83] cornell/gat/seed-0/split-7: SKIP (outputs already present)
+[63/83] cornell/gat/seed-0/split-8: SKIP (outputs already present)
+[64/83] cornell/gat/seed-0/split-9: SKIP (outputs already present)
+[65/83] actor/gat/seed-0/split-0: SKIP (outputs already present)
+[66/83] actor/gat/seed-0/split-1: SKIP (outputs already present)
+[67/83] actor/gat/seed-0/split-2: SKIP (outputs already present)
+[68/83] actor/gat/seed-0/split-3: SKIP (outputs already present)
+[69/83] actor/gat/seed-0/split-4: SKIP (outputs already present)
+[70/83] actor/gat/seed-0/split-5: SKIP (outputs already present)
+[71/83] actor/gat/seed-0/split-6: SKIP (outputs already present)
+[72/83] actor/gat/seed-0/split-7: SKIP (outputs already present)
+[73/83] actor/gat/seed-0/split-8: SKIP (outputs already present)
+[74/83] actor/gat/seed-0/split-9: SKIP (outputs already present)
+[75/83] bbbp/graphsage/seed-0/split-0: SKIP (outputs already present)
+[76/83] proteins/graphsage/seed-0/split-0: SKIP (outputs already present)
+[77/83] reddit/gcn/seed-0/split-0: SKIP (outputs already present)
+[78/83] reddit/gat/seed-0/split-0: launching
+  FAILED in 8.6s (rc=1)
+  stdout-tail:
+
+  stderr-tail:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/cli.py", line 331, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/cli.py", line 316, in main
+    run_cell(args.method, args.dataset, args.architecture, args.config,
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/cli.py", line 128, in run_cell
+    rows = _run(dataset=dataset, architecture=architecture,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/pruning/magnitude.py", line 81, in run_cell
+    ck, prov = _load_dense(dataset, architecture, checkpoint_dir, seed, split)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/pruning/magnitude.py", line 45, in _load_dense
+    raise FileNotFoundError(
+FileNotFoundError: Dense checkpoint missing at results/no-pruning/reddit/gat/seed-0/split-0/checkpoint.pt. Run issue-#1 first.
+
+[79/83] flickr/graphsage/seed-0/split-0: SKIP (outputs already present)
+[80/83] ogbn-arxiv/graphsage/seed-0/split-0: SKIP (outputs already present)
+[81/83] reddit/graphsage/seed-0/split-0: SKIP (outputs already present)
+[82/83] yelp/graphsage/seed-0/split-0: SKIP (outputs already present)
+[83/83] ogbn-products/graphsage/seed-0/split-0: launching
+  FAILED in 8.8s (rc=1)
+  stdout-tail:
+
+  stderr-tail:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/cli.py", line 331, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/cli.py", line 316, in main
+    run_cell(args.method, args.dataset, args.architecture, args.config,
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/cli.py", line 128, in run_cell
+    rows = _run(dataset=dataset, architecture=architecture,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/pruning/magnitude.py", line 81, in run_cell
+    ck, prov = _load_dense(dataset, architecture, checkpoint_dir, seed, split)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/pruning/magnitude.py", line 45, in _load_dense
+    raise FileNotFoundError(
+FileNotFoundError: Dense checkpoint missing at results/no-pruning/ogbn-products/graphsage/seed-0/split-0/checkpoint.pt. Run issue-#1 first.
+
