@@ -19,13 +19,15 @@ from torch_geometric.loader import DataLoader
 from gnn_pruning.eval import evaluate_node_classification, loss_fn
 
 
-def _resolve_mask(data: Data, attr: str) -> Optional[torch.Tensor]:
+def _resolve_mask(data: Data, attr: str, split: int = 0) -> Optional[torch.Tensor]:
     mask = getattr(data, attr, None)
     if mask is None:
         return None
-    # WebKB / Actor ship 10 split columns — pick split 0 by default.
+    # WebKB / Actor ship 10 split columns (Geom-GCN convention) — select the
+    # requested split. 1-D masks ignore `split`, so non-multi-split datasets
+    # are unaffected.
     if mask.dim() == 2:
-        mask = mask[:, 0]
+        mask = mask[:, split]
     return mask.bool()
 
 
@@ -41,20 +43,20 @@ def _ogb_masks(data: Data) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
     return train, val, test
 
 
-def get_node_masks(data: Data) -> tuple[
+def get_node_masks(data: Data, split: int = 0) -> tuple[
     torch.Tensor, Optional[torch.Tensor], torch.Tensor
 ]:
     """Return (train_mask, val_mask, test_mask) for node-classification data.
 
     OGB datasets use `split_idx`. Other PyG datasets use boolean mask
-    attributes. WebKB-style datasets ship multiple split columns; we use
-    column 0.
+    attributes. WebKB-style datasets ship multiple split columns; `split`
+    selects which one (default 0).
     """
     if hasattr(data, "split_idx"):
         return _ogb_masks(data)
-    train = _resolve_mask(data, "train_mask")
-    val = _resolve_mask(data, "val_mask")
-    test = _resolve_mask(data, "test_mask")
+    train = _resolve_mask(data, "train_mask", split)
+    val = _resolve_mask(data, "val_mask", split)
+    test = _resolve_mask(data, "test_mask", split)
     if train is None or test is None:
         # Fall back: random 60/20/20 split.
         n = data.num_nodes
@@ -87,12 +89,13 @@ def train_node_classification(
     patience: int = 50,
     metric_name: str = "accuracy",
     seed: int = 0,
+    split: int = 0,
 ) -> tuple[dict, float, int]:
     torch.manual_seed(seed)
     model = model.to(device)
     data = data.to(device)
 
-    train_mask, val_mask, test_mask = get_node_masks(data)
+    train_mask, val_mask, test_mask = get_node_masks(data, split=split)
     train_mask = train_mask.to(device)
     if val_mask is not None:
         val_mask = val_mask.to(device)
@@ -141,10 +144,11 @@ def train_node_classification(
 
 def evaluate_test(
     model: nn.Module, data: Data, device: torch.device, metric_name: str,
+    split: int = 0,
 ) -> float:
     model = model.to(device).eval()
     data = data.to(device)
-    _, _, test_mask = get_node_masks(data)
+    _, _, test_mask = get_node_masks(data, split=split)
     test_mask = test_mask.to(device)
     y = _flatten_y(data.y)
     with torch.no_grad():

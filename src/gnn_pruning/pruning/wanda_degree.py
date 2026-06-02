@@ -48,9 +48,10 @@ def _device() -> torch.device:
 
 
 def _load_dense(dataset: str, architecture: str,
-                checkpoint_dir: str | None) -> tuple[dict, str]:
+                checkpoint_dir: str | None,
+                seed: int, split: int) -> tuple[dict, str]:
     root = Path(checkpoint_dir) if checkpoint_dir else DENSE_ROOT
-    ck_path = root / dataset / architecture / "checkpoint.pt"
+    ck_path = root / dataset / architecture / f"seed-{seed}" / f"split-{split}" / "checkpoint.pt"
     if not ck_path.exists():
         raise FileNotFoundError(
             f"Dense checkpoint missing at {ck_path}. Run issue #1 first."
@@ -83,12 +84,12 @@ def _degree_summary(deg: torch.Tensor) -> dict:
 
 
 def _collect_node_classification(
-    model: torch.nn.Module, data, device: torch.device,
+    model: torch.nn.Module, data, device: torch.device, split: int = 0,
 ) -> tuple[dict[str, torch.Tensor], torch.Tensor, int]:
     data = data.to(device)
     model = model.to(device).eval()
     acts = collect_activations(model, data.x, data.edge_index)
-    train_mask, _, _ = get_node_masks(data)
+    train_mask, _, _ = get_node_masks(data, split=split)
     train_mask = train_mask.to(device)
     n_used = int(train_mask.sum().item())
     deg = _node_degree(data.edge_index, num_nodes=data.num_nodes).to(device)
@@ -151,12 +152,13 @@ def run_cell(
     sparsity_grid: list[float],
     checkpoint_dir: str | None = None,
     seed: int = 0,
+    split: int = 0,
     **_unused_hp,
 ) -> list[dict]:
     torch.manual_seed(seed)
     device = _device()
 
-    ck, ck_path = _load_dense(dataset, architecture, checkpoint_dir)
+    ck, ck_path = _load_dense(dataset, architecture, checkpoint_dir, seed, split)
     model = _build_from_checkpoint(architecture, ck).to(device)
 
     meta = DATASET_META.get(dataset.lower())
@@ -164,15 +166,15 @@ def run_cell(
 
     if task == "graph-classification":
         ds = load_dataset(dataset)
-        _, _, test_set = _split_graphs(ds, seed=int(ck.get("seed", 0)))
+        _, _, test_set = _split_graphs(ds, seed=int(ck.get("seed", seed)))
         model._test_split = test_set  # type: ignore[attr-defined]
         activations, deg, n_used = _collect_graph_classification(
-            model, ds, device, seed=int(ck.get("seed", 0))
+            model, ds, device, seed=int(ck.get("seed", seed))
         )
     else:
         ds = load_dataset(dataset)
         activations, deg, n_used = _collect_node_classification(
-            model, ds, device
+            model, ds, device, split=split
         )
 
     deg_summary = _degree_summary(deg)
@@ -184,10 +186,10 @@ def run_cell(
             if task == "graph-classification":
                 v = evaluate_test_graphs(model, device)
             else:
-                v = evaluate_test(model, ds, device, metric_name)
+                v = evaluate_test(model, ds, device, metric_name, split=split)
         metric_values.append(float(v))
 
-    cell_dir = RESULTS_ROOT / dataset / architecture
+    cell_dir = RESULTS_ROOT / dataset / architecture / f"seed-{seed}" / f"split-{split}"
     cell_dir.mkdir(parents=True, exist_ok=True)
     metrics = {
         "sparsity_grid": list(map(float, sparsity_grid)),
@@ -198,6 +200,7 @@ def run_cell(
         "n_nodes_used": int(n_used),
         "checkpoint": ck_path,
         "seed": int(seed),
+        "split": int(split),
     }
     (cell_dir / "metrics.json").write_text(json.dumps(metrics, indent=2))
 
