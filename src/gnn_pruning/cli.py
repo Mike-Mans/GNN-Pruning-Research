@@ -40,6 +40,11 @@ METHODS = {
     "wanda-per-class": "results/wanda-per-class",
 }
 
+# Large NC datasets run full-batch and may OOM on 24 GB MPS (issue #6). We
+# order them LAST in the sweep so an OOM there never costs the already-finished
+# small / heterophilic cells (the publishable core).
+LARGE_DATASETS = {"reddit", "ogbn-products", "ogbn-arxiv", "yelp", "flickr"}
+
 
 def _load_config(path: Path) -> dict:
     return yaml.safe_load(path.read_text())
@@ -65,12 +70,48 @@ def _cells_from_config(cfg: dict) -> list[tuple[str, str]]:
     return cells
 
 
+def _resolve_seeds(cfg: dict) -> list[int]:
+    """Seed list for the sweep. Tonight ships [0]; flip to [0,1,2,3,4] for the
+    publishable multi-seed pass (issue #8)."""
+    return [int(s) for s in (cfg.get("seeds") or [0])]
+
+
+def _resolve_splits(dataset: str, cfg: dict) -> list[int]:
+    """Split columns to run for `dataset` (issue #9). WebKB / Actor ship 10
+    Geom-GCN splits; `splits: { <dataset>: all }` runs and averages over all of
+    them. Datasets not listed run the single default split [0]."""
+    spec = (cfg.get("splits") or {}).get(dataset)
+    if spec is None:
+        return [0]
+    if spec == "all":
+        return list(range(10))
+    return [int(s) for s in spec]
+
+
+def _expand_runs(cfg: dict, cells: list[tuple[str, str]]
+                 ) -> list[tuple[str, str, int, int]]:
+    """Expand each (dataset, arch) cell into (dataset, arch, seed, split) runs,
+    ordering large datasets last (issue #6 guard)."""
+    seeds = _resolve_seeds(cfg)
+    runs: list[tuple[str, str, int, int]] = []
+    for dataset, arch in cells:
+        for seed in seeds:
+            for split in _resolve_splits(dataset, cfg):
+                runs.append((dataset, arch, seed, split))
+    # Stable sort: False (0) before True (1) → large datasets last, original
+    # order preserved within each group.
+    runs.sort(key=lambda r: r[0] in LARGE_DATASETS)
+    return runs
+
+
 def run_cell(method: str, dataset: str, architecture: str, cfg_path: Path,
+             seed: int = 0, split: int = 0,
              checkpoint_dir: Optional[str] = None) -> dict:
-    """Execute one cell and append its row(s) to `<method>/summary.csv`."""
+    """Execute one (dataset, arch, seed, split) run; write its metrics.json."""
     cfg = _load_config(cfg_path)
     metric_name = _metric_for(dataset, cfg)
     hp = _hyperparams_for(dataset, cfg)
+    hp.pop("seed", None)  # seed comes from the sweep dimension, not the hp dict
     sparsity_grid = list(cfg.get("sparsity_grid") or [])
 
     method_root = Path(METHODS[method])
@@ -80,28 +121,28 @@ def run_cell(method: str, dataset: str, architecture: str, cfg_path: Path,
     if method == "no-pruning":
         from gnn_pruning.pruning.no_pruning import run_cell as _run
         row = _run(dataset=dataset, architecture=architecture,
-                   metric_name=metric_name, **hp)
+                   metric_name=metric_name, seed=seed, split=split, **hp)
         rows = [row]
     elif method == "magnitude":
         from gnn_pruning.pruning.magnitude import run_cell as _run
         rows = _run(dataset=dataset, architecture=architecture,
                     metric_name=metric_name, sparsity_grid=sparsity_grid,
-                    checkpoint_dir=checkpoint_dir, **hp)
+                    checkpoint_dir=checkpoint_dir, seed=seed, split=split, **hp)
     elif method == "wanda-uniform":
         from gnn_pruning.pruning.wanda_uniform import run_cell as _run
         rows = _run(dataset=dataset, architecture=architecture,
                     metric_name=metric_name, sparsity_grid=sparsity_grid,
-                    checkpoint_dir=checkpoint_dir, **hp)
+                    checkpoint_dir=checkpoint_dir, seed=seed, split=split, **hp)
     elif method == "wanda-degree":
         from gnn_pruning.pruning.wanda_degree import run_cell as _run
         rows = _run(dataset=dataset, architecture=architecture,
                     metric_name=metric_name, sparsity_grid=sparsity_grid,
-                    checkpoint_dir=checkpoint_dir, **hp)
+                    checkpoint_dir=checkpoint_dir, seed=seed, split=split, **hp)
     elif method == "wanda-per-class":
         from gnn_pruning.pruning.wanda_per_class import run_cell as _run
         rows = _run(dataset=dataset, architecture=architecture,
                     metric_name=metric_name, sparsity_grid=sparsity_grid,
-                    checkpoint_dir=checkpoint_dir, **hp)
+                    checkpoint_dir=checkpoint_dir, seed=seed, split=split, **hp)
     else:
         raise ValueError(f"Unknown method {method!r}")
 
@@ -119,8 +160,10 @@ def _filter_cells(cells, datasets_filter, archs_filter):
 
 
 def _expected_outputs_present(method: str, dataset: str, architecture: str,
+                              seed: int, split: int,
                               n_sparsities: int) -> bool:
-    root = Path(METHODS[method]) / dataset / architecture
+    root = (Path(METHODS[method]) / dataset / architecture
+            / f"seed-{seed}" / f"split-{split}")
     metrics = root / "metrics.json"
     if not metrics.exists():
         return False
@@ -141,34 +184,36 @@ def sweep(method: str, cfg_path: Path,
           checkpoint_dir: Optional[str] = None) -> None:
     cfg = _load_config(cfg_path)
     cells = _filter_cells(_cells_from_config(cfg), datasets_filter, archs_filter)
+    runs = _expand_runs(cfg, cells)
     n_sparsities = len(cfg.get("sparsity_grid") or [])
     method_root = Path(METHODS[method])
     method_root.mkdir(parents=True, exist_ok=True)
     log_path = method_root / "run.log"
 
-    summary_rows: list[dict] = []
-
     # Append-only run.log for the orchestrator.
     with log_path.open("a") as logf:
-        logf.write(f"\n=== sweep start: method={method} cells={len(cells)} "
+        logf.write(f"\n=== sweep start: method={method} runs={len(runs)} "
                    f"datasets_filter={datasets_filter} "
                    f"archs_filter={archs_filter} ===\n")
-        for i, (dataset, arch) in enumerate(cells, start=1):
+        for i, (dataset, arch, seed, split) in enumerate(runs, start=1):
+            tag = f"{dataset}/{arch}/seed-{seed}/split-{split}"
             if not force and _expected_outputs_present(
-                method, dataset, arch, n_sparsities
+                method, dataset, arch, seed, split, n_sparsities
             ):
-                logf.write(f"[{i}/{len(cells)}] {dataset}/{arch}: SKIP "
+                logf.write(f"[{i}/{len(runs)}] {tag}: SKIP "
                            f"(outputs already present)\n")
                 logf.flush()
                 continue
             t0 = time.time()
-            logf.write(f"[{i}/{len(cells)}] {dataset}/{arch}: launching\n")
+            logf.write(f"[{i}/{len(runs)}] {tag}: launching\n")
             logf.flush()
             cmd = [
                 sys.executable, "-m", "gnn_pruning.cli", "run-cell",
                 "--method", method,
                 "--dataset", dataset,
                 "--architecture", arch,
+                "--seed", str(seed),
+                "--split", str(split),
                 "--config", str(cfg_path),
             ]
             if checkpoint_dir:
@@ -193,66 +238,46 @@ def sweep(method: str, cfg_path: Path,
                 continue
             logf.write(f"  done in {dt:.1f}s\n")
             logf.flush()
-            # Collect rows from the cell's metrics.json.
-            cell_metrics = method_root / dataset / arch / "metrics.json"
-            if not cell_metrics.exists():
-                continue
-            m = json.loads(cell_metrics.read_text())
-            if method == "no-pruning":
-                ckpt = method_root / dataset / arch / "checkpoint.pt"
-                summary_rows.append({
-                    "dataset": dataset,
-                    "architecture": arch,
-                    "sparsity": m["sparsity"],
-                    "metric_name": m["metric_name"],
-                    "metric_value": m["metric_value"],
-                    "checkpoint_path": str(ckpt),
-                })
-            else:
-                for s, v in zip(m["sparsity_grid"], m["metric_values"]):
-                    summary_rows.append({
-                        "dataset": dataset,
-                        "architecture": arch,
-                        "sparsity": float(s),
-                        "metric_name": m["metric_name"],
-                        "metric_value": float(v),
-                    })
 
     # Write summary.csv (rebuild from disk to be idempotent across runs).
     _rebuild_summary(method, n_sparsities)
 
 
 def _rebuild_summary(method: str, n_sparsities: int) -> None:
-    """Scan `results/<method>/*/*/metrics.json` and rewrite summary.csv."""
+    """Scan per-(seed, split) metrics and rewrite summary.csv as the MEAN over
+    all seeds × splits per (dataset, arch, sparsity) row (issues #8, #9)."""
     method_root = Path(METHODS[method])
-    rows: list[dict] = []
-    for cell_metrics in sorted(method_root.glob("*/*/metrics.json")):
+    # (dataset, arch, sparsity) -> list of metric values across seeds/splits.
+    agg: dict[tuple[str, str, float], list[float]] = {}
+    metric_names: dict[tuple[str, str], str] = {}
+    for cell_metrics in sorted(
+        method_root.glob("*/*/seed-*/split-*/metrics.json")
+    ):
         m = json.loads(cell_metrics.read_text())
-        dataset = cell_metrics.parent.parent.name
-        arch = cell_metrics.parent.name
+        arch = cell_metrics.parent.parent.parent.name
+        dataset = cell_metrics.parent.parent.parent.parent.name
+        metric_names[(dataset, arch)] = m["metric_name"]
         if method == "no-pruning":
-            ckpt = method_root / dataset / arch / "checkpoint.pt"
-            rows.append({
-                "dataset": dataset,
-                "architecture": arch,
-                "sparsity": m["sparsity"],
-                "metric_name": m["metric_name"],
-                "metric_value": m["metric_value"],
-                "checkpoint_path": str(ckpt),
-            })
+            agg.setdefault((dataset, arch, 0.0), []).append(
+                float(m["metric_value"]))
         else:
             for s, v in zip(m["sparsity_grid"], m["metric_values"]):
-                rows.append({
-                    "dataset": dataset,
-                    "architecture": arch,
-                    "sparsity": float(s),
-                    "metric_name": m["metric_name"],
-                    "metric_value": float(v),
-                })
-    if not rows:
+                agg.setdefault((dataset, arch, float(s)), []).append(float(v))
+    if not agg:
         return
+    rows: list[dict] = []
+    for (dataset, arch, sparsity), vals in sorted(agg.items()):
+        rows.append({
+            "dataset": dataset,
+            "architecture": arch,
+            "sparsity": sparsity,
+            "metric_name": metric_names[(dataset, arch)],
+            "metric_value": sum(vals) / len(vals),
+            "n_runs": len(vals),
+        })
     summary_path = method_root / "summary.csv"
-    fieldnames = list(rows[0].keys())
+    fieldnames = ["dataset", "architecture", "sparsity",
+                  "metric_name", "metric_value", "n_runs"]
     with summary_path.open("w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=fieldnames)
         w.writeheader()
@@ -267,6 +292,8 @@ def main(argv: Optional[list[str]] = None) -> int:
     p_run.add_argument("--method", required=True, choices=list(METHODS))
     p_run.add_argument("--dataset", required=True)
     p_run.add_argument("--architecture", required=True)
+    p_run.add_argument("--seed", type=int, default=0)
+    p_run.add_argument("--split", type=int, default=0)
     p_run.add_argument("--config", required=True, type=Path)
     p_run.add_argument("--checkpoint-dir", default=None,
                        help="Override the dense-checkpoint directory for "
@@ -287,6 +314,7 @@ def main(argv: Optional[list[str]] = None) -> int:
 
     if args.command == "run-cell":
         run_cell(args.method, args.dataset, args.architecture, args.config,
+                 seed=args.seed, split=args.split,
                  checkpoint_dir=args.checkpoint_dir)
         return 0
     if args.command == "sweep":

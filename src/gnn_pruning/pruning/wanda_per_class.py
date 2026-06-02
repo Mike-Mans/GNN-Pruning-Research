@@ -33,9 +33,11 @@ from gnn_pruning.plotting import plot_accuracy_vs_sparsity
 from gnn_pruning.pruning import masked_weights
 from gnn_pruning.training import (
     _split_graphs,  # noqa: PLC2701
+    build_sparse_adj,
     evaluate_test,
     evaluate_test_graphs,
     get_node_masks,
+    use_sparse_adj,
 )
 from gnn_pruning.training.activation_hooks import collect_activations
 
@@ -45,15 +47,18 @@ DENSE_ROOT = Path("results/no-pruning")
 
 
 def _device() -> torch.device:
+    if torch.cuda.is_available():
+        return torch.device("cuda")
     if torch.backends.mps.is_available():
         return torch.device("mps")
     return torch.device("cpu")
 
 
 def _load_dense(dataset: str, architecture: str,
-                checkpoint_dir: str | None) -> tuple[dict, str]:
+                checkpoint_dir: str | None,
+                seed: int, split: int) -> tuple[dict, str]:
     root = Path(checkpoint_dir) if checkpoint_dir else DENSE_ROOT
-    ck_path = root / dataset / architecture / "checkpoint.pt"
+    ck_path = root / dataset / architecture / f"seed-{seed}" / f"split-{split}" / "checkpoint.pt"
     if not ck_path.exists():
         raise FileNotFoundError(
             f"Dense checkpoint missing at {ck_path}. Run issue #1 first."
@@ -121,12 +126,14 @@ def _per_class_norm_multi_label(
 
 
 def _collect_node_classification(
-    model: torch.nn.Module, data, device: torch.device,
+    model: torch.nn.Module, data, device: torch.device, split: int = 0,
+    use_sparse: bool = False,
 ) -> tuple[dict[str, torch.Tensor], torch.Tensor, int, bool]:
     data = data.to(device)
     model = model.to(device).eval()
-    acts = collect_activations(model, data.x, data.edge_index)
-    train_mask, _, _ = get_node_masks(data)
+    adj = build_sparse_adj(data) if use_sparse else data.edge_index
+    acts = collect_activations(model, data.x, adj)
+    train_mask, _, _ = get_node_masks(data, split=split)
     train_mask = train_mask.to(device)
     n_used = int(train_mask.sum().item())
     acts_used = {k: v[train_mask] for k, v in acts.items()}
@@ -232,32 +239,35 @@ def run_cell(
     sparsity_grid: list[float],
     checkpoint_dir: str | None = None,
     seed: int = 0,
+    split: int = 0,
     **_unused_hp,
 ) -> list[dict]:
     torch.manual_seed(seed)
     device = _device()
 
-    ck, ck_path = _load_dense(dataset, architecture, checkpoint_dir)
+    ck, ck_path = _load_dense(dataset, architecture, checkpoint_dir, seed, split)
     model = _build_from_checkpoint(architecture, ck).to(device)
 
     meta = DATASET_META.get(dataset.lower())
     task = meta.task if meta else "node-classification"
     is_multi_label = (meta is not None and meta.multi_label) \
         or metric_name == "micro_f1"
+    sparse = use_sparse_adj(dataset, architecture)
 
     if task == "graph-classification":
         ds = load_dataset(dataset)
-        _, _, test_set = _split_graphs(ds, seed=int(ck.get("seed", 0)))
+        _, _, test_set = _split_graphs(ds, seed=int(ck.get("seed", seed)))
         model._test_split = test_set  # type: ignore[attr-defined]
         activations, labels, n_used, _ = _collect_graph_classification(
-            model, ds, device, seed=int(ck.get("seed", 0))
+            model, ds, device, seed=int(ck.get("seed", seed))
         )
         multi_label = False
         n_classes_hint = int(ck["out_dim"])
     else:
         ds = load_dataset(dataset)
         activations, labels, n_used, multi_label = \
-            _collect_node_classification(model, ds, device)
+            _collect_node_classification(model, ds, device, split=split,
+                                         use_sparse=sparse)
         n_classes_hint = int(ck["out_dim"])
         if is_multi_label:
             multi_label = True
@@ -273,10 +283,11 @@ def run_cell(
             if task == "graph-classification":
                 v = evaluate_test_graphs(model, device)
             else:
-                v = evaluate_test(model, ds, device, metric_name)
+                v = evaluate_test(model, ds, device, metric_name,
+                                  split=split, use_sparse=sparse)
         metric_values.append(float(v))
 
-    cell_dir = RESULTS_ROOT / dataset / architecture
+    cell_dir = RESULTS_ROOT / dataset / architecture / f"seed-{seed}" / f"split-{split}"
     cell_dir.mkdir(parents=True, exist_ok=True)
     metrics = {
         "sparsity_grid": list(map(float, sparsity_grid)),
@@ -287,6 +298,7 @@ def run_cell(
         "n_nodes_used": int(n_used),
         "checkpoint": ck_path,
         "seed": int(seed),
+        "split": int(split),
     }
     (cell_dir / "metrics.json").write_text(json.dumps(metrics, indent=2))
 

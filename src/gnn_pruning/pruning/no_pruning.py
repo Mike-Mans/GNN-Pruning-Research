@@ -22,6 +22,7 @@ from gnn_pruning.training import (
     evaluate_test_graphs,
     train_graph_classification,
     train_node_classification,
+    use_sparse_adj,
 )
 
 
@@ -29,6 +30,8 @@ RESULTS_ROOT = Path("results/no-pruning")
 
 
 def _device() -> torch.device:
+    if torch.cuda.is_available():
+        return torch.device("cuda")
     if torch.backends.mps.is_available():
         return torch.device("mps")
     return torch.device("cpu")
@@ -73,6 +76,7 @@ def run_cell(
     metric_name: str = "accuracy",
     batch_size: int = 32,
     seed: int = 0,
+    split: int = 0,
 ) -> dict:
     """Train one (dataset, architecture) cell to convergence, save artifacts.
 
@@ -98,16 +102,19 @@ def run_cell(
         model.load_state_dict(best_state)
         test_metric = evaluate_test_graphs(model, device, batch_size=batch_size)
     else:
+        sparse = use_sparse_adj(dataset, architecture)
         best_state, best_val, best_epoch = train_node_classification(
             model, ds, device=device, lr=lr, weight_decay=weight_decay,
             epochs=epochs, patience=patience, metric_name=metric_name,
-            seed=seed,
+            seed=seed, split=split, use_sparse=sparse,
         )
         model.load_state_dict(best_state)
-        test_metric = evaluate_test(model, ds, device, metric_name)
+        test_metric = evaluate_test(model, ds, device, metric_name,
+                                    split=split, use_sparse=sparse)
 
-    # Persist artifacts.
-    cell_dir = RESULTS_ROOT / dataset / architecture
+    # Persist artifacts. One subdir per (seed, split) so the multi-seed /
+    # multi-split sweep keeps every run isolated and idempotent.
+    cell_dir = RESULTS_ROOT / dataset / architecture / f"seed-{seed}" / f"split-{split}"
     cell_dir.mkdir(parents=True, exist_ok=True)
     ckpt_path = cell_dir / "checkpoint.pt"
     torch.save({
@@ -118,6 +125,7 @@ def run_cell(
         "out_dim": out_dim,
         "hidden_dim": hidden_dim,
         "seed": seed,
+        "split": split,
     }, ckpt_path)
 
     n_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
@@ -128,6 +136,7 @@ def run_cell(
         "n_params": int(n_params),
         "epoch_of_best_val": int(best_epoch),
         "seed": int(seed),
+        "split": int(split),
     }
     (cell_dir / "metrics.json").write_text(json.dumps(metrics, indent=2))
 

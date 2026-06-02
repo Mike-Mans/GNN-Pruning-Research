@@ -33,7 +33,7 @@ cells:
     - reddit
     - yelp
     - ogbn-products
-    - yelpchi
+    # yelpchi dropped (issue #7): PyG 2.7 ships no YelpChi loader — option 4.
     - bbbp
     - proteins
 
@@ -46,5 +46,12 @@ metric_overrides:
   yelp: micro_f1
   ogbn-proteins: micro_f1
 
-default_hyperparams:
-  seed: 0
+# Issue #8: single seed tonight; flip to [0, 1, 2, 3, 4] for the multi-seed pass.
+seeds: [0]
+
+# Issue #9: WebKB / Actor ship 10 Geom-GCN split columns — run & average all.
+splits:
+  cornell: all
+  texas: all
+  wisconsin: all
+  actor: all

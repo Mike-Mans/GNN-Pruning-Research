@@ -17,7 +17,11 @@ from gnn_pruning.models import build_model, named_prunable_weights
 from gnn_pruning.plotting import plot_accuracy_vs_sparsity
 from gnn_pruning.pruning import masked_weights
 from gnn_pruning.pruning.no_pruning import _infer_dims  # noqa: PLC2701
-from gnn_pruning.training import evaluate_test, evaluate_test_graphs
+from gnn_pruning.training import (
+    evaluate_test,
+    evaluate_test_graphs,
+    use_sparse_adj,
+)
 
 
 RESULTS_ROOT = Path("results/magnitude")
@@ -25,15 +29,18 @@ DENSE_ROOT = Path("results/no-pruning")
 
 
 def _device() -> torch.device:
+    if torch.cuda.is_available():
+        return torch.device("cuda")
     if torch.backends.mps.is_available():
         return torch.device("mps")
     return torch.device("cpu")
 
 
 def _load_dense(dataset: str, architecture: str,
-                checkpoint_dir: str | None) -> tuple[dict, dict]:
+                checkpoint_dir: str | None,
+                seed: int, split: int) -> tuple[dict, dict]:
     root = Path(checkpoint_dir) if checkpoint_dir else DENSE_ROOT
-    ck_path = root / dataset / architecture / "checkpoint.pt"
+    ck_path = root / dataset / architecture / f"seed-{seed}" / f"split-{split}" / "checkpoint.pt"
     if not ck_path.exists():
         raise FileNotFoundError(
             f"Dense checkpoint missing at {ck_path}. Run issue-#1 first."
@@ -65,12 +72,13 @@ def run_cell(
     sparsity_grid: list[float],
     checkpoint_dir: str | None = None,
     seed: int = 0,
+    split: int = 0,
     **_unused_hp,
 ) -> list[dict]:
     torch.manual_seed(seed)
     device = _device()
 
-    ck, prov = _load_dense(dataset, architecture, checkpoint_dir)
+    ck, prov = _load_dense(dataset, architecture, checkpoint_dir, seed, split)
     model = _build_from_checkpoint(architecture, ck).to(device)
     pairs = _score_magnitude(model)
 
@@ -83,21 +91,23 @@ def run_cell(
         # the held-out set used by `evaluate_test_graphs`.
         from gnn_pruning.training import _split_graphs  # noqa: PLC2701
         ds = load_dataset(dataset)
-        _, _, test_set = _split_graphs(ds, seed=int(ck.get("seed", 0)))
+        _, _, test_set = _split_graphs(ds, seed=int(ck.get("seed", seed)))
         model._test_split = test_set  # type: ignore[attr-defined]
     else:
         ds = load_dataset(dataset)
 
+    sparse = use_sparse_adj(dataset, architecture)
     metric_values: list[float] = []
     for s in sparsity_grid:
         with masked_weights(pairs, sparsity=s):
             if task == "graph-classification":
                 v = evaluate_test_graphs(model, device)
             else:
-                v = evaluate_test(model, ds, device, metric_name)
+                v = evaluate_test(model, ds, device, metric_name,
+                                  split=split, use_sparse=sparse)
         metric_values.append(float(v))
 
-    cell_dir = RESULTS_ROOT / dataset / architecture
+    cell_dir = RESULTS_ROOT / dataset / architecture / f"seed-{seed}" / f"split-{split}"
     cell_dir.mkdir(parents=True, exist_ok=True)
     layer_info = [
         {"name": name, "shape": list(w.shape), "numel": int(w.numel())}
@@ -113,6 +123,7 @@ def run_cell(
         "per_layer_sparsity": layer_info,
         "checkpoint": prov["checkpoint_path"],
         "seed": int(seed),
+        "split": int(split),
     }
     (cell_dir / "metrics.json").write_text(json.dumps(metrics, indent=2))
 
