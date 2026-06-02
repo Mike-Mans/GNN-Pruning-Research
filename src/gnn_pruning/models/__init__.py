@@ -16,6 +16,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch_geometric.nn import GATConv, GCNConv, SAGEConv, global_mean_pool
+from torch_geometric.nn.conv.gcn_conv import gcn_norm
+from torch_geometric.utils import scatter
 
 
 class GCN(nn.Module):
@@ -77,7 +79,57 @@ class GraphSAGE(nn.Module):
         return x
 
 
-ARCHITECTURES = {"gcn": GCN, "gat": GAT, "graphsage": GraphSAGE, "sage": GraphSAGE}
+class GPRGNN(nn.Module):
+    """Generalized PageRank GNN (Chien et al., ICLR 2021) — a heterophily-capable
+    backbone whose prunable weights are still plain `nn.Linear` layers.
+
+    Architecture: a 2-layer MLP feature transform, then K steps of generalized
+    PageRank propagation with **learnable** per-hop coefficients ``gamma`` (the
+    K+1 scalars are learned, not pruned). The learnable coefficients can go
+    negative — that high-pass behaviour is what lets it model heterophily where
+    GCN/GAT fail.
+
+    Prunable layers: ``lin1`` / ``lin2`` (exposed via :meth:`prunable_linears`).
+    Like GCNConv (which applies its weight *before* propagation), both Linears
+    see pre-propagation inputs, so Wanda / degree / per-class scoring applies
+    exactly as it does for GCN.
+    """
+
+    def __init__(self, in_dim: int, hidden_dim: int, out_dim: int,
+                 K: int = 10, alpha: float = 0.1, dropout: float = 0.5):
+        super().__init__()
+        self.lin1 = nn.Linear(in_dim, hidden_dim)
+        self.lin2 = nn.Linear(hidden_dim, out_dim)
+        self.K = K
+        self.dropout = dropout
+        # PPR initialisation of the per-hop coefficients (learnable thereafter).
+        gamma = alpha * (1.0 - alpha) ** torch.arange(K + 1, dtype=torch.float32)
+        gamma[-1] = (1.0 - alpha) ** K
+        self.gamma = nn.Parameter(gamma)
+
+    def prunable_linears(self) -> list[tuple[str, nn.Linear]]:
+        return [("lin1", self.lin1), ("lin2", self.lin2)]
+
+    def forward(self, x, edge_index, batch=None):
+        x = F.dropout(x, p=self.dropout, training=self.training)
+        x = F.relu(self.lin1(x))
+        x = F.dropout(x, p=self.dropout, training=self.training)
+        h = self.lin2(x)
+        # Symmetric-normalised adjacency with self-loops, then GPR propagation.
+        ei, ew = gcn_norm(edge_index, num_nodes=h.size(0), add_self_loops=True)
+        src, dst = ei[0], ei[1]
+        z = self.gamma[0] * h
+        for k in range(1, self.K + 1):
+            h = scatter(ew.unsqueeze(-1) * h[src], dst, dim=0,
+                        dim_size=h.size(0), reduce="sum")
+            z = z + self.gamma[k] * h
+        if batch is not None:
+            z = global_mean_pool(z, batch)
+        return z
+
+
+ARCHITECTURES = {"gcn": GCN, "gat": GAT, "graphsage": GraphSAGE, "sage": GraphSAGE,
+                 "gprgnn": GPRGNN}
 
 
 def build_model(architecture: str, in_dim: int, hidden_dim: int, out_dim: int,
@@ -138,7 +190,15 @@ def conv_prunable_linears(conv: nn.Module) -> list[tuple[str, nn.Linear]]:
 
 def named_prunable_linears(model: nn.Module
                            ) -> list[tuple[str, nn.Linear]]:
-    """Flatten prunable Linears as `(conv_path.suffix, linear)`."""
+    """Flatten prunable Linears as `(conv_path.suffix, linear)`.
+
+    Models that aren't built from PyG conv layers (e.g. `GPRGNN`) can expose
+    their prunable Linears directly via a `prunable_linears()` method; this is
+    the single integration point shared by the activation hooks and every
+    pruning method, so a new backbone only needs that one method.
+    """
+    if hasattr(model, "prunable_linears"):
+        return list(model.prunable_linears())
     out: list[tuple[str, nn.Linear]] = []
     for conv_name, conv in prunable_layers(model):
         for suffix, lin in conv_prunable_linears(conv):

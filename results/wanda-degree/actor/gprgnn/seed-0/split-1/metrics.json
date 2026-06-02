@@ -1,0 +1,36 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "macro_f1",
+  "metric_values": [
+    0.30856890309248836,
+    0.31032505543759825,
+    0.31121509857116314,
+    0.31229217964834716,
+    0.3092231042655412,
+    0.3042557090954493,
+    0.3003540502881248,
+    0.30727839484971364,
+    0.2761813751287044
+  ],
+  "degree_summary": {
+    "mean": 4.029605388641357,
+    "median": 3.0,
+    "max": 60.0,
+    "p99": 23.0
+  },
+  "self_loops_included": false,
+  "n_nodes_used": 3648,
+  "checkpoint": "results/no-pruning/actor/gprgnn/seed-0/split-1/checkpoint.pt",
+  "seed": 0,
+  "split": 1
+}

@@ -1,0 +1,30 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "macro_f1",
+  "metric_values": [
+    0.3151552170511751,
+    0.3154810607051143,
+    0.31701706851804556,
+    0.3194675589404688,
+    0.3183538084117696,
+    0.3138214917010832,
+    0.3016870192425207,
+    0.299058284947899,
+    0.21251301495382405
+  ],
+  "activation_collection_seed": 0,
+  "n_nodes_used": 3648,
+  "checkpoint": "results/no-pruning/actor/gprgnn/seed-0/split-7/checkpoint.pt",
+  "seed": 0,
+  "split": 7
+}

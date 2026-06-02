@@ -337,3 +337,97 @@ Traceback (most recent call last):
     raise FileNotFoundError(
 FileNotFoundError: Dense checkpoint missing at results/no-pruning/ogbn-products/graphsage/seed-0/split-0/checkpoint.pt. Run issue #1 first.
 
+
+=== sweep start: method=wanda-uniform runs=10 datasets_filter=['wisconsin'] archs_filter=['gprgnn'] ===
+[1/10] wisconsin/gprgnn/seed-0/split-0: launching
+  done in 1.8s
+[2/10] wisconsin/gprgnn/seed-0/split-1: launching
+  done in 1.8s
+[3/10] wisconsin/gprgnn/seed-0/split-2: launching
+  done in 1.8s
+[4/10] wisconsin/gprgnn/seed-0/split-3: launching
+  done in 1.8s
+[5/10] wisconsin/gprgnn/seed-0/split-4: launching
+  done in 1.8s
+[6/10] wisconsin/gprgnn/seed-0/split-5: launching
+  done in 1.8s
+[7/10] wisconsin/gprgnn/seed-0/split-6: launching
+  done in 1.8s
+[8/10] wisconsin/gprgnn/seed-0/split-7: launching
+  done in 1.8s
+[9/10] wisconsin/gprgnn/seed-0/split-8: launching
+  done in 1.8s
+[10/10] wisconsin/gprgnn/seed-0/split-9: launching
+  done in 1.8s
+
+=== sweep start: method=wanda-uniform runs=40 datasets_filter=None archs_filter=['gprgnn'] ===
+[1/40] cornell/gprgnn/seed-0/split-0: launching
+  done in 1.8s
+[2/40] cornell/gprgnn/seed-0/split-1: launching
+  done in 1.8s
+[3/40] cornell/gprgnn/seed-0/split-2: launching
+  done in 1.8s
+[4/40] cornell/gprgnn/seed-0/split-3: launching
+  done in 1.8s
+[5/40] cornell/gprgnn/seed-0/split-4: launching
+  done in 1.8s
+[6/40] cornell/gprgnn/seed-0/split-5: launching
+  done in 1.8s
+[7/40] cornell/gprgnn/seed-0/split-6: launching
+  done in 1.8s
+[8/40] cornell/gprgnn/seed-0/split-7: launching
+  done in 1.8s
+[9/40] cornell/gprgnn/seed-0/split-8: launching
+  done in 1.8s
+[10/40] cornell/gprgnn/seed-0/split-9: launching
+  done in 1.8s
+[11/40] texas/gprgnn/seed-0/split-0: launching
+  done in 1.8s
+[12/40] texas/gprgnn/seed-0/split-1: launching
+  done in 1.8s
+[13/40] texas/gprgnn/seed-0/split-2: launching
+  done in 1.8s
+[14/40] texas/gprgnn/seed-0/split-3: launching
+  done in 1.8s
+[15/40] texas/gprgnn/seed-0/split-4: launching
+  done in 1.8s
+[16/40] texas/gprgnn/seed-0/split-5: launching
+  done in 1.8s
+[17/40] texas/gprgnn/seed-0/split-6: launching
+  done in 1.8s
+[18/40] texas/gprgnn/seed-0/split-7: launching
+  done in 1.8s
+[19/40] texas/gprgnn/seed-0/split-8: launching
+  done in 1.8s
+[20/40] texas/gprgnn/seed-0/split-9: launching
+  done in 1.8s
+[21/40] wisconsin/gprgnn/seed-0/split-0: SKIP (outputs already present)
+[22/40] wisconsin/gprgnn/seed-0/split-1: SKIP (outputs already present)
+[23/40] wisconsin/gprgnn/seed-0/split-2: SKIP (outputs already present)
+[24/40] wisconsin/gprgnn/seed-0/split-3: SKIP (outputs already present)
+[25/40] wisconsin/gprgnn/seed-0/split-4: SKIP (outputs already present)
+[26/40] wisconsin/gprgnn/seed-0/split-5: SKIP (outputs already present)
+[27/40] wisconsin/gprgnn/seed-0/split-6: SKIP (outputs already present)
+[28/40] wisconsin/gprgnn/seed-0/split-7: SKIP (outputs already present)
+[29/40] wisconsin/gprgnn/seed-0/split-8: SKIP (outputs already present)
+[30/40] wisconsin/gprgnn/seed-0/split-9: SKIP (outputs already present)
+[31/40] actor/gprgnn/seed-0/split-0: launching
+  done in 1.8s
+[32/40] actor/gprgnn/seed-0/split-1: launching
+  done in 1.9s
+[33/40] actor/gprgnn/seed-0/split-2: launching
+  done in 1.9s
+[34/40] actor/gprgnn/seed-0/split-3: launching
+  done in 1.8s
+[35/40] actor/gprgnn/seed-0/split-4: launching
+  done in 1.9s
+[36/40] actor/gprgnn/seed-0/split-5: launching
+  done in 2.0s
+[37/40] actor/gprgnn/seed-0/split-6: launching
+  done in 1.9s
+[38/40] actor/gprgnn/seed-0/split-7: launching
+  done in 1.9s
+[39/40] actor/gprgnn/seed-0/split-8: launching
+  done in 1.8s
+[40/40] actor/gprgnn/seed-0/split-9: launching
+  done in 1.9s

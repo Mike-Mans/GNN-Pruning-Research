@@ -1,0 +1,30 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "macro_f1",
+  "metric_values": [
+    0.728910220214568,
+    0.728910220214568,
+    0.728910220214568,
+    0.728910220214568,
+    0.728910220214568,
+    0.7115079365079364,
+    0.7115079365079364,
+    0.5604804497827753,
+    0.5485714285714285
+  ],
+  "activation_collection_seed": 0,
+  "n_nodes_used": 87,
+  "checkpoint": "results/no-pruning/texas/gprgnn/seed-0/split-3/checkpoint.pt",
+  "seed": 0,
+  "split": 3
+}

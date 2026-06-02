@@ -1,6 +1,7 @@
 dataset,architecture,sparsity,metric_name,metric_value,n_runs
-actor,gat,0.0,macro_f1,0.22718388377562296,10
+actor,gat,0.0,macro_f1,0.22718388377562299,10
 actor,gcn,0.0,macro_f1,0.24187868341889915,10
+actor,gprgnn,0.0,macro_f1,0.3124509659612055,10
 bbbp,gcn,0.0,accuracy,0.8,1
 bbbp,graphsage,0.0,accuracy,0.7804878048780488,1
 citeseer,gat,0.0,accuracy,0.6780000329017639,1
@@ -9,8 +10,9 @@ computers,gat,0.0,accuracy,0.9000363945960999,1
 computers,gcn,0.0,accuracy,0.9051254391670227,1
 cora,gat,0.0,accuracy,0.800000011920929,1
 cora,gcn,0.0,accuracy,0.8050000667572021,1
-cornell,gat,0.0,macro_f1,0.3029262619957083,10
-cornell,gcn,0.0,macro_f1,0.24194370505980412,10
+cornell,gat,0.0,macro_f1,0.30292626199570827,10
+cornell,gcn,0.0,macro_f1,0.24194370505980406,10
+cornell,gprgnn,0.0,macro_f1,0.48636271377204476,10
 cs,gcn,0.0,accuracy,0.9378407597541809,1
 flickr,graphsage,0.0,accuracy,0.4475865960121155,1
 ogbn-arxiv,graphsage,0.0,accuracy,0.5483406186103821,1
@@ -23,6 +25,8 @@ pubmed,gat,0.0,accuracy,0.76500004529953,1
 pubmed,gcn,0.0,accuracy,0.7820000648498535,1
 reddit,gcn,0.0,accuracy,0.5645714998245239,1
 reddit,graphsage,0.0,accuracy,0.4794520437717438,1
-texas,gcn,0.0,macro_f1,0.24922940367126417,10
+texas,gcn,0.0,macro_f1,0.24922940367126412,10
+texas,gprgnn,0.0,macro_f1,0.5572811570680276,10
 wisconsin,gcn,0.0,macro_f1,0.30912872565610794,10
+wisconsin,gprgnn,0.0,macro_f1,0.5896377916153053,10
 yelp,graphsage,0.0,micro_f1,0.2962756455634737,1

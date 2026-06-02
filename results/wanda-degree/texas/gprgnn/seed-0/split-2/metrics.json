@@ -1,0 +1,36 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "macro_f1",
+  "metric_values": [
+    0.44470066518847007,
+    0.44470066518847007,
+    0.44470066518847007,
+    0.44470066518847007,
+    0.44470066518847007,
+    0.44470066518847007,
+    0.4014285714285714,
+    0.39372759856630823,
+    0.23214285714285712
+  ],
+  "degree_summary": {
+    "mean": 0.954023003578186,
+    "median": 0.0,
+    "max": 7.0,
+    "p99": 7.0
+  },
+  "self_loops_included": false,
+  "n_nodes_used": 87,
+  "checkpoint": "results/no-pruning/texas/gprgnn/seed-0/split-2/checkpoint.pt",
+  "seed": 0,
+  "split": 2
+}

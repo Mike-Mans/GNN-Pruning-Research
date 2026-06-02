@@ -36,6 +36,12 @@ cells:
     # yelpchi dropped (issue #7): PyG 2.7 ships no YelpChi loader — option 4.
     - bbbp
     - proteins
+  # GPR-GNN on heterophilic datasets (run with --architectures gprgnn).
+  gprgnn:
+    - cornell
+    - texas
+    - wisconsin
+    - actor
 
 default_metric: accuracy
 metric_overrides:

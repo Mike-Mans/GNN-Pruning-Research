@@ -40,6 +40,15 @@ cells:
     # yelpchi dropped (issue #7): PyG 2.7 ships no YelpChi loader — option 4.
     - bbbp
     - proteins
+  # Heterophily-capable backbone (GPR-GNN) on the heterophilic datasets, so the
+  # pruning comparison runs on a base model that actually learns these graphs
+  # (vanilla GCN/GAT barely clear trivial baselines). Run with
+  # `--architectures gprgnn` to do only this slice.
+  gprgnn:
+    - cornell
+    - texas
+    - wisconsin
+    - actor
 
 default_metric: accuracy
 metric_overrides:
