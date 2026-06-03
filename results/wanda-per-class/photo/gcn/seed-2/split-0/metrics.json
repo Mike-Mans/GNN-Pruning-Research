@@ -1,0 +1,36 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "accuracy",
+  "metric_values": [
+    0.94248366355896,
+    0.94248366355896,
+    0.94248366355896,
+    0.9431372880935669,
+    0.9411764740943909,
+    0.9411764740943909,
+    0.9392157196998596,
+    0.9411764740943909,
+    0.9326797723770142
+  ],
+  "class_summary": {
+    "n_classes": 8,
+    "min_count": 195,
+    "max_count": 1160,
+    "imbalance_ratio": 5.948717948717949
+  },
+  "multi_label_strategy": null,
+  "n_nodes_used": 4590,
+  "checkpoint": "results/no-pruning/photo/gcn/seed-2/split-0/checkpoint.pt",
+  "seed": 2,
+  "split": 0
+}

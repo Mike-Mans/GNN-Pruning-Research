@@ -1,0 +1,30 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "macro_f1",
+  "metric_values": [
+    0.20615384615384613,
+    0.20615384615384613,
+    0.20615384615384613,
+    0.20615384615384613,
+    0.20615384615384613,
+    0.20615384615384613,
+    0.20615384615384613,
+    0.1923219814241486,
+    0.19406737053795875
+  ],
+  "activation_collection_seed": 2,
+  "n_nodes_used": 87,
+  "checkpoint": "results/no-pruning/cornell/gcn/seed-2/split-7/checkpoint.pt",
+  "seed": 2,
+  "split": 7
+}

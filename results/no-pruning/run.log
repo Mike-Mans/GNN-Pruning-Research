@@ -1,214 +1,729 @@
 
-=== sweep start: method=no-pruning runs=83 datasets_filter=None archs_filter=None ===
-[1/83] cora/gcn/seed-0/split-0: launching
-  done in 28.3s
-[2/83] citeseer/gcn/seed-0/split-0: launching
-  done in 18.3s
-[3/83] pubmed/gcn/seed-0/split-0: launching
-  done in 18.9s
-[4/83] cs/gcn/seed-0/split-0: launching
-  done in 14.4s
-[5/83] physics/gcn/seed-0/split-0: launching
-  done in 25.5s
-[6/83] photo/gcn/seed-0/split-0: launching
-  done in 13.9s
-[7/83] computers/gcn/seed-0/split-0: launching
-  done in 15.4s
-[8/83] cornell/gcn/seed-0/split-0: launching
-  done in 15.3s
-[9/83] cornell/gcn/seed-0/split-1: launching
-  done in 10.7s
-[10/83] cornell/gcn/seed-0/split-2: launching
-  done in 11.2s
-[11/83] cornell/gcn/seed-0/split-3: launching
-  done in 11.1s
-[12/83] cornell/gcn/seed-0/split-4: launching
-  done in 10.5s
-[13/83] cornell/gcn/seed-0/split-5: launching
-  done in 10.3s
-[14/83] cornell/gcn/seed-0/split-6: launching
-  done in 10.6s
-[15/83] cornell/gcn/seed-0/split-7: launching
-  done in 10.6s
-[16/83] cornell/gcn/seed-0/split-8: launching
-  done in 10.3s
-[17/83] cornell/gcn/seed-0/split-9: launching
-  done in 10.3s
-[18/83] texas/gcn/seed-0/split-0: launching
-  done in 10.7s
-[19/83] texas/gcn/seed-0/split-1: launching
-  done in 10.3s
-[20/83] texas/gcn/seed-0/split-2: launching
-  done in 10.2s
-[21/83] texas/gcn/seed-0/split-3: launching
-  done in 10.3s
-[22/83] texas/gcn/seed-0/split-4: launching
-  done in 10.4s
-[23/83] texas/gcn/seed-0/split-5: launching
-  done in 10.3s
-[24/83] texas/gcn/seed-0/split-6: launching
-  done in 10.3s
-[25/83] texas/gcn/seed-0/split-7: launching
-  done in 11.1s
-[26/83] texas/gcn/seed-0/split-8: launching
-  done in 10.6s
-[27/83] texas/gcn/seed-0/split-9: launching
-  done in 10.3s
-[28/83] wisconsin/gcn/seed-0/split-0: launching
-  done in 15.0s
-[29/83] wisconsin/gcn/seed-0/split-1: launching
-  done in 10.7s
-[30/83] wisconsin/gcn/seed-0/split-2: launching
-  done in 10.3s
-[31/83] wisconsin/gcn/seed-0/split-3: launching
-  done in 10.3s
-[32/83] wisconsin/gcn/seed-0/split-4: launching
-  done in 10.3s
-[33/83] wisconsin/gcn/seed-0/split-5: launching
-  done in 10.3s
-[34/83] wisconsin/gcn/seed-0/split-6: launching
-  done in 10.1s
-[35/83] wisconsin/gcn/seed-0/split-7: launching
-  done in 10.3s
-[36/83] wisconsin/gcn/seed-0/split-8: launching
-  done in 10.3s
-[37/83] wisconsin/gcn/seed-0/split-9: launching
-  done in 10.4s
-[38/83] actor/gcn/seed-0/split-0: launching
-  done in 14.7s
-[39/83] actor/gcn/seed-0/split-1: launching
-  done in 10.8s
-[40/83] actor/gcn/seed-0/split-2: launching
-  done in 10.6s
-[41/83] actor/gcn/seed-0/split-3: launching
-  done in 10.4s
-[42/83] actor/gcn/seed-0/split-4: launching
-  done in 10.8s
-[43/83] actor/gcn/seed-0/split-5: launching
-  done in 10.6s
-[44/83] actor/gcn/seed-0/split-6: launching
-  done in 10.4s
-[45/83] actor/gcn/seed-0/split-7: launching
-  done in 10.7s
-[46/83] actor/gcn/seed-0/split-8: launching
-  done in 10.8s
-[47/83] actor/gcn/seed-0/split-9: launching
-  done in 10.6s
-[48/83] bbbp/gcn/seed-0/split-0: launching
-  done in 25.9s
-[49/83] proteins/gcn/seed-0/split-0: launching
-  done in 21.3s
-[50/83] cora/gat/seed-0/split-0: launching
-  done in 10.5s
-[51/83] citeseer/gat/seed-0/split-0: launching
-  done in 11.0s
-[52/83] pubmed/gat/seed-0/split-0: launching
-  done in 12.2s
-[53/83] computers/gat/seed-0/split-0: launching
-  done in 26.1s
-[54/83] photo/gat/seed-0/split-0: launching
-  done in 18.3s
-[55/83] cornell/gat/seed-0/split-0: launching
-  done in 10.8s
-[56/83] cornell/gat/seed-0/split-1: launching
-  done in 11.5s
-[57/83] cornell/gat/seed-0/split-2: launching
-  done in 11.6s
-[58/83] cornell/gat/seed-0/split-3: launching
-  done in 10.7s
-[59/83] cornell/gat/seed-0/split-4: launching
-  done in 10.9s
-[60/83] cornell/gat/seed-0/split-5: launching
-  done in 10.8s
-[61/83] cornell/gat/seed-0/split-6: launching
-  done in 10.7s
-[62/83] cornell/gat/seed-0/split-7: launching
-  done in 11.4s
-[63/83] cornell/gat/seed-0/split-8: launching
-  done in 10.7s
-[64/83] cornell/gat/seed-0/split-9: launching
-  done in 10.5s
-[65/83] actor/gat/seed-0/split-0: launching
-  done in 11.3s
-[66/83] actor/gat/seed-0/split-1: launching
-  done in 11.8s
-[67/83] actor/gat/seed-0/split-2: launching
-  done in 11.3s
-[68/83] actor/gat/seed-0/split-3: launching
-  done in 11.3s
-[69/83] actor/gat/seed-0/split-4: launching
-  done in 11.5s
-[70/83] actor/gat/seed-0/split-5: launching
-  done in 11.2s
-[71/83] actor/gat/seed-0/split-6: launching
-  done in 11.3s
-[72/83] actor/gat/seed-0/split-7: launching
+=== sweep start: method=no-pruning runs=354 datasets_filter=None archs_filter=None ===
+[1/354] cora/gcn/seed-0/split-0: launching
+  done in 25.6s
+[2/354] cora/gcn/seed-1/split-0: launching
+  done in 9.6s
+[3/354] cora/gcn/seed-2/split-0: launching
+  done in 9.5s
+[4/354] citeseer/gcn/seed-0/split-0: launching
+  done in 14.3s
+[5/354] citeseer/gcn/seed-1/split-0: launching
+  done in 9.7s
+[6/354] citeseer/gcn/seed-2/split-0: launching
+  done in 9.6s
+[7/354] pubmed/gcn/seed-0/split-0: launching
+  done in 16.1s
+[8/354] pubmed/gcn/seed-1/split-0: launching
+  done in 10.0s
+[9/354] pubmed/gcn/seed-2/split-0: launching
+  done in 9.8s
+[10/354] cs/gcn/seed-0/split-0: launching
+  done in 13.8s
+[11/354] cs/gcn/seed-1/split-0: launching
+  done in 12.5s
+[12/354] cs/gcn/seed-2/split-0: launching
   done in 11.7s
-[73/83] actor/gat/seed-0/split-8: launching
-  done in 11.2s
-[74/83] actor/gat/seed-0/split-9: launching
-  done in 11.2s
-[75/83] bbbp/graphsage/seed-0/split-0: launching
-  done in 17.9s
-[76/83] proteins/graphsage/seed-0/split-0: launching
+[13/354] physics/gcn/seed-0/split-0: launching
+  done in 26.6s
+[14/354] physics/gcn/seed-1/split-0: launching
   done in 15.8s
-[77/83] reddit/gcn/seed-0/split-0: launching
-  done in 67.0s
-[78/83] reddit/gat/seed-0/split-0: launching
-  FAILED in 13.1s (rc=1)
-  stdout-tail:
-
-  stderr-tail:
-)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1790, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/gat_conv.py", line 366, in forward
-    out = self.propagate(edge_index, x=x, alpha=alpha, size=size)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/tmp/torch_geometric.nn.conv.gat_conv_GATConv_propagate_3sc05ym3.py", line 150, in propagate
-    kwargs = self.collect(
-             ^^^^^^^^^^^^^
-  File "/tmp/torch_geometric.nn.conv.gat_conv_GATConv_propagate_3sc05ym3.py", line 85, in collect
-    x_j = self._index_select(_x_0, edge_index_j)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/message_passing.py", line 267, in _index_select
-    return self._index_select_safe(src, index)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/message_passing.py", line 290, in _index_select_safe
-    raise e
-  File "/usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/message_passing.py", line 271, in _index_select_safe
-    return src.index_select(self.node_dim, index)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 178.89 GiB. GPU 0 has a total capacity of 79.25 GiB of which 72.16 GiB is free. Including non-PyTorch memory, this process has 7.07 GiB memory in use. Of the allocated memory 6.52 GiB is allocated by PyTorch, and 64.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
-
-[79/83] flickr/graphsage/seed-0/split-0: launching
-  done in 24.0s
-[80/83] ogbn-arxiv/graphsage/seed-0/split-0: launching
-  done in 39.2s
-[81/83] reddit/graphsage/seed-0/split-0: launching
-  done in 25.8s
-[82/83] yelp/graphsage/seed-0/split-0: launching
-  done in 91.1s
-[83/83] ogbn-products/graphsage/seed-0/split-0: launching
-  FAILED in 9.4s (rc=1)
+[15/354] physics/gcn/seed-2/split-0: launching
+  done in 15.4s
+[16/354] photo/gcn/seed-0/split-0: launching
+  done in 12.0s
+[17/354] photo/gcn/seed-1/split-0: launching
+  done in 10.8s
+[18/354] photo/gcn/seed-2/split-0: launching
+  done in 10.9s
+[19/354] computers/gcn/seed-0/split-0: launching
+  done in 13.4s
+[20/354] computers/gcn/seed-1/split-0: launching
+  done in 11.6s
+[21/354] computers/gcn/seed-2/split-0: launching
+  done in 11.6s
+[22/354] cornell/gcn/seed-0/split-0: launching
+  done in 12.6s
+[23/354] cornell/gcn/seed-0/split-1: launching
+  done in 10.1s
+[24/354] cornell/gcn/seed-0/split-2: launching
+  done in 10.6s
+[25/354] cornell/gcn/seed-0/split-3: launching
+  done in 10.4s
+[26/354] cornell/gcn/seed-0/split-4: launching
+  done in 9.9s
+[27/354] cornell/gcn/seed-0/split-5: launching
+  done in 9.6s
+[28/354] cornell/gcn/seed-0/split-6: launching
+  done in 10.0s
+[29/354] cornell/gcn/seed-0/split-7: launching
+  done in 10.0s
+[30/354] cornell/gcn/seed-0/split-8: launching
+  done in 9.7s
+[31/354] cornell/gcn/seed-0/split-9: launching
+  done in 9.7s
+[32/354] cornell/gcn/seed-1/split-0: launching
+  done in 9.7s
+[33/354] cornell/gcn/seed-1/split-1: launching
+  done in 9.9s
+[34/354] cornell/gcn/seed-1/split-2: launching
+  done in 10.2s
+[35/354] cornell/gcn/seed-1/split-3: launching
+  done in 10.0s
+[36/354] cornell/gcn/seed-1/split-4: launching
+  done in 9.9s
+[37/354] cornell/gcn/seed-1/split-5: launching
+  done in 9.6s
+[38/354] cornell/gcn/seed-1/split-6: launching
+  done in 10.5s
+[39/354] cornell/gcn/seed-1/split-7: launching
+  done in 10.4s
+[40/354] cornell/gcn/seed-1/split-8: launching
+  done in 10.3s
+[41/354] cornell/gcn/seed-1/split-9: launching
+  done in 10.0s
+[42/354] cornell/gcn/seed-2/split-0: launching
+  done in 10.6s
+[43/354] cornell/gcn/seed-2/split-1: launching
+  done in 10.0s
+[44/354] cornell/gcn/seed-2/split-2: launching
+  done in 10.2s
+[45/354] cornell/gcn/seed-2/split-3: launching
+  done in 9.6s
+[46/354] cornell/gcn/seed-2/split-4: launching
+  done in 10.0s
+[47/354] cornell/gcn/seed-2/split-5: launching
+  done in 10.3s
+[48/354] cornell/gcn/seed-2/split-6: launching
+  done in 9.9s
+[49/354] cornell/gcn/seed-2/split-7: launching
+  done in 10.1s
+[50/354] cornell/gcn/seed-2/split-8: launching
+  done in 9.6s
+[51/354] cornell/gcn/seed-2/split-9: launching
+  done in 10.2s
+[52/354] texas/gcn/seed-0/split-0: launching
+  done in 12.1s
+[53/354] texas/gcn/seed-0/split-1: launching
+  done in 9.7s
+[54/354] texas/gcn/seed-0/split-2: launching
+  done in 9.7s
+[55/354] texas/gcn/seed-0/split-3: launching
+  done in 9.7s
+[56/354] texas/gcn/seed-0/split-4: launching
+  done in 9.7s
+[57/354] texas/gcn/seed-0/split-5: launching
+  done in 9.7s
+[58/354] texas/gcn/seed-0/split-6: launching
+  done in 9.7s
+[59/354] texas/gcn/seed-0/split-7: launching
+  done in 10.6s
+[60/354] texas/gcn/seed-0/split-8: launching
+  done in 10.0s
+[61/354] texas/gcn/seed-0/split-9: launching
+  done in 9.7s
+[62/354] texas/gcn/seed-1/split-0: launching
+  done in 9.8s
+[63/354] texas/gcn/seed-1/split-1: launching
+  done in 9.7s
+[64/354] texas/gcn/seed-1/split-2: launching
+  done in 9.7s
+[65/354] texas/gcn/seed-1/split-3: launching
+  done in 9.7s
+[66/354] texas/gcn/seed-1/split-4: launching
+  done in 9.7s
+[67/354] texas/gcn/seed-1/split-5: launching
+  done in 9.7s
+[68/354] texas/gcn/seed-1/split-6: launching
+  done in 9.6s
+[69/354] texas/gcn/seed-1/split-7: launching
+  done in 10.2s
+[70/354] texas/gcn/seed-1/split-8: launching
+  done in 9.6s
+[71/354] texas/gcn/seed-1/split-9: launching
+  done in 10.1s
+[72/354] texas/gcn/seed-2/split-0: launching
+  done in 10.0s
+[73/354] texas/gcn/seed-2/split-1: launching
+  done in 9.8s
+[74/354] texas/gcn/seed-2/split-2: launching
+  done in 9.6s
+[75/354] texas/gcn/seed-2/split-3: launching
+  done in 9.5s
+[76/354] texas/gcn/seed-2/split-4: launching
+  done in 9.7s
+[77/354] texas/gcn/seed-2/split-5: launching
+  done in 9.5s
+[78/354] texas/gcn/seed-2/split-6: launching
+  done in 9.6s
+[79/354] texas/gcn/seed-2/split-7: launching
+  done in 9.5s
+[80/354] texas/gcn/seed-2/split-8: launching
+  done in 9.6s
+[81/354] texas/gcn/seed-2/split-9: launching
+  done in 9.5s
+[82/354] wisconsin/gcn/seed-0/split-0: launching
+  done in 12.1s
+[83/354] wisconsin/gcn/seed-0/split-1: launching
+  done in 9.9s
+[84/354] wisconsin/gcn/seed-0/split-2: launching
+  done in 9.7s
+[85/354] wisconsin/gcn/seed-0/split-3: launching
+  done in 9.7s
+[86/354] wisconsin/gcn/seed-0/split-4: launching
+  done in 9.5s
+[87/354] wisconsin/gcn/seed-0/split-5: launching
+  done in 9.5s
+[88/354] wisconsin/gcn/seed-0/split-6: launching
+  done in 9.6s
+[89/354] wisconsin/gcn/seed-0/split-7: launching
+  done in 9.6s
+[90/354] wisconsin/gcn/seed-0/split-8: launching
+  done in 9.7s
+[91/354] wisconsin/gcn/seed-0/split-9: launching
+  done in 9.8s
+[92/354] wisconsin/gcn/seed-1/split-0: launching
+  done in 9.6s
+[93/354] wisconsin/gcn/seed-1/split-1: launching
+  done in 10.0s
+[94/354] wisconsin/gcn/seed-1/split-2: launching
+  done in 9.7s
+[95/354] wisconsin/gcn/seed-1/split-3: launching
+  done in 9.9s
+[96/354] wisconsin/gcn/seed-1/split-4: launching
+  done in 9.6s
+[97/354] wisconsin/gcn/seed-1/split-5: launching
+  done in 9.7s
+[98/354] wisconsin/gcn/seed-1/split-6: launching
+  done in 9.5s
+[99/354] wisconsin/gcn/seed-1/split-7: launching
+  done in 9.8s
+[100/354] wisconsin/gcn/seed-1/split-8: launching
+  done in 9.7s
+[101/354] wisconsin/gcn/seed-1/split-9: launching
+  done in 9.7s
+[102/354] wisconsin/gcn/seed-2/split-0: launching
+  done in 9.6s
+[103/354] wisconsin/gcn/seed-2/split-1: launching
+  done in 10.2s
+[104/354] wisconsin/gcn/seed-2/split-2: launching
+  done in 9.6s
+[105/354] wisconsin/gcn/seed-2/split-3: launching
+  done in 9.8s
+[106/354] wisconsin/gcn/seed-2/split-4: launching
+  done in 9.5s
+[107/354] wisconsin/gcn/seed-2/split-5: launching
+  done in 9.9s
+[108/354] wisconsin/gcn/seed-2/split-6: launching
+  done in 9.7s
+[109/354] wisconsin/gcn/seed-2/split-7: launching
+  done in 9.7s
+[110/354] wisconsin/gcn/seed-2/split-8: launching
+  done in 9.8s
+[111/354] wisconsin/gcn/seed-2/split-9: launching
+  done in 9.6s
+[112/354] actor/gcn/seed-0/split-0: launching
+  done in 12.6s
+[113/354] actor/gcn/seed-0/split-1: launching
+  done in 10.1s
+[114/354] actor/gcn/seed-0/split-2: launching
+  done in 9.9s
+[115/354] actor/gcn/seed-0/split-3: launching
+  done in 9.8s
+[116/354] actor/gcn/seed-0/split-4: launching
+  done in 10.2s
+[117/354] actor/gcn/seed-0/split-5: launching
+  done in 9.8s
+[118/354] actor/gcn/seed-0/split-6: launching
+  done in 9.7s
+[119/354] actor/gcn/seed-0/split-7: launching
+  done in 10.2s
+[120/354] actor/gcn/seed-0/split-8: launching
+  done in 10.2s
+[121/354] actor/gcn/seed-0/split-9: launching
+  done in 10.0s
+[122/354] actor/gcn/seed-1/split-0: launching
+  done in 9.7s
+[123/354] actor/gcn/seed-1/split-1: launching
+  done in 9.7s
+[124/354] actor/gcn/seed-1/split-2: launching
+  done in 9.8s
+[125/354] actor/gcn/seed-1/split-3: launching
+  done in 9.8s
+[126/354] actor/gcn/seed-1/split-4: launching
+  done in 9.9s
+[127/354] actor/gcn/seed-1/split-5: launching
+  done in 10.0s
+[128/354] actor/gcn/seed-1/split-6: launching
+  done in 9.8s
+[129/354] actor/gcn/seed-1/split-7: launching
+  done in 9.9s
+[130/354] actor/gcn/seed-1/split-8: launching
+  done in 10.5s
+[131/354] actor/gcn/seed-1/split-9: launching
+  done in 10.4s
+[132/354] actor/gcn/seed-2/split-0: launching
+  done in 9.8s
+[133/354] actor/gcn/seed-2/split-1: launching
+  done in 10.3s
+[134/354] actor/gcn/seed-2/split-2: launching
+  done in 10.1s
+[135/354] actor/gcn/seed-2/split-3: launching
+  done in 10.0s
+[136/354] actor/gcn/seed-2/split-4: launching
+  done in 10.0s
+[137/354] actor/gcn/seed-2/split-5: launching
+  done in 10.3s
+[138/354] actor/gcn/seed-2/split-6: launching
+  done in 9.8s
+[139/354] actor/gcn/seed-2/split-7: launching
+  done in 10.3s
+[140/354] actor/gcn/seed-2/split-8: launching
+  done in 10.1s
+[141/354] actor/gcn/seed-2/split-9: launching
+  done in 10.1s
+[142/354] bbbp/gcn/seed-0/split-0: launching
+  done in 25.4s
+[143/354] bbbp/gcn/seed-1/split-0: launching
+  done in 28.1s
+[144/354] bbbp/gcn/seed-2/split-0: launching
+  done in 37.7s
+[145/354] proteins/gcn/seed-0/split-0: launching
+  done in 19.4s
+[146/354] proteins/gcn/seed-1/split-0: launching
+  done in 15.7s
+[147/354] proteins/gcn/seed-2/split-0: launching
+  done in 17.3s
+[148/354] cora/gat/seed-0/split-0: launching
+  done in 9.9s
+[149/354] cora/gat/seed-1/split-0: launching
+  done in 9.9s
+[150/354] cora/gat/seed-2/split-0: launching
+  done in 10.5s
+[151/354] citeseer/gat/seed-0/split-0: launching
+  done in 10.4s
+[152/354] citeseer/gat/seed-1/split-0: launching
+  done in 10.5s
+[153/354] citeseer/gat/seed-2/split-0: launching
+  done in 10.4s
+[154/354] pubmed/gat/seed-0/split-0: launching
+  done in 11.8s
+[155/354] pubmed/gat/seed-1/split-0: launching
+  done in 11.8s
+[156/354] pubmed/gat/seed-2/split-0: launching
+  done in 12.8s
+[157/354] computers/gat/seed-0/split-0: launching
+  done in 26.2s
+[158/354] computers/gat/seed-1/split-0: launching
+  done in 25.9s
+[159/354] computers/gat/seed-2/split-0: launching
+  done in 25.9s
+[160/354] photo/gat/seed-0/split-0: launching
+  done in 18.1s
+[161/354] photo/gat/seed-1/split-0: launching
+  done in 18.1s
+[162/354] photo/gat/seed-2/split-0: launching
+  done in 18.5s
+[163/354] cornell/gat/seed-0/split-0: launching
+  done in 10.8s
+[164/354] cornell/gat/seed-0/split-1: launching
+  done in 10.7s
+[165/354] cornell/gat/seed-0/split-2: launching
+  done in 10.8s
+[166/354] cornell/gat/seed-0/split-3: launching
+  done in 10.2s
+[167/354] cornell/gat/seed-0/split-4: launching
+  done in 10.1s
+[168/354] cornell/gat/seed-0/split-5: launching
+  done in 10.2s
+[169/354] cornell/gat/seed-0/split-6: launching
+  done in 10.1s
+[170/354] cornell/gat/seed-0/split-7: launching
+  done in 10.9s
+[171/354] cornell/gat/seed-0/split-8: launching
+  done in 10.4s
+[172/354] cornell/gat/seed-0/split-9: launching
+  done in 9.9s
+[173/354] cornell/gat/seed-1/split-0: launching
+  done in 10.4s
+[174/354] cornell/gat/seed-1/split-1: launching
+  done in 11.2s
+[175/354] cornell/gat/seed-1/split-2: launching
+  done in 11.0s
+[176/354] cornell/gat/seed-1/split-3: launching
+  done in 10.8s
+[177/354] cornell/gat/seed-1/split-4: launching
+  done in 10.2s
+[178/354] cornell/gat/seed-1/split-5: launching
+  done in 10.3s
+[179/354] cornell/gat/seed-1/split-6: launching
+  done in 10.5s
+[180/354] cornell/gat/seed-1/split-7: launching
+  done in 10.6s
+[181/354] cornell/gat/seed-1/split-8: launching
+  done in 10.7s
+[182/354] cornell/gat/seed-1/split-9: launching
+  done in 10.8s
+[183/354] cornell/gat/seed-2/split-0: launching
+  done in 10.6s
+[184/354] cornell/gat/seed-2/split-1: launching
+  done in 10.4s
+[185/354] cornell/gat/seed-2/split-2: launching
+  done in 10.6s
+[186/354] cornell/gat/seed-2/split-3: launching
+  done in 10.2s
+[187/354] cornell/gat/seed-2/split-4: launching
+  done in 10.5s
+[188/354] cornell/gat/seed-2/split-5: launching
+  done in 10.6s
+[189/354] cornell/gat/seed-2/split-6: launching
+  done in 10.3s
+[190/354] cornell/gat/seed-2/split-7: launching
+  done in 10.4s
+[191/354] cornell/gat/seed-2/split-8: launching
+  done in 10.1s
+[192/354] cornell/gat/seed-2/split-9: launching
+  done in 10.1s
+[193/354] actor/gat/seed-0/split-0: launching
+  done in 10.8s
+[194/354] actor/gat/seed-0/split-1: launching
+  done in 11.2s
+[195/354] actor/gat/seed-0/split-2: launching
+  done in 10.6s
+[196/354] actor/gat/seed-0/split-3: launching
+  done in 10.7s
+[197/354] actor/gat/seed-0/split-4: launching
+  done in 10.9s
+[198/354] actor/gat/seed-0/split-5: launching
+  done in 10.8s
+[199/354] actor/gat/seed-0/split-6: launching
+  done in 10.7s
+[200/354] actor/gat/seed-0/split-7: launching
+  done in 11.2s
+[201/354] actor/gat/seed-0/split-8: launching
+  done in 10.8s
+[202/354] actor/gat/seed-0/split-9: launching
+  done in 10.6s
+[203/354] actor/gat/seed-1/split-0: launching
+  done in 11.2s
+[204/354] actor/gat/seed-1/split-1: launching
+  done in 11.6s
+[205/354] actor/gat/seed-1/split-2: launching
+  done in 10.8s
+[206/354] actor/gat/seed-1/split-3: launching
+  done in 10.6s
+[207/354] actor/gat/seed-1/split-4: launching
+  done in 11.1s
+[208/354] actor/gat/seed-1/split-5: launching
+  done in 10.7s
+[209/354] actor/gat/seed-1/split-6: launching
+  done in 10.7s
+[210/354] actor/gat/seed-1/split-7: launching
+  done in 11.2s
+[211/354] actor/gat/seed-1/split-8: launching
+  done in 11.4s
+[212/354] actor/gat/seed-1/split-9: launching
+  done in 11.8s
+[213/354] actor/gat/seed-2/split-0: launching
+  done in 11.4s
+[214/354] actor/gat/seed-2/split-1: launching
+  done in 11.5s
+[215/354] actor/gat/seed-2/split-2: launching
+  done in 10.7s
+[216/354] actor/gat/seed-2/split-3: launching
+  done in 11.2s
+[217/354] actor/gat/seed-2/split-4: launching
+  done in 11.3s
+[218/354] actor/gat/seed-2/split-5: launching
+  done in 11.8s
+[219/354] actor/gat/seed-2/split-6: launching
+  done in 11.1s
+[220/354] actor/gat/seed-2/split-7: launching
+  done in 10.9s
+[221/354] actor/gat/seed-2/split-8: launching
+  done in 11.1s
+[222/354] actor/gat/seed-2/split-9: launching
+  done in 12.3s
+[223/354] bbbp/graphsage/seed-0/split-0: launching
+  done in 18.5s
+[224/354] bbbp/graphsage/seed-1/split-0: launching
+  done in 29.8s
+[225/354] bbbp/graphsage/seed-2/split-0: launching
+  done in 25.7s
+[226/354] proteins/graphsage/seed-0/split-0: launching
+  done in 15.2s
+[227/354] proteins/graphsage/seed-1/split-0: launching
+  done in 17.4s
+[228/354] proteins/graphsage/seed-2/split-0: launching
+  done in 12.4s
+[229/354] cornell/gprgnn/seed-0/split-0: launching
+  done in 11.1s
+[230/354] cornell/gprgnn/seed-0/split-1: launching
+  done in 11.0s
+[231/354] cornell/gprgnn/seed-0/split-2: launching
+  done in 10.0s
+[232/354] cornell/gprgnn/seed-0/split-3: launching
+  done in 10.0s
+[233/354] cornell/gprgnn/seed-0/split-4: launching
+  done in 11.1s
+[234/354] cornell/gprgnn/seed-0/split-5: launching
+  done in 11.0s
+[235/354] cornell/gprgnn/seed-0/split-6: launching
+  done in 10.8s
+[236/354] cornell/gprgnn/seed-0/split-7: launching
+  done in 10.0s
+[237/354] cornell/gprgnn/seed-0/split-8: launching
+  done in 10.6s
+[238/354] cornell/gprgnn/seed-0/split-9: launching
+  done in 10.8s
+[239/354] cornell/gprgnn/seed-1/split-0: launching
+  done in 10.5s
+[240/354] cornell/gprgnn/seed-1/split-1: launching
+  done in 11.2s
+[241/354] cornell/gprgnn/seed-1/split-2: launching
+  done in 10.4s
+[242/354] cornell/gprgnn/seed-1/split-3: launching
+  done in 10.6s
+[243/354] cornell/gprgnn/seed-1/split-4: launching
+  done in 11.2s
+[244/354] cornell/gprgnn/seed-1/split-5: launching
+  done in 10.7s
+[245/354] cornell/gprgnn/seed-1/split-6: launching
+  done in 11.2s
+[246/354] cornell/gprgnn/seed-1/split-7: launching
+  done in 11.2s
+[247/354] cornell/gprgnn/seed-1/split-8: launching
+  done in 10.8s
+[248/354] cornell/gprgnn/seed-1/split-9: launching
+  done in 10.1s
+[249/354] cornell/gprgnn/seed-2/split-0: launching
+  done in 11.1s
+[250/354] cornell/gprgnn/seed-2/split-1: launching
+  done in 10.6s
+[251/354] cornell/gprgnn/seed-2/split-2: launching
+  done in 11.1s
+[252/354] cornell/gprgnn/seed-2/split-3: launching
+  done in 11.1s
+[253/354] cornell/gprgnn/seed-2/split-4: launching
+  done in 10.6s
+[254/354] cornell/gprgnn/seed-2/split-5: launching
+  done in 11.2s
+[255/354] cornell/gprgnn/seed-2/split-6: launching
+  done in 10.8s
+[256/354] cornell/gprgnn/seed-2/split-7: launching
+  done in 10.4s
+[257/354] cornell/gprgnn/seed-2/split-8: launching
+  done in 10.3s
+[258/354] cornell/gprgnn/seed-2/split-9: launching
+  done in 10.6s
+[259/354] texas/gprgnn/seed-0/split-0: launching
+  done in 11.2s
+[260/354] texas/gprgnn/seed-0/split-1: launching
+  done in 11.2s
+[261/354] texas/gprgnn/seed-0/split-2: launching
+  done in 11.1s
+[262/354] texas/gprgnn/seed-0/split-3: launching
+  done in 10.1s
+[263/354] texas/gprgnn/seed-0/split-4: launching
+  done in 11.1s
+[264/354] texas/gprgnn/seed-0/split-5: launching
+  done in 11.2s
+[265/354] texas/gprgnn/seed-0/split-6: launching
+  done in 11.3s
+[266/354] texas/gprgnn/seed-0/split-7: launching
+  done in 11.2s
+[267/354] texas/gprgnn/seed-0/split-8: launching
+  done in 10.5s
+[268/354] texas/gprgnn/seed-0/split-9: launching
+  done in 10.9s
+[269/354] texas/gprgnn/seed-1/split-0: launching
+  done in 11.3s
+[270/354] texas/gprgnn/seed-1/split-1: launching
+  done in 11.2s
+[271/354] texas/gprgnn/seed-1/split-2: launching
+  done in 11.2s
+[272/354] texas/gprgnn/seed-1/split-3: launching
+  done in 11.0s
+[273/354] texas/gprgnn/seed-1/split-4: launching
+  done in 11.0s
+[274/354] texas/gprgnn/seed-1/split-5: launching
+  done in 11.1s
+[275/354] texas/gprgnn/seed-1/split-6: launching
+  done in 11.2s
+[276/354] texas/gprgnn/seed-1/split-7: launching
+  done in 11.2s
+[277/354] texas/gprgnn/seed-1/split-8: launching
+  done in 10.9s
+[278/354] texas/gprgnn/seed-1/split-9: launching
+  done in 10.9s
+[279/354] texas/gprgnn/seed-2/split-0: launching
+  done in 11.1s
+[280/354] texas/gprgnn/seed-2/split-1: launching
+  done in 11.1s
+[281/354] texas/gprgnn/seed-2/split-2: launching
+  done in 10.6s
+[282/354] texas/gprgnn/seed-2/split-3: launching
+  done in 11.1s
+[283/354] texas/gprgnn/seed-2/split-4: launching
+  done in 11.1s
+[284/354] texas/gprgnn/seed-2/split-5: launching
+  done in 11.0s
+[285/354] texas/gprgnn/seed-2/split-6: launching
+  done in 11.0s
+[286/354] texas/gprgnn/seed-2/split-7: launching
+  done in 11.3s
+[287/354] texas/gprgnn/seed-2/split-8: launching
+  done in 11.2s
+[288/354] texas/gprgnn/seed-2/split-9: launching
+  done in 10.6s
+[289/354] wisconsin/gprgnn/seed-0/split-0: launching
+  done in 11.1s
+[290/354] wisconsin/gprgnn/seed-0/split-1: launching
+  done in 10.7s
+[291/354] wisconsin/gprgnn/seed-0/split-2: launching
+  done in 11.2s
+[292/354] wisconsin/gprgnn/seed-0/split-3: launching
+  done in 10.0s
+[293/354] wisconsin/gprgnn/seed-0/split-4: launching
+  done in 10.9s
+[294/354] wisconsin/gprgnn/seed-0/split-5: launching
+  done in 10.0s
+[295/354] wisconsin/gprgnn/seed-0/split-6: launching
+  done in 10.6s
+[296/354] wisconsin/gprgnn/seed-0/split-7: launching
+  done in 10.7s
+[297/354] wisconsin/gprgnn/seed-0/split-8: launching
+  done in 10.6s
+[298/354] wisconsin/gprgnn/seed-0/split-9: launching
+  done in 10.8s
+[299/354] wisconsin/gprgnn/seed-1/split-0: launching
+  done in 10.5s
+[300/354] wisconsin/gprgnn/seed-1/split-1: launching
+  done in 11.2s
+[301/354] wisconsin/gprgnn/seed-1/split-2: launching
+  done in 11.1s
+[302/354] wisconsin/gprgnn/seed-1/split-3: launching
+  done in 10.8s
+[303/354] wisconsin/gprgnn/seed-1/split-4: launching
+  done in 10.3s
+[304/354] wisconsin/gprgnn/seed-1/split-5: launching
+  done in 10.9s
+[305/354] wisconsin/gprgnn/seed-1/split-6: launching
+  done in 10.1s
+[306/354] wisconsin/gprgnn/seed-1/split-7: launching
+  done in 11.1s
+[307/354] wisconsin/gprgnn/seed-1/split-8: launching
+  done in 11.1s
+[308/354] wisconsin/gprgnn/seed-1/split-9: launching
+  done in 11.3s
+[309/354] wisconsin/gprgnn/seed-2/split-0: launching
+  done in 11.4s
+[310/354] wisconsin/gprgnn/seed-2/split-1: launching
+  done in 10.9s
+[311/354] wisconsin/gprgnn/seed-2/split-2: launching
+  done in 11.1s
+[312/354] wisconsin/gprgnn/seed-2/split-3: launching
+  done in 11.0s
+[313/354] wisconsin/gprgnn/seed-2/split-4: launching
+  done in 11.1s
+[314/354] wisconsin/gprgnn/seed-2/split-5: launching
+  done in 11.1s
+[315/354] wisconsin/gprgnn/seed-2/split-6: launching
+  done in 11.0s
+[316/354] wisconsin/gprgnn/seed-2/split-7: launching
+  done in 10.7s
+[317/354] wisconsin/gprgnn/seed-2/split-8: launching
+  done in 10.7s
+[318/354] wisconsin/gprgnn/seed-2/split-9: launching
+  done in 10.2s
+[319/354] actor/gprgnn/seed-0/split-0: launching
+  done in 10.6s
+[320/354] actor/gprgnn/seed-0/split-1: launching
+  done in 11.4s
+[321/354] actor/gprgnn/seed-0/split-2: launching
+  done in 10.3s
+[322/354] actor/gprgnn/seed-0/split-3: launching
+  done in 10.5s
+[323/354] actor/gprgnn/seed-0/split-4: launching
+  done in 11.2s
+[324/354] actor/gprgnn/seed-0/split-5: launching
+  done in 11.4s
+[325/354] actor/gprgnn/seed-0/split-6: launching
+  done in 11.1s
+[326/354] actor/gprgnn/seed-0/split-7: launching
+  done in 11.0s
+[327/354] actor/gprgnn/seed-0/split-8: launching
+  done in 10.9s
+[328/354] actor/gprgnn/seed-0/split-9: launching
+  done in 10.8s
+[329/354] actor/gprgnn/seed-1/split-0: launching
+  done in 11.3s
+[330/354] actor/gprgnn/seed-1/split-1: launching
+  done in 11.1s
+[331/354] actor/gprgnn/seed-1/split-2: launching
+  done in 11.0s
+[332/354] actor/gprgnn/seed-1/split-3: launching
+  done in 11.7s
+[333/354] actor/gprgnn/seed-1/split-4: launching
+  done in 10.5s
+[334/354] actor/gprgnn/seed-1/split-5: launching
+  done in 11.2s
+[335/354] actor/gprgnn/seed-1/split-6: launching
+  done in 10.8s
+[336/354] actor/gprgnn/seed-1/split-7: launching
+  done in 11.4s
+[337/354] actor/gprgnn/seed-1/split-8: launching
+  done in 10.9s
+[338/354] actor/gprgnn/seed-1/split-9: launching
+  done in 11.1s
+[339/354] actor/gprgnn/seed-2/split-0: launching
+  done in 11.3s
+[340/354] actor/gprgnn/seed-2/split-1: launching
+  done in 10.9s
+[341/354] actor/gprgnn/seed-2/split-2: launching
+  done in 11.2s
+[342/354] actor/gprgnn/seed-2/split-3: launching
+  done in 11.0s
+[343/354] actor/gprgnn/seed-2/split-4: launching
+  done in 11.2s
+[344/354] actor/gprgnn/seed-2/split-5: launching
+  done in 11.6s
+[345/354] actor/gprgnn/seed-2/split-6: launching
+  done in 10.6s
+[346/354] actor/gprgnn/seed-2/split-7: launching
+  done in 10.8s
+[347/354] actor/gprgnn/seed-2/split-8: launching
+  done in 11.0s
+[348/354] actor/gprgnn/seed-2/split-9: launching
+  done in 10.9s
+[349/354] reddit/gcn/seed-0/split-0: launching
+  done in 219.5s
+[350/354] flickr/graphsage/seed-0/split-0: launching
+  done in 45.5s
+[351/354] ogbn-arxiv/graphsage/seed-0/split-0: launching
+  done in 57.0s
+[352/354] reddit/graphsage/seed-0/split-0: launching
+  done in 403.0s
+[353/354] yelp/graphsage/seed-0/split-0: launching
+  done in 378.6s
+[354/354] ogbn-products/graphsage/seed-0/split-0: launching
+  FAILED in 9.5s (rc=1)
   stdout-tail:
 This will download 1.38GB. Will you proceed? (y/N)
 
   stderr-tail:
-cli.py", line 316, in main
+cli.py", line 322, in main
     run_cell(args.method, args.dataset, args.architecture, args.config,
-  File "/content/GNN-Pruning-Research/src/gnn_pruning/cli.py", line 123, in run_cell
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/cli.py", line 125, in run_cell
     row = _run(dataset=dataset, architecture=architecture,
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/content/GNN-Pruning-Research/src/gnn_pruning/pruning/no_pruning.py", line 91, in run_cell
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/pruning/no_pruning.py", line 92, in run_cell
     ds = load_dataset(dataset)
          ^^^^^^^^^^^^^^^^^^^^^
-  File "/content/GNN-Pruning-Research/src/gnn_pruning/data/loaders.py", line 264, in load_dataset
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/data/loaders.py", line 268, in load_dataset
     return DATASET_REGISTRY[key](root)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/content/GNN-Pruning-Research/src/gnn_pruning/data/loaders.py", line 90, in load_products
+  File "/content/GNN-Pruning-Research/src/gnn_pruning/data/loaders.py", line 94, in load_products
     dataset = PygNodePropPredDataset(name="ogbn-products", root=_subdir(root, "OGB"))
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/usr/local/lib/python3.12/dist-packages/ogb/nodeproppred/dataset_pyg.py", line 68, in __init__
@@ -227,241 +742,3 @@ cli.py", line 316, in main
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 EOFError: EOF when reading a line
 
-
-=== sweep start: method=no-pruning runs=83 datasets_filter=None archs_filter=None ===
-[1/83] cora/gcn/seed-0/split-0: SKIP (outputs already present)
-[2/83] citeseer/gcn/seed-0/split-0: SKIP (outputs already present)
-[3/83] pubmed/gcn/seed-0/split-0: SKIP (outputs already present)
-[4/83] cs/gcn/seed-0/split-0: SKIP (outputs already present)
-[5/83] physics/gcn/seed-0/split-0: SKIP (outputs already present)
-[6/83] photo/gcn/seed-0/split-0: SKIP (outputs already present)
-[7/83] computers/gcn/seed-0/split-0: SKIP (outputs already present)
-[8/83] cornell/gcn/seed-0/split-0: SKIP (outputs already present)
-[9/83] cornell/gcn/seed-0/split-1: SKIP (outputs already present)
-[10/83] cornell/gcn/seed-0/split-2: SKIP (outputs already present)
-[11/83] cornell/gcn/seed-0/split-3: SKIP (outputs already present)
-[12/83] cornell/gcn/seed-0/split-4: SKIP (outputs already present)
-[13/83] cornell/gcn/seed-0/split-5: SKIP (outputs already present)
-[14/83] cornell/gcn/seed-0/split-6: SKIP (outputs already present)
-[15/83] cornell/gcn/seed-0/split-7: SKIP (outputs already present)
-[16/83] cornell/gcn/seed-0/split-8: SKIP (outputs already present)
-[17/83] cornell/gcn/seed-0/split-9: SKIP (outputs already present)
-[18/83] texas/gcn/seed-0/split-0: SKIP (outputs already present)
-[19/83] texas/gcn/seed-0/split-1: SKIP (outputs already present)
-[20/83] texas/gcn/seed-0/split-2: SKIP (outputs already present)
-[21/83] texas/gcn/seed-0/split-3: SKIP (outputs already present)
-[22/83] texas/gcn/seed-0/split-4: SKIP (outputs already present)
-[23/83] texas/gcn/seed-0/split-5: SKIP (outputs already present)
-[24/83] texas/gcn/seed-0/split-6: SKIP (outputs already present)
-[25/83] texas/gcn/seed-0/split-7: SKIP (outputs already present)
-[26/83] texas/gcn/seed-0/split-8: SKIP (outputs already present)
-[27/83] texas/gcn/seed-0/split-9: SKIP (outputs already present)
-[28/83] wisconsin/gcn/seed-0/split-0: SKIP (outputs already present)
-[29/83] wisconsin/gcn/seed-0/split-1: SKIP (outputs already present)
-[30/83] wisconsin/gcn/seed-0/split-2: SKIP (outputs already present)
-[31/83] wisconsin/gcn/seed-0/split-3: SKIP (outputs already present)
-[32/83] wisconsin/gcn/seed-0/split-4: SKIP (outputs already present)
-[33/83] wisconsin/gcn/seed-0/split-5: SKIP (outputs already present)
-[34/83] wisconsin/gcn/seed-0/split-6: SKIP (outputs already present)
-[35/83] wisconsin/gcn/seed-0/split-7: SKIP (outputs already present)
-[36/83] wisconsin/gcn/seed-0/split-8: SKIP (outputs already present)
-[37/83] wisconsin/gcn/seed-0/split-9: SKIP (outputs already present)
-[38/83] actor/gcn/seed-0/split-0: SKIP (outputs already present)
-[39/83] actor/gcn/seed-0/split-1: SKIP (outputs already present)
-[40/83] actor/gcn/seed-0/split-2: SKIP (outputs already present)
-[41/83] actor/gcn/seed-0/split-3: SKIP (outputs already present)
-[42/83] actor/gcn/seed-0/split-4: SKIP (outputs already present)
-[43/83] actor/gcn/seed-0/split-5: SKIP (outputs already present)
-[44/83] actor/gcn/seed-0/split-6: SKIP (outputs already present)
-[45/83] actor/gcn/seed-0/split-7: SKIP (outputs already present)
-[46/83] actor/gcn/seed-0/split-8: SKIP (outputs already present)
-[47/83] actor/gcn/seed-0/split-9: SKIP (outputs already present)
-[48/83] bbbp/gcn/seed-0/split-0: SKIP (outputs already present)
-[49/83] proteins/gcn/seed-0/split-0: SKIP (outputs already present)
-[50/83] cora/gat/seed-0/split-0: SKIP (outputs already present)
-[51/83] citeseer/gat/seed-0/split-0: SKIP (outputs already present)
-[52/83] pubmed/gat/seed-0/split-0: SKIP (outputs already present)
-[53/83] computers/gat/seed-0/split-0: SKIP (outputs already present)
-[54/83] photo/gat/seed-0/split-0: SKIP (outputs already present)
-[55/83] cornell/gat/seed-0/split-0: SKIP (outputs already present)
-[56/83] cornell/gat/seed-0/split-1: SKIP (outputs already present)
-[57/83] cornell/gat/seed-0/split-2: SKIP (outputs already present)
-[58/83] cornell/gat/seed-0/split-3: SKIP (outputs already present)
-[59/83] cornell/gat/seed-0/split-4: SKIP (outputs already present)
-[60/83] cornell/gat/seed-0/split-5: SKIP (outputs already present)
-[61/83] cornell/gat/seed-0/split-6: SKIP (outputs already present)
-[62/83] cornell/gat/seed-0/split-7: SKIP (outputs already present)
-[63/83] cornell/gat/seed-0/split-8: SKIP (outputs already present)
-[64/83] cornell/gat/seed-0/split-9: SKIP (outputs already present)
-[65/83] actor/gat/seed-0/split-0: SKIP (outputs already present)
-[66/83] actor/gat/seed-0/split-1: SKIP (outputs already present)
-[67/83] actor/gat/seed-0/split-2: SKIP (outputs already present)
-[68/83] actor/gat/seed-0/split-3: SKIP (outputs already present)
-[69/83] actor/gat/seed-0/split-4: SKIP (outputs already present)
-[70/83] actor/gat/seed-0/split-5: SKIP (outputs already present)
-[71/83] actor/gat/seed-0/split-6: SKIP (outputs already present)
-[72/83] actor/gat/seed-0/split-7: SKIP (outputs already present)
-[73/83] actor/gat/seed-0/split-8: SKIP (outputs already present)
-[74/83] actor/gat/seed-0/split-9: SKIP (outputs already present)
-[75/83] bbbp/graphsage/seed-0/split-0: SKIP (outputs already present)
-[76/83] proteins/graphsage/seed-0/split-0: SKIP (outputs already present)
-[77/83] reddit/gcn/seed-0/split-0: SKIP (outputs already present)
-[78/83] reddit/gat/seed-0/split-0: launching
-  FAILED in 36.9s (rc=1)
-  stdout-tail:
-
-  stderr-tail:
-)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1790, in _call_impl
-    return forward_call(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/gat_conv.py", line 366, in forward
-    out = self.propagate(edge_index, x=x, alpha=alpha, size=size)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/tmp/torch_geometric.nn.conv.gat_conv_GATConv_propagate_1e20_qmz.py", line 150, in propagate
-    kwargs = self.collect(
-             ^^^^^^^^^^^^^
-  File "/tmp/torch_geometric.nn.conv.gat_conv_GATConv_propagate_1e20_qmz.py", line 85, in collect
-    x_j = self._index_select(_x_0, edge_index_j)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/message_passing.py", line 267, in _index_select
-    return self._index_select_safe(src, index)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/message_passing.py", line 290, in _index_select_safe
-    raise e
-  File "/usr/local/lib/python3.12/dist-packages/torch_geometric/nn/conv/message_passing.py", line 271, in _index_select_safe
-    return src.index_select(self.node_dim, index)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 178.89 GiB. GPU 0 has a total capacity of 79.25 GiB of which 72.16 GiB is free. Including non-PyTorch memory, this process has 7.07 GiB memory in use. Of the allocated memory 6.52 GiB is allocated by PyTorch, and 64.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
-
-[79/83] flickr/graphsage/seed-0/split-0: SKIP (outputs already present)
-[80/83] ogbn-arxiv/graphsage/seed-0/split-0: SKIP (outputs already present)
-[81/83] reddit/graphsage/seed-0/split-0: SKIP (outputs already present)
-[82/83] yelp/graphsage/seed-0/split-0: SKIP (outputs already present)
-[83/83] ogbn-products/graphsage/seed-0/split-0: launching
-  FAILED in 9.2s (rc=1)
-  stdout-tail:
-ogbn-products has been updated.
-Will you update the dataset now? (y/N)
-
-  stderr-tail:
-Traceback (most recent call last):
-  File "<frozen runpy>", line 198, in _run_module_as_main
-  File "<frozen runpy>", line 88, in _run_code
-  File "/content/GNN-Pruning-Research/src/gnn_pruning/cli.py", line 331, in <module>
-    raise SystemExit(main())
-                     ^^^^^^
-  File "/content/GNN-Pruning-Research/src/gnn_pruning/cli.py", line 316, in main
-    run_cell(args.method, args.dataset, args.architecture, args.config,
-  File "/content/GNN-Pruning-Research/src/gnn_pruning/cli.py", line 123, in run_cell
-    row = _run(dataset=dataset, architecture=architecture,
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/content/GNN-Pruning-Research/src/gnn_pruning/pruning/no_pruning.py", line 91, in run_cell
-    ds = load_dataset(dataset)
-         ^^^^^^^^^^^^^^^^^^^^^
-  File "/content/GNN-Pruning-Research/src/gnn_pruning/data/loaders.py", line 264, in load_dataset
-    return DATASET_REGISTRY[key](root)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/content/GNN-Pruning-Research/src/gnn_pruning/data/loaders.py", line 90, in load_products
-    dataset = PygNodePropPredDataset(name="ogbn-products", root=_subdir(root, "OGB"))
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/dist-packages/ogb/nodeproppred/dataset_pyg.py", line 55, in __init__
-    if input('Will you update the dataset now? (y/N)\n').lower() == 'y':
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-EOFError: EOF when reading a line
-
-
-=== sweep start: method=no-pruning runs=10 datasets_filter=['wisconsin'] archs_filter=['gprgnn'] ===
-[1/10] wisconsin/gprgnn/seed-0/split-0: launching
-  done in 2.8s
-[2/10] wisconsin/gprgnn/seed-0/split-1: launching
-  done in 2.6s
-[3/10] wisconsin/gprgnn/seed-0/split-2: launching
-  done in 2.8s
-[4/10] wisconsin/gprgnn/seed-0/split-3: launching
-  done in 2.3s
-[5/10] wisconsin/gprgnn/seed-0/split-4: launching
-  done in 2.3s
-[6/10] wisconsin/gprgnn/seed-0/split-5: launching
-  done in 2.9s
-[7/10] wisconsin/gprgnn/seed-0/split-6: launching
-  done in 2.4s
-[8/10] wisconsin/gprgnn/seed-0/split-7: launching
-  done in 2.4s
-[9/10] wisconsin/gprgnn/seed-0/split-8: launching
-  done in 2.7s
-[10/10] wisconsin/gprgnn/seed-0/split-9: launching
-  done in 2.3s
-
-=== sweep start: method=no-pruning runs=40 datasets_filter=None archs_filter=['gprgnn'] ===
-[1/40] cornell/gprgnn/seed-0/split-0: launching
-  done in 2.7s
-[2/40] cornell/gprgnn/seed-0/split-1: launching
-  done in 2.5s
-[3/40] cornell/gprgnn/seed-0/split-2: launching
-  done in 2.7s
-[4/40] cornell/gprgnn/seed-0/split-3: launching
-  done in 2.2s
-[5/40] cornell/gprgnn/seed-0/split-4: launching
-  done in 2.7s
-[6/40] cornell/gprgnn/seed-0/split-5: launching
-  done in 2.3s
-[7/40] cornell/gprgnn/seed-0/split-6: launching
-  done in 2.5s
-[8/40] cornell/gprgnn/seed-0/split-7: launching
-  done in 2.7s
-[9/40] cornell/gprgnn/seed-0/split-8: launching
-  done in 2.6s
-[10/40] cornell/gprgnn/seed-0/split-9: launching
-  done in 2.3s
-[11/40] texas/gprgnn/seed-0/split-0: launching
-  done in 2.7s
-[12/40] texas/gprgnn/seed-0/split-1: launching
-  done in 2.8s
-[13/40] texas/gprgnn/seed-0/split-2: launching
-  done in 2.8s
-[14/40] texas/gprgnn/seed-0/split-3: launching
-  done in 2.7s
-[15/40] texas/gprgnn/seed-0/split-4: launching
-  done in 2.2s
-[16/40] texas/gprgnn/seed-0/split-5: launching
-  done in 2.7s
-[17/40] texas/gprgnn/seed-0/split-6: launching
-  done in 2.5s
-[18/40] texas/gprgnn/seed-0/split-7: launching
-  done in 2.6s
-[19/40] texas/gprgnn/seed-0/split-8: launching
-  done in 2.6s
-[20/40] texas/gprgnn/seed-0/split-9: launching
-  done in 2.6s
-[21/40] wisconsin/gprgnn/seed-0/split-0: SKIP (outputs already present)
-[22/40] wisconsin/gprgnn/seed-0/split-1: SKIP (outputs already present)
-[23/40] wisconsin/gprgnn/seed-0/split-2: SKIP (outputs already present)
-[24/40] wisconsin/gprgnn/seed-0/split-3: SKIP (outputs already present)
-[25/40] wisconsin/gprgnn/seed-0/split-4: SKIP (outputs already present)
-[26/40] wisconsin/gprgnn/seed-0/split-5: SKIP (outputs already present)
-[27/40] wisconsin/gprgnn/seed-0/split-6: SKIP (outputs already present)
-[28/40] wisconsin/gprgnn/seed-0/split-7: SKIP (outputs already present)
-[29/40] wisconsin/gprgnn/seed-0/split-8: SKIP (outputs already present)
-[30/40] wisconsin/gprgnn/seed-0/split-9: SKIP (outputs already present)
-[31/40] actor/gprgnn/seed-0/split-0: launching
-  done in 3.1s
-[32/40] actor/gprgnn/seed-0/split-1: launching
-  done in 3.0s
-[33/40] actor/gprgnn/seed-0/split-2: launching
-  done in 3.5s
-[34/40] actor/gprgnn/seed-0/split-3: launching
-  done in 3.5s
-[35/40] actor/gprgnn/seed-0/split-4: launching
-  done in 2.9s
-[36/40] actor/gprgnn/seed-0/split-5: launching
-  done in 3.2s
-[37/40] actor/gprgnn/seed-0/split-6: launching
-  done in 2.9s
-[38/40] actor/gprgnn/seed-0/split-7: launching
-  done in 2.9s
-[39/40] actor/gprgnn/seed-0/split-8: launching
-  done in 2.8s
-[40/40] actor/gprgnn/seed-0/split-9: launching
-  done in 2.7s

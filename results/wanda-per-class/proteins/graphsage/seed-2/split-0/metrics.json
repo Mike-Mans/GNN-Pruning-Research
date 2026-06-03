@@ -1,0 +1,36 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "accuracy",
+  "metric_values": [
+    0.6785714285714286,
+    0.6875,
+    0.6875,
+    0.6875,
+    0.6875,
+    0.6875,
+    0.6607142857142857,
+    0.6160714285714286,
+    0.6160714285714286
+  ],
+  "class_summary": {
+    "n_classes": 2,
+    "min_count": 8583,
+    "max_count": 26807,
+    "imbalance_ratio": 3.1232669229873005
+  },
+  "multi_label_strategy": null,
+  "n_nodes_used": 35390,
+  "checkpoint": "results/no-pruning/proteins/graphsage/seed-2/split-0/checkpoint.pt",
+  "seed": 2,
+  "split": 0
+}

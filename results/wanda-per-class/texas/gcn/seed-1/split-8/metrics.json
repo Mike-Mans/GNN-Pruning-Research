@@ -1,0 +1,36 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "macro_f1",
+  "metric_values": [
+    0.5310077519379844,
+    0.5310077519379844,
+    0.5310077519379844,
+    0.5150375939849624,
+    0.5150375939849624,
+    0.5425101214574899,
+    0.4634920634920635,
+    0.32857142857142857,
+    0.1758893280632411
+  ],
+  "class_summary": {
+    "n_classes": 5,
+    "min_count": 1,
+    "max_count": 50,
+    "imbalance_ratio": 50.0
+  },
+  "multi_label_strategy": null,
+  "n_nodes_used": 87,
+  "checkpoint": "results/no-pruning/texas/gcn/seed-1/split-8/checkpoint.pt",
+  "seed": 1,
+  "split": 8
+}

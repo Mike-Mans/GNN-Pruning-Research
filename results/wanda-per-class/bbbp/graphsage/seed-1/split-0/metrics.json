@@ -1,0 +1,36 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "accuracy",
+  "metric_values": [
+    0.8048780487804879,
+    0.8097560975609757,
+    0.8146341463414634,
+    0.8097560975609757,
+    0.775609756097561,
+    0.6097560975609756,
+    0.2731707317073171,
+    0.2731707317073171,
+    0.7414634146341463
+  ],
+  "class_summary": {
+    "n_classes": 2,
+    "min_count": 11695,
+    "max_count": 27489,
+    "imbalance_ratio": 2.3504916631038903
+  },
+  "multi_label_strategy": null,
+  "n_nodes_used": 39184,
+  "checkpoint": "results/no-pruning/bbbp/graphsage/seed-1/split-0/checkpoint.pt",
+  "seed": 1,
+  "split": 0
+}

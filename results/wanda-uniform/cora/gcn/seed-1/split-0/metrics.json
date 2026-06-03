@@ -1,0 +1,30 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "accuracy",
+  "metric_values": [
+    0.8100000619888306,
+    0.8050000667572021,
+    0.8040000200271606,
+    0.7920000553131104,
+    0.8020000457763672,
+    0.7850000262260437,
+    0.7930000424385071,
+    0.7500000596046448,
+    0.39000001549720764
+  ],
+  "activation_collection_seed": 1,
+  "n_nodes_used": 140,
+  "checkpoint": "results/no-pruning/cora/gcn/seed-1/split-0/checkpoint.pt",
+  "seed": 1,
+  "split": 0
+}

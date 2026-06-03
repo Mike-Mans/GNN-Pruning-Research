@@ -1,0 +1,36 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "macro_f1",
+  "metric_values": [
+    0.5141404358353511,
+    0.5141404358353511,
+    0.5141404358353511,
+    0.5141404358353511,
+    0.4353629976580796,
+    0.5141404358353511,
+    0.4989381499726327,
+    0.5041379310344827,
+    0.4628205128205128
+  ],
+  "class_summary": {
+    "n_classes": 5,
+    "min_count": 1,
+    "max_count": 55,
+    "imbalance_ratio": 55.0
+  },
+  "multi_label_strategy": null,
+  "n_nodes_used": 120,
+  "checkpoint": "results/no-pruning/wisconsin/gprgnn/seed-2/split-1/checkpoint.pt",
+  "seed": 2,
+  "split": 1
+}

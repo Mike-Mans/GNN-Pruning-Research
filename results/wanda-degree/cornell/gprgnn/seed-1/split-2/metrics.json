@@ -1,0 +1,36 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "macro_f1",
+  "metric_values": [
+    0.37333333333333335,
+    0.37333333333333335,
+    0.37333333333333335,
+    0.37333333333333335,
+    0.3687912087912088,
+    0.4333526122999807,
+    0.414919703951962,
+    0.425908714940973,
+    0.3283501683501683
+  ],
+  "degree_summary": {
+    "mean": 2.183907985687256,
+    "median": 1.0,
+    "max": 93.0,
+    "p99": 21.619949340820312
+  },
+  "self_loops_included": false,
+  "n_nodes_used": 87,
+  "checkpoint": "results/no-pruning/cornell/gprgnn/seed-1/split-2/checkpoint.pt",
+  "seed": 1,
+  "split": 2
+}

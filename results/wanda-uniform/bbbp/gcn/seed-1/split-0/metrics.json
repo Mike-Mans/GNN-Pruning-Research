@@ -1,0 +1,30 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "accuracy",
+  "metric_values": [
+    0.7853658536585366,
+    0.7853658536585366,
+    0.7853658536585366,
+    0.7853658536585366,
+    0.7804878048780488,
+    0.7658536585365854,
+    0.424390243902439,
+    0.2682926829268293,
+    0.2926829268292683
+  ],
+  "activation_collection_seed": 1,
+  "n_nodes_used": 39184,
+  "checkpoint": "results/no-pruning/bbbp/gcn/seed-1/split-0/checkpoint.pt",
+  "seed": 1,
+  "split": 0
+}

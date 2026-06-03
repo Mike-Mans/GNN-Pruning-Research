@@ -1,0 +1,46 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "accuracy",
+  "metric_values": [
+    0.7850000262260437,
+    0.7800000309944153,
+    0.7710000276565552,
+    0.7690000534057617,
+    0.7790000438690186,
+    0.7540000081062317,
+    0.7270000576972961,
+    0.6670000553131104,
+    0.7450000643730164
+  ],
+  "per_layer_sparsity": [
+    {
+      "name": "conv1.lin.weight",
+      "shape": [
+        256,
+        500
+      ],
+      "numel": 128000
+    },
+    {
+      "name": "conv2.lin.weight",
+      "shape": [
+        3,
+        256
+      ],
+      "numel": 768
+    }
+  ],
+  "checkpoint": "results/no-pruning/pubmed/gcn/seed-1/split-0/checkpoint.pt",
+  "seed": 1,
+  "split": 0
+}

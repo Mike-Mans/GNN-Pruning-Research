@@ -1,0 +1,46 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "macro_f1",
+  "metric_values": [
+    0.16055172413793103,
+    0.16055172413793103,
+    0.1628985507246377,
+    0.1628985507246377,
+    0.163049853372434,
+    0.17316017316017315,
+    0.08372093023255814,
+    0.09090909090909091,
+    0.16282051282051282
+  ],
+  "per_layer_sparsity": [
+    {
+      "name": "conv1.lin.weight",
+      "shape": [
+        256,
+        1703
+      ],
+      "numel": 435968
+    },
+    {
+      "name": "conv2.lin.weight",
+      "shape": [
+        5,
+        256
+      ],
+      "numel": 1280
+    }
+  ],
+  "checkpoint": "results/no-pruning/cornell/gcn/seed-1/split-5/checkpoint.pt",
+  "seed": 1,
+  "split": 5
+}

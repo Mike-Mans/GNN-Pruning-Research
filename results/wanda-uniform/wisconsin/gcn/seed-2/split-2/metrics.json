@@ -1,0 +1,30 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "macro_f1",
+  "metric_values": [
+    0.3254901960784314,
+    0.3254901960784314,
+    0.3254901960784314,
+    0.3254901960784314,
+    0.3241290322580645,
+    0.31494897959183676,
+    0.3215989684074791,
+    0.26873015873015876,
+    0.17927571515520388
+  ],
+  "activation_collection_seed": 2,
+  "n_nodes_used": 120,
+  "checkpoint": "results/no-pruning/wisconsin/gcn/seed-2/split-2/checkpoint.pt",
+  "seed": 2,
+  "split": 2
+}

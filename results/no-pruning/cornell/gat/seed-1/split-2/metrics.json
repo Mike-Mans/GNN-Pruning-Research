@@ -1,0 +1,9 @@
+{
+  "sparsity": 0.0,
+  "metric_name": "macro_f1",
+  "metric_value": 0.26591876208897486,
+  "n_params": 3504143,
+  "epoch_of_best_val": 104,
+  "seed": 1,
+  "split": 2
+}

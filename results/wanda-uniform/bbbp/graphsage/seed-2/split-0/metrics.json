@@ -1,0 +1,30 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "accuracy",
+  "metric_values": [
+    0.751219512195122,
+    0.7609756097560976,
+    0.7658536585365854,
+    0.7658536585365854,
+    0.7609756097560976,
+    0.5560975609756098,
+    0.33170731707317075,
+    0.7121951219512195,
+    0.7170731707317073
+  ],
+  "activation_collection_seed": 2,
+  "n_nodes_used": 39228,
+  "checkpoint": "results/no-pruning/bbbp/graphsage/seed-2/split-0/checkpoint.pt",
+  "seed": 2,
+  "split": 0
+}

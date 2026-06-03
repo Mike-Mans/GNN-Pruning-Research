@@ -1,0 +1,36 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "accuracy",
+  "metric_values": [
+    0.6696428571428571,
+    0.6696428571428571,
+    0.6607142857142857,
+    0.6607142857142857,
+    0.6785714285714286,
+    0.6607142857142857,
+    0.6785714285714286,
+    0.625,
+    0.6160714285714286
+  ],
+  "degree_summary": {
+    "mean": 3.737022876739502,
+    "median": 4.0,
+    "max": 12.0,
+    "p99": 7.0
+  },
+  "self_loops_included": false,
+  "n_nodes_used": 35524,
+  "checkpoint": "results/no-pruning/proteins/gcn/seed-1/split-0/checkpoint.pt",
+  "seed": 1,
+  "split": 0
+}

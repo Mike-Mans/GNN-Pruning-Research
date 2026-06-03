@@ -1,0 +1,9 @@
+{
+  "sparsity": 0.0,
+  "metric_name": "accuracy",
+  "metric_value": 0.7414634146341463,
+  "n_params": 3074,
+  "epoch_of_best_val": 71,
+  "seed": 2,
+  "split": 0
+}

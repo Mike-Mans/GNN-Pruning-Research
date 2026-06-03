@@ -1,0 +1,30 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "accuracy",
+  "metric_values": [
+    0.781000018119812,
+    0.7850000262260437,
+    0.7880000472068787,
+    0.7820000648498535,
+    0.7860000133514404,
+    0.7830000519752502,
+    0.7280000448226929,
+    0.6530000567436218,
+    0.5380000472068787
+  ],
+  "activation_collection_seed": 1,
+  "n_nodes_used": 60,
+  "checkpoint": "results/no-pruning/pubmed/gcn/seed-1/split-0/checkpoint.pt",
+  "seed": 1,
+  "split": 0
+}

@@ -1,0 +1,30 @@
+{
+  "sparsity_grid": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "metric_name": "accuracy",
+  "metric_values": [
+    0.9669564962387085,
+    0.967536211013794,
+    0.9669564962387085,
+    0.9671013951301575,
+    0.9668115377426147,
+    0.9657970666885376,
+    0.9592753052711487,
+    0.9505796432495117,
+    0.8715941905975342
+  ],
+  "activation_collection_seed": 2,
+  "n_nodes_used": 20695,
+  "checkpoint": "results/no-pruning/physics/gcn/seed-2/split-0/checkpoint.pt",
+  "seed": 2,
+  "split": 0
+}
