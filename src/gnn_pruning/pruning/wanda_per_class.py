@@ -29,7 +29,6 @@ from torch_geometric.loader import DataLoader
 
 from gnn_pruning.data import DATASET_META, load_dataset
 from gnn_pruning.models import build_model, named_prunable_linears
-from gnn_pruning.plotting import plot_accuracy_vs_sparsity
 from gnn_pruning.pruning import masked_weights
 from gnn_pruning.training import (
     _split_graphs,  # noqa: PLC2701
@@ -301,22 +300,6 @@ def run_cell(
         "split": int(split),
     }
     (cell_dir / "metrics.json").write_text(json.dumps(metrics, indent=2))
-
-    plot_path = RESULTS_ROOT / "plots" / \
-        f"accuracy_vs_sparsity_{dataset}_{architecture}.png"
-    plot_accuracy_vs_sparsity(
-        dataset, architecture,
-        sparsities=sparsity_grid, values=metric_values,
-        out_path=plot_path,
-        metric_name=metric_name,
-        method_label="wanda-per-class",
-        reference_paths={
-            "dense (#1)": DENSE_ROOT / "summary.csv",
-            "magnitude (#2)": Path("results/magnitude/summary.csv"),
-            "wanda-uniform (#3)": Path("results/wanda-uniform/summary.csv"),
-            "wanda-degree (#4)": Path("results/wanda-degree/summary.csv"),
-        },
-    )
 
     return [
         {

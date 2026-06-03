@@ -16,7 +16,6 @@ import torch
 from gnn_pruning.data import DATASET_META, load_dataset
 from gnn_pruning.eval import evaluate_node_classification
 from gnn_pruning.models import build_model
-from gnn_pruning.plotting import plot_accuracy_vs_sparsity
 from gnn_pruning.training import (
     evaluate_test,
     evaluate_test_graphs,
@@ -142,16 +141,6 @@ def run_cell(
         "split": int(split),
     }
     (cell_dir / "metrics.json").write_text(json.dumps(metrics, indent=2))
-
-    plot_path = RESULTS_ROOT / "plots" / \
-        f"accuracy_vs_sparsity_{dataset}_{architecture}.png"
-    plot_accuracy_vs_sparsity(
-        dataset, architecture,
-        sparsities=[0.0], values=[float(test_metric)],
-        out_path=plot_path,
-        metric_name=metric_name,
-        method_label="no-pruning (dense)",
-    )
 
     return {
         "dataset": dataset,

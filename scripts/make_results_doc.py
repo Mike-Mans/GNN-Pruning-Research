@@ -5,6 +5,9 @@ reproduction notebook.
 """
 import pandas as pd, numpy as np, os, sys
 from collections import Counter
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 ROOT = os.environ.get("GNN_ROOT", os.getcwd())
 sys.path.insert(0, os.path.join(ROOT, "src"))
 from gnn_pruning.data import DATASET_META, load_dataset
@@ -121,16 +124,46 @@ def winline(cells):
     body = "  ·  ".join(f"{LBL[m]}: **{c[m]}**" for m in PM)
     return f"{body}  ·  _none-competitive: {none}_  (of {tot} cell×sparsity points)"
 
+_COLORS = {"magnitude": "#444444", "wanda-uniform": "#1f77b4",
+           "wanda-degree": "#2ca02c", "wanda-per-class": "#d62728"}
+_PRETTY = {"accuracy": "accuracy", "macro_f1": "macro-F1", "micro_f1": "micro-F1"}
+
+def make_overlay_plot(d, a):
+    """One overlay plot per (dataset, arch): all 4 pruning methods (with ±1 std
+    bands from the multi-seed runs) + the dense baseline as a horizontal line.
+    Written to results/plots/<dataset>_<arch>.png."""
+    fig, ax = plt.subplots(figsize=(5.2, 3.6))
+    ax.axhline(dense_val(d, a), ls="--", lw=1.2, color="gray", alpha=0.8,
+               label="dense (no pruning)")
+    for m in PM:
+        sub = S[m][(S[m].dataset == d) & (S[m].architecture == a)].sort_values("sparsity")
+        if sub.empty:
+            continue
+        x, y = sub.sparsity.to_numpy(), sub.metric_value.to_numpy()
+        ax.plot(x, y, marker="o", ms=3, lw=1.6, color=_COLORS[m], label=LBL[m])
+        if "metric_std" in sub.columns:
+            sd = sub.metric_std.to_numpy()
+            if (sd > 0).any():
+                ax.fill_between(x, y - sd, y + sd, color=_COLORS[m], alpha=0.15)
+    ax.set_xlabel("Sparsity")
+    ax.set_ylabel(_PRETTY.get(metric_name(d, a), metric_name(d, a)))
+    ax.set_title(f"{a.upper()} on {d}")
+    ax.grid(True, alpha=0.3)
+    ax.legend(fontsize=7, loc="best")
+    fig.tight_layout()
+    out_dir = os.path.join(ROOT, "results", "plots")
+    os.makedirs(out_dir, exist_ok=True)
+    fig.savefig(os.path.join(out_dir, f"{d}_{a}.png"), dpi=120)
+    plt.close(fig)
+
 def plot_md(d, a):
-    rel = f"wanda-per-class/plots/accuracy_vs_sparsity_{d}_{a}.png"
-    if os.path.exists(f"{ROOT}/results/{rel}"):
-        return f"![{d}/{a} overlay]({rel})"
-    return "_(overlay plot unavailable — cell did not complete)_"
+    return f"![{d}/{a} overlay](plots/{d}_{a}.png)"
 
 def section(cells):
     parts = []
     for d, a in cells:
-        mn = {"accuracy": "accuracy", "macro_f1": "macro-F1", "micro_f1": "micro-F1"}[metric_name(d, a)]
+        make_overlay_plot(d, a)        # generate the single overlay plot here
+        mn = _PRETTY[metric_name(d, a)]
         parts.append(f"#### {d} · {a.upper()}\n")
         parts.append(f"*Metric: {mn} · dense baseline (0% sparsity): "
                      f"**{dense_val(d, a):.3f}** · averaged over {nruns(d, a)} "
@@ -144,9 +177,9 @@ md = []
 md.append("# Comprehensive Results — GNN Activation-Based Pruning\n")
 md.append("Generated from `results/<method>/summary.csv`. Five methods compared across "
           "every completed (dataset, architecture) cell at 9 sparsity levels (0.1–0.9). "
-          "Each cell shows the per-sparsity table (best method per row **bold**) and the "
-          "overlaid accuracy-vs-sparsity plot from `results/wanda-per-class/plots/`, which "
-          "draws all four pruning methods plus the dense reference.\n")
+          "Each cell shows the per-sparsity table (best method per row **bold**) and a single "
+          "overlaid accuracy-vs-sparsity plot (in `results/plots/`) drawing all four pruning "
+          "methods with ±1 std bands (multi-seed) plus the dense baseline as a reference line.\n")
 
 md.append("## Methods\n")
 md.append("- **No-Pruning** — dense baseline (0% sparsity).\n"
