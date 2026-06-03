@@ -85,7 +85,11 @@ def load_arxiv(root: Union[str, Path] = DEFAULT_ROOT) -> Data:
 
 def load_products(root: Union[str, Path] = DEFAULT_ROOT) -> Data:
     from ogb.nodeproppred import PygNodePropPredDataset
+    import ogb.utils.url as _ogb_url
 
+    # ogbn-products is a large download; OGB prompts for confirmation via
+    # input(), which raises EOFError in a headless subprocess. Auto-confirm.
+    _ogb_url.decide_download = lambda *_a, **_k: True
     _allowlist_ogb_globals()
     dataset = PygNodePropPredDataset(name="ogbn-products", root=_subdir(root, "OGB"))
     data = dataset[0]

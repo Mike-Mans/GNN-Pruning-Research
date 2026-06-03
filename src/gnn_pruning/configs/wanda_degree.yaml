@@ -52,8 +52,8 @@ metric_overrides:
   yelp: micro_f1
   ogbn-proteins: micro_f1
 
-# Issue #8: single seed tonight; flip to [0, 1, 2, 3, 4] for the multi-seed pass.
-seeds: [0]
+# Multi-seed core cells (issue #8); large NC datasets forced single-seed in code.
+seeds: [0, 1, 2]
 
 # Issue #9: WebKB / Actor ship 10 Geom-GCN split columns — run & average all.
 splits:

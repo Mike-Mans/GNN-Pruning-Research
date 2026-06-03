@@ -61,8 +61,9 @@ metric_overrides:
   yelp: micro_f1
   ogbn-proteins: micro_f1
 
-# Issue #8: single seed tonight; flip to [0, 1, 2, 3, 4] for the multi-seed pass.
-seeds: [0]
+# Multi-seed core cells for error bars (issue #8). Large NC datasets are forced
+# single-seed in code (_resolve_seeds) since their minibatch training is run once.
+seeds: [0, 1, 2]
 
 # Issue #9: WebKB / Actor ship 10 Geom-GCN split columns — run & average all.
 splits:
@@ -105,23 +106,37 @@ hyperparam_overrides:
   actor:
     epochs: 200
     patience: 50
-  # Large datasets: SAGE on Reddit / ogbn-arxiv / ogbn-products / Yelp / Flickr
-  # — full-batch on MPS works for ogbn-arxiv per preflight (5.3 GB driver),
-  # but Reddit / ogbn-products may need NeighborLoader sampling. The current
-  # implementation is full-batch; if the human hits OOM on those, switch to
-  # the NeighborLoader code path (see RUN_REPORT.md "what's left").
+  # Large NC datasets: minibatch (NeighborLoader) training — full-batch is
+  # 1 gradient step/epoch, which undertrains these. Minibatch gives many steps
+  # per epoch, so epoch counts are small. Eval + Wanda activation collection
+  # stay full-batch on the sparse path (run on CUDA / Colab A100).
   ogbn-arxiv:
-    epochs: 200
-    patience: 30
+    mini_batch: true
+    fanout: [15, 10]
+    batch_size: 1024
+    epochs: 40
+    patience: 10
   reddit:
-    epochs: 100
-    patience: 20
+    mini_batch: true
+    fanout: [15, 10]
+    batch_size: 1024
+    epochs: 40
+    patience: 10
   yelp:
-    epochs: 100
-    patience: 20
+    mini_batch: true
+    fanout: [15, 10]
+    batch_size: 1024
+    epochs: 40
+    patience: 10
   ogbn-products:
-    epochs: 100
-    patience: 20
+    mini_batch: true
+    fanout: [10, 5]        # smaller fanout to bound subgraph size on 2.4M nodes
+    batch_size: 1024
+    epochs: 30
+    patience: 10
   flickr:
-    epochs: 100
-    patience: 20
+    mini_batch: true
+    fanout: [15, 10]
+    batch_size: 1024
+    epochs: 40
+    patience: 10

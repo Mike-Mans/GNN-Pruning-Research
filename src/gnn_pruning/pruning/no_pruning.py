@@ -77,6 +77,8 @@ def run_cell(
     batch_size: int = 32,
     seed: int = 0,
     split: int = 0,
+    mini_batch: bool = False,
+    fanout: list | None = None,
 ) -> dict:
     """Train one (dataset, architecture) cell to convergence, save artifacts.
 
@@ -107,6 +109,7 @@ def run_cell(
             model, ds, device=device, lr=lr, weight_decay=weight_decay,
             epochs=epochs, patience=patience, metric_name=metric_name,
             seed=seed, split=split, use_sparse=sparse,
+            mini_batch=mini_batch, fanout=fanout, batch_size=batch_size,
         )
         model.load_state_dict(best_state)
         test_metric = evaluate_test(model, ds, device, metric_name,

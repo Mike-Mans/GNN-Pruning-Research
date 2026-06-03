@@ -70,9 +70,12 @@ def _cells_from_config(cfg: dict) -> list[tuple[str, str]]:
     return cells
 
 
-def _resolve_seeds(cfg: dict) -> list[int]:
-    """Seed list for the sweep. Tonight ships [0]; flip to [0,1,2,3,4] for the
-    publishable multi-seed pass (issue #8)."""
+def _resolve_seeds(dataset: str, cfg: dict) -> list[int]:
+    """Seed list for `dataset`. Large NC datasets stay single-seed (their
+    minibatch training is run once); everything else uses the config `seeds`
+    list (multi-seed for error bars, issue #8)."""
+    if dataset in LARGE_DATASETS:
+        return [0]
     return [int(s) for s in (cfg.get("seeds") or [0])]
 
 
@@ -92,10 +95,9 @@ def _expand_runs(cfg: dict, cells: list[tuple[str, str]]
                  ) -> list[tuple[str, str, int, int]]:
     """Expand each (dataset, arch) cell into (dataset, arch, seed, split) runs,
     ordering large datasets last (issue #6 guard)."""
-    seeds = _resolve_seeds(cfg)
     runs: list[tuple[str, str, int, int]] = []
     for dataset, arch in cells:
-        for seed in seeds:
+        for seed in _resolve_seeds(dataset, cfg):
             for split in _resolve_splits(dataset, cfg):
                 runs.append((dataset, arch, seed, split))
     # Stable sort: False (0) before True (1) → large datasets last, original
@@ -267,17 +269,21 @@ def _rebuild_summary(method: str, n_sparsities: int) -> None:
         return
     rows: list[dict] = []
     for (dataset, arch, sparsity), vals in sorted(agg.items()):
+        mean = sum(vals) / len(vals)
+        # Population std across seeds × splits (0 for single-run cells).
+        std = (sum((v - mean) ** 2 for v in vals) / len(vals)) ** 0.5
         rows.append({
             "dataset": dataset,
             "architecture": arch,
             "sparsity": sparsity,
             "metric_name": metric_names[(dataset, arch)],
-            "metric_value": sum(vals) / len(vals),
+            "metric_value": mean,
+            "metric_std": std,
             "n_runs": len(vals),
         })
     summary_path = method_root / "summary.csv"
     fieldnames = ["dataset", "architecture", "sparsity",
-                  "metric_name", "metric_value", "n_runs"]
+                  "metric_name", "metric_value", "metric_std", "n_runs"]
     with summary_path.open("w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=fieldnames)
         w.writeheader()
