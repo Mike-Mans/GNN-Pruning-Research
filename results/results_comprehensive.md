@@ -41,39 +41,63 @@ Homophilic datasets first (alphabetical), then heterophilic (alphabetical).
 
 | Dataset | Homophily | Classes | Architecture | Metric | Dense value | Runs |
 |---|---|---|---|---|---|---|
-| bbbp | Homophilic | 2 | GCN | accuracy | 0.800 | 1 |
-| bbbp | Homophilic | 2 | GRAPHSAGE | accuracy | 0.780 | 1 |
-| citeseer | Homophilic | 6 | GAT | accuracy | 0.678 | 1 |
-| citeseer | Homophilic | 6 | GCN | accuracy | 0.703 | 1 |
-| computers | Homophilic | 10 | GAT | accuracy | 0.900 | 1 |
-| computers | Homophilic | 10 | GCN | accuracy | 0.905 | 1 |
-| cora | Homophilic | 7 | GAT | accuracy | 0.800 | 1 |
-| cora | Homophilic | 7 | GCN | accuracy | 0.805 | 1 |
-| cs | Homophilic | 15 | GCN | accuracy | 0.938 | 1 |
-| flickr | Homophilic | 7 | GRAPHSAGE | accuracy | 0.448 | 1 |
-| ogbn-arxiv | Homophilic | 40 | GRAPHSAGE | accuracy | 0.548 | 1 |
-| photo | Homophilic | 8 | GAT | accuracy | 0.902 | 1 |
-| photo | Homophilic | 8 | GCN | accuracy | 0.939 | 1 |
-| physics | Homophilic | 5 | GCN | accuracy | 0.966 | 1 |
-| proteins | Homophilic | 2 | GCN | accuracy | 0.652 | 1 |
-| proteins | Homophilic | 2 | GRAPHSAGE | accuracy | 0.643 | 1 |
-| pubmed | Homophilic | 3 | GAT | accuracy | 0.765 | 1 |
-| pubmed | Homophilic | 3 | GCN | accuracy | 0.782 | 1 |
-| reddit | Homophilic | 41 | GCN | accuracy | 0.565 | 1 |
-| reddit | Homophilic | 41 | GRAPHSAGE | accuracy | 0.479 | 1 |
-| yelp | Homophilic | 100\* | GRAPHSAGE | micro-F1 | 0.296 | 1 |
-| actor | Heterophilic | 5 | GAT | macro-F1 | 0.227 | 10 |
-| actor | Heterophilic | 5 | GCN | macro-F1 | 0.242 | 10 |
-| actor | Heterophilic | 5 | GPRGNN | macro-F1 | 0.312 | 10 |
-| cornell | Heterophilic | 5 | GAT | macro-F1 | 0.303 | 10 |
-| cornell | Heterophilic | 5 | GCN | macro-F1 | 0.242 | 10 |
-| cornell | Heterophilic | 5 | GPRGNN | macro-F1 | 0.486 | 10 |
-| texas | Heterophilic | 5 | GCN | macro-F1 | 0.249 | 10 |
-| texas | Heterophilic | 5 | GPRGNN | macro-F1 | 0.557 | 10 |
-| wisconsin | Heterophilic | 5 | GCN | macro-F1 | 0.309 | 10 |
-| wisconsin | Heterophilic | 5 | GPRGNN | macro-F1 | 0.590 | 10 |
+| bbbp | Homophilic (—) | 2 | GCN | accuracy | 0.800 | 1 |
+| bbbp | Homophilic (—) | 2 | GRAPHSAGE | accuracy | 0.780 | 1 |
+| citeseer | Homophilic (0.74) | 6 | GAT | accuracy | 0.678 | 1 |
+| citeseer | Homophilic (0.74) | 6 | GCN | accuracy | 0.703 | 1 |
+| computers | Homophilic (0.78) | 10 | GAT | accuracy | 0.900 | 1 |
+| computers | Homophilic (0.78) | 10 | GCN | accuracy | 0.905 | 1 |
+| cora | Homophilic (0.81) | 7 | GAT | accuracy | 0.800 | 1 |
+| cora | Homophilic (0.81) | 7 | GCN | accuracy | 0.805 | 1 |
+| cs | Homophilic (0.81) | 15 | GCN | accuracy | 0.938 | 1 |
+| flickr | Homophilic (0.32) | 7 | GRAPHSAGE | accuracy | 0.448 | 1 |
+| ogbn-arxiv | Homophilic (0.66) | 40 | GRAPHSAGE | accuracy | 0.548 | 1 |
+| photo | Homophilic (0.83) | 8 | GAT | accuracy | 0.902 | 1 |
+| photo | Homophilic (0.83) | 8 | GCN | accuracy | 0.939 | 1 |
+| physics | Homophilic (0.93) | 5 | GCN | accuracy | 0.966 | 1 |
+| proteins | Homophilic (—) | 2 | GCN | accuracy | 0.652 | 1 |
+| proteins | Homophilic (—) | 2 | GRAPHSAGE | accuracy | 0.643 | 1 |
+| pubmed | Homophilic (0.80) | 3 | GAT | accuracy | 0.765 | 1 |
+| pubmed | Homophilic (0.80) | 3 | GCN | accuracy | 0.782 | 1 |
+| reddit | Homophilic (0.78) | 41 | GCN | accuracy | 0.565 | 1 |
+| reddit | Homophilic (0.78) | 41 | GRAPHSAGE | accuracy | 0.479 | 1 |
+| yelp | Homophilic (—) | 100\* | GRAPHSAGE | micro-F1 | 0.296 | 1 |
+| actor | Heterophilic (0.22) | 5 | GAT | macro-F1 | 0.227 | 10 |
+| actor | Heterophilic (0.22) | 5 | GCN | macro-F1 | 0.242 | 10 |
+| actor | Heterophilic (0.22) | 5 | GPRGNN | macro-F1 | 0.312 | 10 |
+| cornell | Heterophilic (0.13) | 5 | GAT | macro-F1 | 0.303 | 10 |
+| cornell | Heterophilic (0.13) | 5 | GCN | macro-F1 | 0.242 | 10 |
+| cornell | Heterophilic (0.13) | 5 | GPRGNN | macro-F1 | 0.486 | 10 |
+| texas | Heterophilic (0.11) | 5 | GCN | macro-F1 | 0.249 | 10 |
+| texas | Heterophilic (0.11) | 5 | GPRGNN | macro-F1 | 0.557 | 10 |
+| wisconsin | Heterophilic (0.20) | 5 | GCN | macro-F1 | 0.309 | 10 |
+| wisconsin | Heterophilic (0.20) | 5 | GPRGNN | macro-F1 | 0.590 | 10 |
 
-\* Yelp is multi-label (100 binary labels); all other datasets are single-label.
+\* Yelp is multi-label (100 binary labels); all other datasets are single-label. Homophily = edge homophily (fraction of edges joining same-label nodes); `—` where undefined (graph-classification, multi-label).
+
+## Best result per (dataset × architecture)
+
+Each cell is the **best metric observed** for that (dataset × architecture) and the regime that produced it: `dense` = no pruning, otherwise `Method @ sparsity`. Same dataset ordering and homophily labels as the table above. **Caveat:** this is the maximum over 37 configurations per cell (dense + 4 methods × 9 sparsities), so it is an optimistic, selection-biased estimate — the per-cell tables further down give the full sparsity curves. `—` = not evaluated (`reddit/gat` OOM; `ogbn-products` download-blocked).
+
+| Dataset | Homophily | GCN | GAT | GraphSAGE | GPR-GNN |
+|---|---|---|---|---|---|
+| bbbp | Homophilic (—) | 0.820 (Unif @50%) | — | 0.805 (PerCls @70%) | — |
+| citeseer | Homophilic (0.74) | 0.703 (dense) | 0.706 (Unif @80%) | — | — |
+| computers | Homophilic (0.78) | 0.907 (Mag @70%) | 0.904 (Deg @50%) | — | — |
+| cora | Homophilic (0.81) | 0.809 (Unif @50%) | 0.808 (Mag @70%) | — | — |
+| cs | Homophilic (0.81) | 0.939 (Mag @20%) | — | — | — |
+| flickr | Homophilic (0.32) | — | — | 0.449 (Mag @20%) | — |
+| ogbn-arxiv | Homophilic (0.66) | — | — | 0.548 (Deg @40%) | — |
+| photo | Homophilic (0.83) | 0.942 (Mag @70%) | 0.908 (Unif @40%) | — | — |
+| physics | Homophilic (0.93) | 0.968 (Deg @60%) | — | — | — |
+| proteins | Homophilic (—) | 0.670 (Unif @60%) | — | 0.670 (Mag @50%) | — |
+| pubmed | Homophilic (0.80) | 0.790 (Mag @80%) | 0.768 (Mag @60%) | — | — |
+| reddit | Homophilic (0.78) | 0.566 (Mag @30%) | — | 0.488 (Mag @30%) | — |
+| yelp | Homophilic (—) | — | — | 0.302 (PerCls @70%) | — |
+| actor | Heterophilic (0.22) | 0.244 (Unif @30%) | 0.228 (Deg @20%) | — | 0.316 (PerCls @40%) |
+| cornell | Heterophilic (0.13) | 0.265 (Mag @80%) | 0.347 (Mag @80%) | — | 0.527 (Deg @70%) |
+| texas | Heterophilic (0.11) | 0.273 (PerCls @80%) | — | — | 0.571 (PerCls @70%) |
+| wisconsin | Heterophilic (0.20) | 0.318 (Mag @50%) | — | — | 0.628 (Unif @70%) |
 
 ---
 
