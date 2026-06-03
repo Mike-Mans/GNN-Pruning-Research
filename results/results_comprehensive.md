@@ -18,17 +18,22 @@ Heterophilic datasets (Cornell/Texas/Wisconsin/Actor) report **macro-F1**, the m
 
 31 of 33 (dataset, architecture) cells completed across all 5 methods. **Not shown:** `reddit/gat` (full-batch attention OOM, ~178 GiB — infeasible on any GPU) and `ogbn-products/graphsage` (OGB interactive-download prompt in the headless run — recoverable). Reddit is covered by GCN and GraphSAGE.
 
-## Headline finding (win counts: times each method is best, across cells × sparsities)
+## Headline finding — competitive win counts
 
-| Group | Magnitude | Wanda-Uniform | Wanda-Degree | Wanda-Per-Class |
-|---|---|---|---|---|
-| **All cells** | 109 | 91 | 51 | 28 |
-| Heterophilic (GPR-GNN) | 6 | 13 | 12 | 5 |
-| Homophilic small/medium | 60 | 25 | 15 | 8 |
-| Homophilic large | 15 | 13 | 11 | 6 |
-| Graph classification | 13 | 19 | 0 | 4 |
+For each cell × sparsity level (0.1–0.9), we tally which of the **four pruning methods** is best — **but a win only counts if that method stays competitive with the dense model**, i.e. retains ≥ 95% of the cell's dense-baseline metric (≤ 5% relative drop). A win among collapsed models is not a win. **None-competitive** counts cell × sparsity points where *even the best* pruning method fell below that bar (the over-pruned regime). The dense baseline itself is the reference, not a competitor (it only exists at 0% sparsity).
 
-> **Wanda-Per-Class is the weakest method by win count in every group**, including the heterophilic/class-imbalanced regime it was hypothesized to help. With a functional heterophilic backbone (GPR-GNN), the simpler activation-aware variants (Uniform/Degree) lead; plain Magnitude is strongest overall. We find no evidence that class- or topology-aware refinements to activation pruning help.
+| Group | Magnitude | Wanda-Uniform | Wanda-Degree | Wanda-Per-Class | None-competitive |
+|---|---|---|---|---|---|
+| **All cells** | 103 | 78 | 47 | 27 | 24 |
+| Heterophilic (GPR-GNN) | 6 | 9 | 12 | 5 | 4 |
+| Heterophilic (vanilla GCN/GAT) | 14 | 17 | 12 | 5 | 6 |
+| Homophilic small/medium | 56 | 22 | 14 | 8 | 8 |
+| Homophilic large | 14 | 13 | 9 | 5 | 4 |
+| Graph classification | 13 | 17 | 0 | 4 | 2 |
+
+> **Wanda-Per-Class — the proposal's hypothesized method — is never the best in any group, and ranks last (or tied-last) on every node-classification group.** It provides no benefit even in the heterophilic / class-imbalanced regime it was designed for, now tested on a functional GPR-GNN backbone. Which of the *other* three leads varies by group and is sensitive to the threshold (Magnitude on homophilic and all-cells; Wanda-Uniform on graph-classification and vanilla-heterophilic; the margins are small) — but the **bottom** of the ranking is stable: the class-aware refinement doesn't earn its complexity. The per-class result is robust to the competitiveness bar — last at 90%, 95%, and 99% of dense alike (only the none-competitive total shifts: 12 / 24 / 55 of 279 across all cells).
+
+_Note: "best" is rank at matched sparsity and says nothing about margin — at low sparsity all four methods sit within ~0.3 points, so the per-cell tables below show the actual magnitudes. Per-cell tables bold the row-max (raw best) regardless of competitiveness._
 
 ## Dense baselines (0% sparsity), all cells
 
@@ -76,7 +81,7 @@ Homophilic datasets first (alphabetical), then heterophilic (alphabetical).
 
 The proposal's hypothesis lives here: class-imbalanced, heterophilic graphs. Vanilla GCN/GAT cannot learn these (Section 2), so we re-ran them with **GPR-GNN**, a heterophily-capable backbone whose prunable weights are still plain Linears. GPR-GNN roughly doubles vanilla GCN's macro-F1 (e.g. Wisconsin 0.59 vs 0.31), so the pruning comparison is finally interpretable — and Per-Class still does not win.
 
-_Win counts here:_ Magnitude: **6**  ·  Wanda-Uniform: **13**  ·  Wanda-Degree: **12**  ·  Wanda-Per-Class: **5**  (of 36)
+_Win counts here:_ Magnitude: **6**  ·  Wanda-Uniform: **9**  ·  Wanda-Degree: **12**  ·  Wanda-Per-Class: **5**  ·  _none-competitive: 4_  (of 36 cell×sparsity points)
 
 #### cornell · GPRGNN
 
@@ -156,7 +161,7 @@ _Win counts here:_ Magnitude: **6**  ·  Wanda-Uniform: **13**  ·  Wanda-Degree
 
 Included for completeness. On these the dense models barely clear trivial baselines (macro-F1 0.23–0.31; near or below majority-class accuracy), so method differences are noise. This is the known heterophily failure of homophily-assuming aggregation, and the reason Section 1 re-runs them with GPR-GNN.
 
-_Win counts here:_ Magnitude: **15**  ·  Wanda-Uniform: **21**  ·  Wanda-Degree: **13**  ·  Wanda-Per-Class: **5**  (of 54)
+_Win counts here:_ Magnitude: **14**  ·  Wanda-Uniform: **17**  ·  Wanda-Degree: **12**  ·  Wanda-Per-Class: **5**  ·  _none-competitive: 6_  (of 54 cell×sparsity points)
 
 #### cornell · GCN
 
@@ -272,7 +277,7 @@ _Win counts here:_ Magnitude: **15**  ·  Wanda-Uniform: **21**  ·  Wanda-Degre
 
 Base models are strong (accuracy 0.68–0.97, far above trivial), so this comparison is meaningful. Methods are nearly tied until ~70% sparsity; at extreme sparsity Wanda-Uniform is modestly best and Per-Class is among the weakest.
 
-_Win counts here:_ Magnitude: **60**  ·  Wanda-Uniform: **25**  ·  Wanda-Degree: **15**  ·  Wanda-Per-Class: **8**  (of 108)
+_Win counts here:_ Magnitude: **56**  ·  Wanda-Uniform: **22**  ·  Wanda-Degree: **14**  ·  Wanda-Per-Class: **8**  ·  _none-competitive: 8_  (of 108 cell×sparsity points)
 
 #### cora · GCN
 
@@ -496,7 +501,7 @@ _Win counts here:_ Magnitude: **60**  ·  Wanda-Uniform: **25**  ·  Wanda-Degre
 
 Reddit/Yelp/Arxiv/Flickr. Reddit (GCN/SAGE) and Yelp ran via the sparse-adjacency (SpMM) path. Baselines are healthy in rank terms (well above majority) but low in absolute terms vs literature — the 2-layer/100-epoch config is undertuned on these large graphs, and **Flickr is near-trivial** (+0.02 over majority), so treat Flickr as uninterpretable.
 
-_Win counts here:_ Magnitude: **15**  ·  Wanda-Uniform: **13**  ·  Wanda-Degree: **11**  ·  Wanda-Per-Class: **6**  (of 45)
+_Win counts here:_ Magnitude: **14**  ·  Wanda-Uniform: **13**  ·  Wanda-Degree: **9**  ·  Wanda-Per-Class: **5**  ·  _none-competitive: 4_  (of 45 cell×sparsity points)
 
 #### ogbn-arxiv · GRAPHSAGE
 
@@ -594,7 +599,7 @@ _Win counts here:_ Magnitude: **15**  ·  Wanda-Uniform: **13**  ·  Wanda-Degre
 
 BBBP and PROTEINS (global-mean-pool readout). Single random 80/10/10 split.
 
-_Win counts here:_ Magnitude: **13**  ·  Wanda-Uniform: **19**  ·  Wanda-Degree: **0**  ·  Wanda-Per-Class: **4**  (of 36)
+_Win counts here:_ Magnitude: **13**  ·  Wanda-Uniform: **17**  ·  Wanda-Degree: **0**  ·  Wanda-Per-Class: **4**  ·  _none-competitive: 2_  (of 36 cell×sparsity points)
 
 #### bbbp · GCN
 
