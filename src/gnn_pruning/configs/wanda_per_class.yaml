@@ -24,7 +24,7 @@ cells:
     - pubmed
     - computers
     - photo
-    - reddit
+    # reddit/gat removed: full-batch attention eval OOMs (~178 GiB); infeasible.
     - cornell
     - actor
   graphsage:
