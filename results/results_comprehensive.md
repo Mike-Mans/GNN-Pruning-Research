@@ -32,39 +32,43 @@ Heterophilic datasets (Cornell/Texas/Wisconsin/Actor) report **macro-F1**, the m
 
 ## Dense baselines (0% sparsity), all cells
 
-| Dataset | Homophily | Architecture | Metric | Dense value | Runs |
-|---|---|---|---|---|---|
-| actor | Heterophilic | GAT | macro-F1 | 0.227 | 10 |
-| actor | Heterophilic | GCN | macro-F1 | 0.242 | 10 |
-| actor | Heterophilic | GPRGNN | macro-F1 | 0.312 | 10 |
-| bbbp | Homophilic | GCN | accuracy | 0.800 | 1 |
-| bbbp | Homophilic | GRAPHSAGE | accuracy | 0.780 | 1 |
-| citeseer | Homophilic | GAT | accuracy | 0.678 | 1 |
-| citeseer | Homophilic | GCN | accuracy | 0.703 | 1 |
-| computers | Homophilic | GAT | accuracy | 0.900 | 1 |
-| computers | Homophilic | GCN | accuracy | 0.905 | 1 |
-| cora | Homophilic | GAT | accuracy | 0.800 | 1 |
-| cora | Homophilic | GCN | accuracy | 0.805 | 1 |
-| cornell | Heterophilic | GAT | macro-F1 | 0.303 | 10 |
-| cornell | Heterophilic | GCN | macro-F1 | 0.242 | 10 |
-| cornell | Heterophilic | GPRGNN | macro-F1 | 0.486 | 10 |
-| cs | Homophilic | GCN | accuracy | 0.938 | 1 |
-| flickr | Homophilic | GRAPHSAGE | accuracy | 0.448 | 1 |
-| ogbn-arxiv | Homophilic | GRAPHSAGE | accuracy | 0.548 | 1 |
-| photo | Homophilic | GAT | accuracy | 0.902 | 1 |
-| photo | Homophilic | GCN | accuracy | 0.939 | 1 |
-| physics | Homophilic | GCN | accuracy | 0.966 | 1 |
-| proteins | Homophilic | GCN | accuracy | 0.652 | 1 |
-| proteins | Homophilic | GRAPHSAGE | accuracy | 0.643 | 1 |
-| pubmed | Homophilic | GAT | accuracy | 0.765 | 1 |
-| pubmed | Homophilic | GCN | accuracy | 0.782 | 1 |
-| reddit | Homophilic | GCN | accuracy | 0.565 | 1 |
-| reddit | Homophilic | GRAPHSAGE | accuracy | 0.479 | 1 |
-| texas | Heterophilic | GCN | macro-F1 | 0.249 | 10 |
-| texas | Heterophilic | GPRGNN | macro-F1 | 0.557 | 10 |
-| wisconsin | Heterophilic | GCN | macro-F1 | 0.309 | 10 |
-| wisconsin | Heterophilic | GPRGNN | macro-F1 | 0.590 | 10 |
-| yelp | Homophilic | GRAPHSAGE | micro-F1 | 0.296 | 1 |
+Homophilic datasets first (alphabetical), then heterophilic (alphabetical).
+
+| Dataset | Homophily | Classes | Architecture | Metric | Dense value | Runs |
+|---|---|---|---|---|---|---|
+| bbbp | Homophilic | 2 | GCN | accuracy | 0.800 | 1 |
+| bbbp | Homophilic | 2 | GRAPHSAGE | accuracy | 0.780 | 1 |
+| citeseer | Homophilic | 6 | GAT | accuracy | 0.678 | 1 |
+| citeseer | Homophilic | 6 | GCN | accuracy | 0.703 | 1 |
+| computers | Homophilic | 10 | GAT | accuracy | 0.900 | 1 |
+| computers | Homophilic | 10 | GCN | accuracy | 0.905 | 1 |
+| cora | Homophilic | 7 | GAT | accuracy | 0.800 | 1 |
+| cora | Homophilic | 7 | GCN | accuracy | 0.805 | 1 |
+| cs | Homophilic | 15 | GCN | accuracy | 0.938 | 1 |
+| flickr | Homophilic | 7 | GRAPHSAGE | accuracy | 0.448 | 1 |
+| ogbn-arxiv | Homophilic | 40 | GRAPHSAGE | accuracy | 0.548 | 1 |
+| photo | Homophilic | 8 | GAT | accuracy | 0.902 | 1 |
+| photo | Homophilic | 8 | GCN | accuracy | 0.939 | 1 |
+| physics | Homophilic | 5 | GCN | accuracy | 0.966 | 1 |
+| proteins | Homophilic | 2 | GCN | accuracy | 0.652 | 1 |
+| proteins | Homophilic | 2 | GRAPHSAGE | accuracy | 0.643 | 1 |
+| pubmed | Homophilic | 3 | GAT | accuracy | 0.765 | 1 |
+| pubmed | Homophilic | 3 | GCN | accuracy | 0.782 | 1 |
+| reddit | Homophilic | 41 | GCN | accuracy | 0.565 | 1 |
+| reddit | Homophilic | 41 | GRAPHSAGE | accuracy | 0.479 | 1 |
+| yelp | Homophilic | 100\* | GRAPHSAGE | micro-F1 | 0.296 | 1 |
+| actor | Heterophilic | 5 | GAT | macro-F1 | 0.227 | 10 |
+| actor | Heterophilic | 5 | GCN | macro-F1 | 0.242 | 10 |
+| actor | Heterophilic | 5 | GPRGNN | macro-F1 | 0.312 | 10 |
+| cornell | Heterophilic | 5 | GAT | macro-F1 | 0.303 | 10 |
+| cornell | Heterophilic | 5 | GCN | macro-F1 | 0.242 | 10 |
+| cornell | Heterophilic | 5 | GPRGNN | macro-F1 | 0.486 | 10 |
+| texas | Heterophilic | 5 | GCN | macro-F1 | 0.249 | 10 |
+| texas | Heterophilic | 5 | GPRGNN | macro-F1 | 0.557 | 10 |
+| wisconsin | Heterophilic | 5 | GCN | macro-F1 | 0.309 | 10 |
+| wisconsin | Heterophilic | 5 | GPRGNN | macro-F1 | 0.590 | 10 |
+
+\* Yelp is multi-label (100 binary labels); all other datasets are single-label.
 
 ---
 
